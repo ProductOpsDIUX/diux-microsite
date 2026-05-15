@@ -12,7 +12,7 @@
   const TWEAK_DEFAULTS = {
     theme: 'dark',
     accent: '#7CFFB2',
-    heroVariant: 'kinetic',
+    heroVariant: 'dotfield',
     density: 'balanced',
     fontPair: 'editorial',
     grid: 'off',
@@ -31,7 +31,7 @@
   }
   const FONT_PAIRS = {
     editorial: {
-      display: '"Instrument Serif", "Times New Roman", serif',
+      display: '"Special Gothic Expanded One", "Inter Tight", system-ui, sans-serif',
       sans: '"Inter", -apple-system, sans-serif',
       mono: '"JetBrains Mono", ui-monospace, monospace'
     },

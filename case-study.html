@@ -6,11 +6,18 @@
   <title>Mission Compose · Case Study · DI & UX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/tokens.css" />
   <link rel="stylesheet" href="styles/pages.css" />
 </head>
 <body>
+  <div class="loader" data-loader aria-hidden="true">
+    <span class="loader-brand">DI &amp; UX</span>
+    <span class="loader-count" data-loader-count>0</span>
+    <span class="loader-meta">Loading</span>
+    <span class="loader-rule" data-loader-rule></span>
+  </div>
+  <script>(function(){if(sessionStorage.getItem("diux.loader.v1"))return;document.documentElement.classList.add("loader-active");})();</script>
   <div class="grid-overlay" aria-hidden="true"></div>
   <div data-praxis-chrome="nav"></div>
 
