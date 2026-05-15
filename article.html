@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Designing trust into autonomous mission systems · DI & UX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/pages.css" />
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div data-praxis-chrome="nav"></div>
+
+  <header class="detail-hero" data-cms="cms.template/article">
+    <div class="wrap">
+      <nav class="crumbs">
+        <a href="index.html">DI &amp; UX</a>
+        <span class="sep">/</span>
+        <a href="index.html#thinking">Thinking</a>
+        <span class="sep">/</span>
+        <span>Article</span>
+      </nav>
+      <div class="eyebrow reveal" data-cms="article.tag">// AI · Trust &amp; Adoption</div>
+      <h1 class="detail-h1 reveal" data-cms="article.title">Designing <span class="serif-italic">trust</span> into autonomous mission systems.</h1>
+      <p class="reveal" style="font-family: var(--font-display); font-size: 28px; line-height: 1.25; letter-spacing: -0.01em; max-width: 36ch; color: var(--fg-1); margin: 0 0 32px;" data-cms="article.deck">When the model becomes a teammate, the seam between human judgement and machine inference becomes a design surface — and the most important one we have.</p>
+      <div class="detail-meta" data-cms="article.meta">
+        <div class="detail-meta-item"><div class="k">Author</div><div class="v">Maya Okafor</div></div>
+        <div class="detail-meta-item"><div class="k">With</div><div class="v">Jonas Lindqvist</div></div>
+        <div class="detail-meta-item"><div class="k">Published</div><div class="v">28 April 2026</div></div>
+        <div class="detail-meta-item"><div class="k">Read time</div><div class="v">12 minutes</div></div>
+        <div class="detail-meta-item"><div class="k">Topic</div><div class="v">AI · UX</div></div>
+      </div>
+    </div>
+  </header>
+
+  <figure style="margin: 0;">
+    <div class="wrap" style="padding-top: 32px;">
+      <div class="media reveal" style="aspect-ratio: 21/9;" data-cms="article.cover">
+        <span class="media-label">[ ARTICLE_HERO_TRUST.MP4 · 04:20 ]</span>
+      </div>
+    </div>
+  </figure>
+
+  <article class="article-body wrap" data-cms="article.body">
+    <p class="lead reveal">For decades, defence software was built around a single mental model: the operator was the decision-maker, and the system was a faster pen. That model is breaking down. The next generation of mission systems contains models that can recommend, summarise, even act — and the question of <em>where the human ends and the system begins</em> is no longer rhetorical.</p>
+
+    <p class="reveal">We've been embedded inside three programmes wrestling with this. What follows is what we've learned about designing the seam — the place where human judgement meets machine inference — and why we think trust isn't a feeling to be earned, but a property to be built.</p>
+
+    <h2 class="reveal">Trust is a structural property, not a vibe</h2>
+    <p class="reveal">The instinct, when adoption is low, is to add a friendly explanation. A tooltip. A "why am I seeing this?" link. These help, marginally. But what actually moves the needle is something more architectural: making the model's <em>uncertainty visible by default</em>, and making the operator's <em>override irreversible by design</em>.</p>
+    <p class="reveal">When operators can see, at a glance, where the system is confident and where it is guessing — and when their corrections are demonstrably re-shaping the model's next answer — trust accumulates as a side-effect of normal work. You don't have to ask for it.</p>
+
+    <blockquote class="reveal">"The model is a teammate. The interface is the contract."<span class="cite">— Field embed, 14th week</span></blockquote>
+
+    <h2 class="reveal">Six shifts we keep designing for</h2>
+    <ul>
+      <li class="reveal"><strong>From answer to argument.</strong> Stop showing one recommendation; show the two or three the model considered, and why one won.</li>
+      <li class="reveal"><strong>From confidence as a number to confidence as a shape.</strong> A 78% certainty bar is meaningless. A bounded region on a map is operationally readable.</li>
+      <li class="reveal"><strong>From override to negotiation.</strong> Let the operator constrain the model ("never route through this airspace") rather than just reject its output.</li>
+      <li class="reveal"><strong>From log to ledger.</strong> Every model action should leave a citable, replayable trace — for after-action review and for legal accountability.</li>
+      <li class="reveal"><strong>From dashboard to dialogue.</strong> The most-used surface is increasingly conversational. Design it like a workflow, not a chatbot.</li>
+      <li class="reveal"><strong>From single-shot to standing query.</strong> Mission users want models that watch on their behalf, not models that answer when prompted.</li>
+    </ul>
+
+    <figure class="reveal">
+      <div class="media"><span class="media-label">[ DIAGRAM_TRUST_SEAM.SVG ]</span></div>
+      <figcaption>Fig. 01 — The trust seam, mapped across six interaction primitives we keep returning to.</figcaption>
+    </figure>
+
+    <h2 class="reveal">Where we're taking this next</h2>
+    <p class="reveal">Over the next two quarters we're publishing a pattern library covering all six shifts, with reference implementations in our open-source token system. If you're working on adjacent problems — particularly in the human-on-the-loop space — we'd like to compare notes.</p>
+    <p class="reveal">The mission is too important for our software to feel like a black box. The good news is, none of this requires new science. It requires a design discipline that takes operator agency as a first-class concern, and is willing to ship the boring infrastructure to support it.</p>
+
+    <div class="reveal" style="margin-top: 56px; padding: 32px; border: 1px solid var(--line); border-radius: var(--r-3); background: var(--bg-1); display: grid; gap: 16px;">
+      <div class="eyebrow">// Continue reading</div>
+      <h3 class="display" style="font-size: 28px; margin: 0;">The new operator: from joystick to dialogue</h3>
+      <a href="article.html" class="btn" style="justify-self: start;">Next article <span class="arrow">→</span></a>
+    </div>
+  </article>
+
+  <section class="related">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">// More from DI & UX</div>
+          <h2 style="font-size: var(--t-h3);">Related <span class="serif-italic">thinking.</span></h2>
+        </div>
+      </div>
+      <div class="article-grid" id="related-grid">
+        <a class="article-card" href="article.html">
+          <div class="media"><span class="media-label">[ RELATED_01.JPG ]</span></div>
+          <div class="case-meta"><span>UX</span><span class="dot"></span><span>8 min</span></div>
+          <h3>The new operator: from joystick to dialogue</h3>
+          <p>Six interaction shifts as conversational interfaces enter the bridge.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card" href="article.html">
+          <div class="media"><span class="media-label">[ RELATED_02.JPG ]</span></div>
+          <div class="case-meta"><span>Research</span><span class="dot"></span><span>14 min</span></div>
+          <h3>Sensor fusion as a design material</h3>
+          <p>Treating heterogeneous data as a designable surface.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card" href="article.html">
+          <div class="media"><span class="media-label">[ RELATED_03.JPG ]</span></div>
+          <div class="case-meta"><span>Strategy</span><span class="dot"></span><span>11 min</span></div>
+          <h3>Procuring AI you can actually adopt</h3>
+          <p>Notes for programme leads navigating the messy middle.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div data-praxis-chrome="footer"></div>
+
+  <script src="scripts/chrome.js"></script>
+  <script src="scripts/praxis.js"></script>
+  <script src="scripts/tweaks.js"></script>
+</body>
+</html>

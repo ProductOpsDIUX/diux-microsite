@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DI & UX · Defence Tech Design Innovation &amp; UX</title>
+  <meta name="description" content="A defence-tech design innovation and UX practice." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/pages.css" />
+</head>
+<body>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div data-praxis-chrome="nav"></div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero hud-corners" data-cms="cms.section/hero">
+    <div class="hero-meta">
+      <div class="hero-meta-block">
+        <div>// DI & UX Practice</div>
+        <div class="v">Est. 2019 · Cleared</div>
+      </div>
+      <div class="hero-meta-block right">
+        <div>// Status</div>
+        <div class="v"><span style="color:var(--accent)">●</span> Operational · 47 active engagements</div>
+      </div>
+    </div>
+
+    <div class="hero-stage" data-hero-stage>
+      <!-- Variant: kinetic — no background visual, text-driven -->
+      <div data-variant="kinetic"></div>
+      <!-- Variant: radar -->
+      <div data-variant="radar" class="hero-radar" aria-hidden="true">
+        <svg viewBox="0 0 600 600">
+          <defs>
+            <radialGradient id="rg" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.0" />
+              <stop offset="100%" stop-color="var(--accent)" stop-opacity="0.18" />
+            </radialGradient>
+          </defs>
+          <circle cx="300" cy="300" r="290" fill="none" stroke="var(--line)" />
+          <circle cx="300" cy="300" r="220" fill="none" stroke="var(--line)" />
+          <circle cx="300" cy="300" r="150" fill="none" stroke="var(--line)" />
+          <circle cx="300" cy="300" r="80" fill="none" stroke="var(--line)" />
+          <line x1="10" y1="300" x2="590" y2="300" stroke="var(--line)" />
+          <line x1="300" y1="10" x2="300" y2="590" stroke="var(--line)" />
+          <line x1="86" y1="86" x2="514" y2="514" stroke="var(--line)" />
+          <line x1="514" y1="86" x2="86" y2="514" stroke="var(--line)" />
+          <g class="radar-sweep">
+            <path d="M300,300 L300,10 A290,290 0 0,1 590,300 Z" fill="url(#rg)" />
+            <line x1="300" y1="300" x2="590" y2="300" stroke="var(--accent)" stroke-width="1.5" />
+          </g>
+          <circle cx="420" cy="200" r="3" fill="var(--accent)" />
+          <circle cx="200" cy="380" r="3" fill="var(--accent)" />
+          <circle cx="380" cy="420" r="3" fill="var(--accent)" />
+          <circle cx="160" cy="220" r="3" fill="var(--warn)" />
+        </svg>
+      </div>
+      <!-- Variant: dotfield -->
+      <canvas data-variant="dotfield" data-dotfield class="dotfield"></canvas>
+    </div>
+
+    <!-- Persistent design glyph so users get "design team" at a glance -->
+    <div class="hero-glyph" aria-hidden="true">
+      <svg viewBox="0 0 320 320" fill="none">
+        <circle cx="160" cy="160" r="158" stroke="var(--line-strong)" />
+        <circle cx="160" cy="160" r="120" stroke="var(--line)" />
+        <circle cx="160" cy="160" r="80" stroke="var(--line)" />
+        <path d="M40 160 H280 M160 40 V280" stroke="var(--line)" />
+        <path d="M160 40 L280 160 L160 280 L40 160 Z" stroke="var(--accent)" stroke-width="1.2" />
+        <rect x="150" y="150" width="20" height="20" fill="var(--accent)" />
+        <text x="160" y="306" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--fg-2)" letter-spacing="2">DESIGN · INTELLIGENCE · MISSION</text>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <div class="eyebrow reveal">Design Innovation &amp; UX · Defence Technology</div>
+      <h1 class="hero-h1 reveal">
+        Designing the<br />
+        <span class="em" data-rotator="instruments|interfaces|operators|decisions|advantage"></span><br />
+        of modern defence.
+      </h1>
+      <p class="hero-sub reveal">DI & UX is a multidisciplinary design practice embedded inside defence technology. We craft mission-grade software, AI-enabled workflows, and the decision tools the people on the line actually trust.</p>
+      <div class="hero-actions reveal">
+        <a href="#work" class="btn btn-primary magnet" data-magnet="0.25">See the work <span class="arrow">→</span></a>
+        <a href="#contact" class="btn btn-ghost magnet" data-magnet="0.2">Brief the team <span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <div>// Lat 51.5074°N · Lon 0.1278°W · UK · NATO</div>
+      <a href="#capabilities" class="scroll-indicator">
+        <span>Scroll</span>
+        <span class="scroll-indicator-line"></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============ STATS ============ -->
+  <section class="stat-band" data-cms="cms.section/stats">
+    <div class="wrap">
+      <div class="stat-grid">
+        <div class="stat reveal">
+          <div class="stat-num"><span data-count="47">0</span></div>
+          <div class="stat-label">// Active engagements across DSTL, MoD, primes</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num"><span data-count="120">0</span><span class="unit">+</span></div>
+          <div class="stat-label">// Designers, researchers, AI specialists</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num"><span data-count="2.4">0</span><span class="unit">M</span></div>
+          <div class="stat-label">// Operator hours informed by our research</div>
+        </div>
+        <div class="stat reveal">
+          <div class="stat-num"><span data-count="14">0</span></div>
+          <div class="stat-label">// Patents &amp; defence-publishing contributions</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAPABILITIES ============ -->
+  <section class="section" id="capabilities" data-cms="cms.section/capabilities">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">// Capabilities</div>
+          <h2>Four practices,<br /><span class="serif-italic">one mission stack.</span></h2>
+        </div>
+        <div class="actions">
+          <a href="#work" class="btn">All capabilities <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pillars reveal" data-cms="cms.collection/capability">
+        <article class="pillar">
+          <div class="pillar-num">01 / UX</div>
+          <h3>UX Strategy &amp; Operator Experience</h3>
+          <p>Field-led research, interaction design, and usability for the watchstanders, analysts, and commanders who use these systems for hours at a time.</p>
+          <div class="pillar-foot">
+            <span>14 designers</span>
+            <span class="arrow">→</span>
+          </div>
+        </article>
+        <article class="pillar">
+          <div class="pillar-num">02 / AI</div>
+          <h3>AI-Enabled Workflows</h3>
+          <p>Designing the human side of model-mediated work — from agent orchestration to confidence affordances and human-on-the-loop oversight.</p>
+          <div class="pillar-foot">
+            <span>7 specialists</span>
+            <span class="arrow">→</span>
+          </div>
+        </article>
+        <article class="pillar">
+          <div class="pillar-num">03 / Innovation</div>
+          <h3>Design Innovation Labs</h3>
+          <p>Speculative prototypes, rapid hackathons, and capability concepts that pull future doctrine into something teams can hold in their hands.</p>
+          <div class="pillar-foot">
+            <span>4 leads</span>
+            <span class="arrow">→</span>
+          </div>
+        </article>
+        <article class="pillar">
+          <div class="pillar-num">04 / Transformation</div>
+          <h3>Digital Transformation</h3>
+          <p>Service design, design systems, and the operating models that let large defence organisations actually ship modern software.</p>
+          <div class="pillar-foot">
+            <span>11 designers</span>
+            <span class="arrow">→</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK / CASE STUDIES ============ -->
+  <section class="section" id="work" data-cms="cms.collection/case-study" style="background: var(--bg-1); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">// Selected work</div>
+          <h2>Mission-grade<br /><span class="serif-italic">software, shipped.</span></h2>
+        </div>
+        <div class="actions">
+          <a href="case-study.html" class="btn">All case studies <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="filter-bar" data-filter-bar data-filter-target="#case-grid">
+        <span class="label">// Filter</span>
+        <button class="chip" data-filter="all" aria-pressed="true">All work</button>
+        <button class="chip" data-filter="cmd">Command</button>
+        <button class="chip" data-filter="ai">AI &amp; ML</button>
+        <button class="chip" data-filter="ops">Operator UI</button>
+        <button class="chip" data-filter="intel">Intelligence</button>
+        <button class="chip" data-filter="field">Field tools</button>
+      </div>
+
+      <div class="case-grid" id="case-grid">
+        <a class="case-card span-7 reveal" href="case-study.html" data-tags="cmd,ops" data-cms="cms.item/case-study">
+          <div class="media">
+            <span class="media-label">[ MISSION_COMPOSE_HERO.MP4 ]</span>
+            <div class="preview-overlay"><span class="label">Open case study →</span></div>
+          </div>
+          <div class="case-meta"><span>2025</span><span class="dot"></span><span>Royal Navy</span><span class="dot"></span><span>Workspace</span></div>
+          <h3>Mission Compose — a planning workspace for joint operations</h3>
+          <p>A multiplayer planning canvas that collapses six tools into one shared surface, with AI-assisted route &amp; ROE checks running alongside the team.</p>
+        </a>
+        <a class="case-card span-5 reveal" href="case-study.html" data-tags="ops,ai" data-cms="cms.item/case-study">
+          <div class="media">
+            <span class="media-label">[ AEGIS_CONSOLE_01.PNG ]</span>
+            <div class="preview-overlay"><span class="label">Open case study →</span></div>
+          </div>
+          <div class="case-meta"><span>2025</span><span class="dot"></span><span>BAE</span><span class="dot"></span><span>Operator UI</span></div>
+          <h3>Aegis Console — multi-domain situational awareness</h3>
+          <p>Reframing a 14-pane operator console around glanceable intent and progressive disclosure.</p>
+        </a>
+        <a class="case-card span-4 reveal" href="case-study.html" data-tags="ai" data-cms="cms.item/case-study">
+          <div class="media">
+            <span class="media-label">[ FORGE_DOCS.PNG ]</span>
+            <div class="preview-overlay"><span class="label">Open case study →</span></div>
+          </div>
+          <div class="case-meta"><span>2024</span><span class="dot"></span><span>MoD</span><span class="dot"></span><span>AI Tools</span></div>
+          <h3>Forge — AI-assisted document workflows</h3>
+          <p>Drafting, redaction, and classification at the speed analysts actually work.</p>
+        </a>
+        <a class="case-card span-4 reveal tall" href="case-study.html" data-tags="field" data-cms="cms.item/case-study">
+          <div class="media">
+            <span class="media-label">[ BEACON_FIELD.JPG ]</span>
+            <div class="preview-overlay"><span class="label">Open case study →</span></div>
+          </div>
+          <div class="case-meta"><span>2024</span><span class="dot"></span><span>Army</span><span class="dot"></span><span>Field</span></div>
+          <h3>Beacon — edge sensor configurator</h3>
+          <p>Tools rugged enough for a hatch, learnable in 30 seconds.</p>
+        </a>
+        <a class="case-card span-4 reveal" href="case-study.html" data-tags="intel,ai" data-cms="cms.item/case-study">
+          <div class="media">
+            <span class="media-label">[ SENTRY_TRIAGE.PNG ]</span>
+            <div class="preview-overlay"><span class="label">Open case study →</span></div>
+          </div>
+          <div class="case-meta"><span>2024</span><span class="dot"></span><span>NATO</span><span class="dot"></span><span>Intel</span></div>
+          <h3>Sentry — threat triage for analysts</h3>
+          <p>Prioritisation that learns the analyst's own risk model.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THINKING / ARTICLES ============ -->
+  <section class="section" id="thinking" data-cms="cms.collection/article">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">// Thinking</div>
+          <h2>Field notes from<br /><span class="serif-italic">inside the loop.</span></h2>
+        </div>
+        <div class="actions">
+          <a href="article.html" class="btn">All articles <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="filter-bar" data-filter-bar data-filter-target="#article-grid">
+        <span class="label">// Topic</span>
+        <button class="chip" data-filter="all" aria-pressed="true">All</button>
+        <button class="chip" data-filter="ai">AI</button>
+        <button class="chip" data-filter="ux">UX</button>
+        <button class="chip" data-filter="research">Research</button>
+        <button class="chip" data-filter="systems">Systems</button>
+        <button class="chip" data-filter="strategy">Strategy</button>
+      </div>
+
+      <div class="article-grid" id="article-grid">
+        <a class="article-card reveal" href="article.html" data-tags="ai,ux" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_01.JPG ]</span></div>
+          <div class="case-meta"><span>AI</span><span class="dot"></span><span>12 min</span></div>
+          <h3>Designing trust into autonomous mission systems</h3>
+          <p>What changes when the model is a teammate, not a tool — and how do you design the seam between the two?</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="ux" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_02.JPG ]</span></div>
+          <div class="case-meta"><span>UX</span><span class="dot"></span><span>8 min</span></div>
+          <h3>The new operator: from joystick to dialogue</h3>
+          <p>Six interaction shifts we're seeing as conversational interfaces enter the bridge, the hatch, and the SOC.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="ai,research" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_03.JPG ]</span></div>
+          <div class="case-meta"><span>Research</span><span class="dot"></span><span>14 min</span></div>
+          <h3>Sensor fusion as a design material</h3>
+          <p>Treating heterogeneous data as a designable surface — not just a backend concern.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="research" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_04.JPG ]</span></div>
+          <div class="case-meta"><span>Research</span><span class="dot"></span><span>10 min</span></div>
+          <h3>Cognitive load on the modern bridge</h3>
+          <p>What two years of bridge-side observation taught us about visual hierarchy under pressure.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="systems" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_05.JPG ]</span></div>
+          <div class="case-meta"><span>Systems</span><span class="dot"></span><span>16 min</span></div>
+          <h3>A pattern language for command interfaces</h3>
+          <p>Twenty-three composable patterns we keep reaching for across mission software.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="ux" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_06.JPG ]</span></div>
+          <div class="case-meta"><span>UX</span><span class="dot"></span><span>6 min</span></div>
+          <h3>Why glanceable beats comprehensive</h3>
+          <p>An old radar-ops heuristic, freshly relevant to every dashboard we ship.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="strategy,ai" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_07.JPG ]</span></div>
+          <div class="case-meta"><span>Strategy</span><span class="dot"></span><span>11 min</span></div>
+          <h3>Procuring AI you can actually adopt</h3>
+          <p>Notes for programme leads navigating the messy middle between pilot and production.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="systems,ux" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_08.JPG ]</span></div>
+          <div class="case-meta"><span>Systems</span><span class="dot"></span><span>9 min</span></div>
+          <h3>Tokens for tactical interfaces</h3>
+          <p>How we structure a token system that survives dark-mode bridges and bright-light hatches alike.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+        <a class="article-card reveal" href="article.html" data-tags="research" data-cms="cms.item/article">
+          <div class="media"><span class="media-label">[ ARTICLE_HERO_09.JPG ]</span></div>
+          <div class="case-meta"><span>Research</span><span class="dot"></span><span>13 min</span></div>
+          <h3>Studying watchstanders, not workshops</h3>
+          <p>Why field embeds beat usability labs for mission software — and how we run them.</p>
+          <div class="read"><span>Read</span><span class="arrow">→</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section" id="team" data-cms="cms.collection/team-member" style="background: var(--bg-1); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">// People</div>
+          <h2>The practice<br /><span class="serif-italic">behind the practice.</span></h2>
+        </div>
+        <div class="actions">
+          <a href="team.html" class="btn">Meet the team <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="team-grid">
+        <a class="team-card reveal" href="team.html" data-cms="cms.item/team-member">
+          <div class="portrait"><span class="initials">MO</span></div>
+          <div class="info"><div class="name">Maya Okafor</div><div class="role">Head of Design Innovation</div></div>
+        </a>
+        <a class="team-card reveal" href="team.html" data-cms="cms.item/team-member">
+          <div class="portrait"><span class="initials">JL</span></div>
+          <div class="info"><div class="name">Jonas Lindqvist</div><div class="role">Principal AI / UX Researcher</div></div>
+        </a>
+        <a class="team-card reveal" href="team.html" data-cms="cms.item/team-member">
+          <div class="portrait"><span class="initials">AV</span></div>
+          <div class="info"><div class="name">Aria Venkatesan</div><div class="role">Staff Interaction Designer</div></div>
+        </a>
+        <a class="team-card reveal" href="team.html" data-cms="cms.item/team-member">
+          <div class="portrait"><span class="initials">RT</span></div>
+          <div class="info"><div class="name">Rafael Tovar</div><div class="role">Service Design Lead</div></div>
+        </a>
+        <a class="team-card reveal" href="team.html" data-cms="cms.item/team-member">
+          <div class="portrait"><span class="initials">HK</span></div>
+          <div class="info"><div class="name">Hana Kobayashi</div><div class="role">Design Systems Engineer</div></div>
+        </a>
+        <a class="team-card reveal" href="team.html" data-cms="cms.item/team-member">
+          <div class="portrait"><span class="initials">DM</span></div>
+          <div class="info"><div class="name">Dele Maclean</div><div class="role">Innovation Lab Director</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PUBLICATIONS ============ -->
+  <section class="section" id="publications" data-cms="cms.collection/publication">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">// Publications &amp; resources</div>
+          <h2>Open-source<br /><span class="serif-italic">to the field.</span></h2>
+        </div>
+        <div class="actions">
+          <a href="#" class="btn">Library <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="pub-list">
+        <a class="pub-item reveal" href="#" data-cms="cms.item/publication">
+          <div class="pub-num">P / 014</div>
+          <div class="pub-title">Designing for the human-on-the-loop: a 2026 field report</div>
+          <div class="pub-meta">PDF · 84 pages · 2026</div>
+          <div class="pub-arrow">→</div>
+        </a>
+        <a class="pub-item reveal" href="#" data-cms="cms.item/publication">
+          <div class="pub-num">P / 013</div>
+          <div class="pub-title">A pattern library for command &amp; control interfaces — v2</div>
+          <div class="pub-meta">Web library · 2025</div>
+          <div class="pub-arrow">→</div>
+        </a>
+        <a class="pub-item reveal" href="#" data-cms="cms.item/publication">
+          <div class="pub-num">P / 012</div>
+          <div class="pub-title">Heuristics for AI-mediated decision support</div>
+          <div class="pub-meta">PDF · 28 pages · 2025</div>
+          <div class="pub-arrow">→</div>
+        </a>
+        <a class="pub-item reveal" href="#" data-cms="cms.item/publication">
+          <div class="pub-num">P / 011</div>
+          <div class="pub-title">Tactical token system — open-source release</div>
+          <div class="pub-meta">GitHub · MIT · 2025</div>
+          <div class="pub-arrow">→</div>
+        </a>
+        <a class="pub-item reveal" href="#" data-cms="cms.item/publication">
+          <div class="pub-num">P / 010</div>
+          <div class="pub-title">Operator interview corpus, 2022–2024</div>
+          <div class="pub-meta">Dataset · Restricted · 2024</div>
+          <div class="pub-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EVENTS strip ============ -->
+  <section class="section" id="events" data-cms="cms.collection/event">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <div class="eyebrow">// Events &amp; hackathons</div>
+          <h2>Where you'll<br /><span class="serif-italic">find us next.</span></h2>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <article class="card reveal" style="padding: 24px; display:grid; gap:16px;" data-cms="cms.item/event">
+          <div class="mono">12 → 14 JUN 2026 · LONDON</div>
+          <h3 class="display" style="font-size: 30px; margin: 0;">DefCon UK · Mission AI track</h3>
+          <p style="margin:0; color: var(--fg-2); font-size: 14px;">Maya Okafor &amp; Jonas Lindqvist on designing the next decade of mission AI.</p>
+          <a href="#" class="mono" style="color: var(--accent);">Reserve seat →</a>
+        </article>
+        <article class="card reveal" style="padding: 24px; display:grid; gap:16px;" data-cms="cms.item/event">
+          <div class="mono">28 JUN 2026 · BRISTOL</div>
+          <h3 class="display" style="font-size: 30px; margin: 0;">DI & UX Hackathon · Edge Sensors</h3>
+          <p style="margin:0; color: var(--fg-2); font-size: 14px;">36 hours, mixed teams, real sensor stacks. Apply by 5 June.</p>
+          <a href="#" class="mono" style="color: var(--accent);">Apply →</a>
+        </article>
+        <article class="card reveal" style="padding: 24px; display:grid; gap:16px;" data-cms="cms.item/event">
+          <div class="mono">17 SEP 2026 · ONLINE</div>
+          <h3 class="display" style="font-size: 30px; margin: 0;">Open Studio · Q3 review</h3>
+          <p style="margin:0; color: var(--fg-2); font-size: 14px;">A live walkthrough of three case studies, with the teams in the room.</p>
+          <a href="#" class="mono" style="color: var(--accent);">Add to calendar →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta-band" id="contact" data-cms="cms.section/cta">
+    <div class="wrap">
+      <div class="eyebrow reveal">// Brief us</div>
+      <h2 class="reveal">Have a hard problem<br /><span class="em serif-italic">worth designing for?</span></h2>
+      <div class="hero-actions reveal">
+        <a href="#" class="btn btn-primary magnet" data-magnet="0.3">Start a brief <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-ghost magnet" data-magnet="0.2">careers@diux.team <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div data-praxis-chrome="footer"></div>
+
+  <script src="scripts/chrome.js"></script>
+  <script src="scripts/praxis.js"></script>
+  <script src="scripts/tweaks.js"></script>
+</body>
+</html>
