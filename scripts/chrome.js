@@ -272,26 +272,13 @@
     const el = document.querySelector('[data-loader]');
     if (!el) return;
     if (sessionStorage.getItem('diux.loader.v1')) { el.remove(); return; }
-    const num = el.querySelector('[data-loader-count]');
-    const rule = el.querySelector('[data-loader-rule]');
-    const start = performance.now();
-    const dur = 1800;
-    function tick(t) {
-      const p = Math.min(1, (t - start) / dur);
-      const eased = 1 - Math.pow(1 - p, 2);
-      num.textContent = Math.floor(eased * 100);
-      if (rule) rule.style.transform = 'scaleX(' + eased + ')';
-      if (p < 1) requestAnimationFrame(tick);
-      else {
-        sessionStorage.setItem('diux.loader.v1', '1');
-        setTimeout(() => {
-          el.classList.add('done');
-          document.documentElement.classList.remove('loader-active');
-          setTimeout(() => el.classList.add('gone'), 1200);
-        }, 220);
-      }
-    }
-    requestAnimationFrame(tick);
+    const HOLD = 2200;
+    setTimeout(() => {
+      sessionStorage.setItem('diux.loader.v1', '1');
+      el.classList.add('done');
+      document.documentElement.classList.remove('loader-active');
+      setTimeout(() => el.classList.add('gone'), 1200);
+    }, HOLD);
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', runLoader);
