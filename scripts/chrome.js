@@ -12,10 +12,11 @@
     <div class="nav-inner">
       <a href="index.html" class="brand">
         <span class="brand-mark">
-          <svg viewBox="0 0 22 22" fill="none">
-            <rect x="1" y="1" width="20" height="20" stroke="currentColor" stroke-width="1.2"/>
-            <path d="M11 2 L20 11 L11 20 L2 11 Z" stroke="var(--accent)" stroke-width="1.2" fill="none"/>
-            <circle cx="11" cy="11" r="2" fill="var(--accent)"/>
+          <svg viewBox="0 0 856 883" fill="none" aria-hidden="true">
+            <rect x="438" y="37" width="392" height="392" fill="#EE2537"/>
+            <rect x="438" y="454" width="392" height="392" fill="currentColor"/>
+            <path d="M413 429.5C413 377.956 402.848 326.917 383.123 279.297C363.398 231.676 334.486 188.408 298.039 151.961C261.592 115.514 218.324 86.6022 170.703 66.8773C123.083 47.1523 72.0438 37 20.5 37L20.5 429.5H413Z" fill="currentColor"/>
+            <path d="M20.5 846C72.0438 846 123.083 835.848 170.703 816.123C218.324 796.398 261.592 767.486 298.039 731.039C334.486 694.592 363.398 651.324 383.123 603.703C402.848 556.083 413 505.044 413 453.5L20.5 453.5L20.5 846Z" fill="currentColor"/>
           </svg>
         </span>
         <span>DI &amp; UX</span>
@@ -48,7 +49,7 @@
           <span>Search</span>
           <span class="kbd">⌘K</span>
         </button>
-        <a href="#contact" class="btn btn-primary magnet" data-magnet="0.3">Brief us <span class="arrow">→</span></a>
+        <a href="contact.html" class="btn btn-primary magnet" data-magnet="0.3">Connect with us <span class="arrow">→</span></a>
       </div>
     </div>
   </nav>
@@ -194,10 +195,11 @@
         <div class="footer-col">
           <div class="brand" style="margin-bottom: 24px;">
             <span class="brand-mark">
-              <svg viewBox="0 0 22 22" fill="none">
-                <rect x="1" y="1" width="20" height="20" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M11 2 L20 11 L11 20 L2 11 Z" stroke="var(--accent)" stroke-width="1.2" fill="none"/>
-                <circle cx="11" cy="11" r="2" fill="var(--accent)"/>
+              <svg viewBox="0 0 856 883" fill="none" aria-hidden="true">
+                <rect x="438" y="37" width="392" height="392" fill="#EE2537"/>
+                <rect x="438" y="454" width="392" height="392" fill="currentColor"/>
+                <path d="M413 429.5C413 377.956 402.848 326.917 383.123 279.297C363.398 231.676 334.486 188.408 298.039 151.961C261.592 115.514 218.324 86.6022 170.703 66.8773C123.083 47.1523 72.0438 37 20.5 37L20.5 429.5H413Z" fill="currentColor"/>
+                <path d="M20.5 846C72.0438 846 123.083 835.848 170.703 816.123C218.324 796.398 261.592 767.486 298.039 731.039C334.486 694.592 363.398 651.324 383.123 603.703C402.848 556.083 413 505.044 413 453.5L20.5 453.5L20.5 846Z" fill="currentColor"/>
               </svg>
             </span>
             <span>DI &amp; UX</span>
