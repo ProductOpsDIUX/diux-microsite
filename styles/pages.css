@@ -64,7 +64,7 @@
   max-width: var(--maxw);
   margin: 0 auto;
   width: 100%;
-  display: flex; justify-content: space-between; align-items: end;
+  display: flex; justify-content: center; align-items: end;
   font-family: var(--font-mono); font-size: 11px; color: var(--fg-2);
   letter-spacing: 0.08em; text-transform: uppercase;
   z-index: 3;
@@ -102,7 +102,9 @@
   display: inline-block;
   vertical-align: baseline;
   position: relative;
-  height: 1em;
+  height: 1.1em;
+  line-height: 1.1;
+  padding-top: 0.08em;
   overflow: hidden;
 }
 .kinetic-rotator-inner { display: inline-block; }
@@ -110,6 +112,7 @@
   display: block;
   font-style: italic;
   color: var(--accent);
+  line-height: 1.1;
 }
 
 /* === Hero dot field === */

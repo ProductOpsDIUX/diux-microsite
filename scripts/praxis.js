@@ -369,63 +369,53 @@
   // Hero variants — kinetic word rotator + dotfield
   // ----------------------------------------------------------
   function initHero() {
-    // Kinetic rotator
+    // Kinetic rotator — crossfade between words so the rotator never
+    // overlaps the rows above or below, and cycles forward only.
     document.querySelectorAll('[data-rotator]').forEach(el => {
       if (el.dataset.rotatorInit === '1') return;
       el.dataset.rotatorInit = '1';
       const words = el.dataset.rotator.split('|');
-      // Clear any existing text/children before injecting our own
       el.textContent = '';
       el.style.position = 'relative';
       el.style.display = 'inline-block';
       el.style.verticalAlign = 'baseline';
-      // Allow vertical headroom for italic ascenders/descenders (Instrument g/p/j)
-      el.style.height = '1.15em';
-      el.style.paddingTop = '0.1em';
-      el.style.marginBottom = '-0.1em';
-      el.style.overflow = 'hidden';
-      el.style.lineHeight = '1';
+      el.style.whiteSpace = 'nowrap';
 
+      // Width-setter reserves space for the widest word so layout doesn't jump.
       const widthSetter = document.createElement('span');
       widthSetter.style.visibility = 'hidden';
-      widthSetter.style.position = 'absolute';
-      widthSetter.style.top = '0';
-      widthSetter.style.left = '0';
-      widthSetter.style.whiteSpace = 'nowrap';
       widthSetter.style.fontStyle = 'italic';
       widthSetter.style.pointerEvents = 'none';
+      widthSetter.textContent = words.reduce((a, b) => a.length > b.length ? a : b, '');
       el.appendChild(widthSetter);
 
-      const inner = document.createElement('span');
-      inner.className = 'kinetic-rotator-inner';
-      inner.style.display = 'block';
-      inner.style.transition = 'transform 600ms cubic-bezier(0.5,0,0.1,1)';
-      inner.style.willChange = 'transform';
-
-      const slideH = 1.15; // em — must match container height
-      words.forEach(w => {
-        const s = document.createElement('span');
-        s.textContent = w;
-        s.style.display = 'block';
-        s.style.height = slideH + 'em';
-        s.style.lineHeight = slideH;
-        s.style.fontStyle = 'italic';
-        s.style.color = 'var(--accent)';
-        s.style.whiteSpace = 'nowrap';
-        inner.appendChild(s);
-      });
-      el.appendChild(inner);
+      // Visible word floats above the width-setter.
+      const word = document.createElement('span');
+      word.style.position = 'absolute';
+      word.style.left = '0';
+      word.style.top = '0';
+      word.style.fontStyle = 'italic';
+      word.style.color = 'var(--accent)';
+      word.style.transition = 'opacity 220ms ease, transform 320ms cubic-bezier(0.5,0,0.1,1)';
+      word.style.willChange = 'opacity, transform';
+      word.textContent = words[0];
+      el.appendChild(word);
 
       let i = 0;
-      function setWidth(w) {
-        widthSetter.textContent = w;
-        el.style.minWidth = (widthSetter.offsetWidth + 4) + 'px';
-      }
-      setWidth(words[0]);
       setInterval(() => {
-        i = (i + 1) % words.length;
-        inner.style.transform = `translateY(-${i * slideH}em)`;
-        setWidth(words[i]);
+        word.style.opacity = '0';
+        word.style.transform = 'translateY(-8px)';
+        setTimeout(() => {
+          i = (i + 1) % words.length;
+          word.textContent = words[i];
+          word.style.transition = 'none';
+          word.style.transform = 'translateY(8px)';
+          // force reflow before re-enabling transition
+          void word.offsetWidth;
+          word.style.transition = 'opacity 220ms ease, transform 320ms cubic-bezier(0.5,0,0.1,1)';
+          word.style.opacity = '1';
+          word.style.transform = 'translateY(0)';
+        }, 240);
       }, 2400);
     });
 
