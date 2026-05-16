@@ -41,15 +41,6 @@
         <button class="nav-mobile-trigger" data-mobile-nav aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
-        <button class="nav-search-trigger magnet" data-magnet="0.2" data-search-trigger>
-          <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-            <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"/>
-            <path d="M11 11 L14 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-          </svg>
-          <span>Search</span>
-          <span class="kbd">⌘K</span>
-        </button>
-        <a href="contact.html" class="btn btn-primary magnet" data-magnet="0.3">Connect with us <span class="arrow">→</span></a>
       </div>
     </div>
   </nav>
@@ -260,7 +251,7 @@
     document.querySelectorAll('[data-praxis-chrome]').forEach(el => {
       const what = el.dataset.praxisChrome || 'all';
       let html = '';
-      if (what === 'nav' || what === 'all') html += NAV_HTML + SEARCH_HTML;
+      if (what === 'nav' || what === 'all') html += NAV_HTML;
       if (what === 'footer' || what === 'all') html += FOOTER_HTML;
       el.outerHTML = html;
     });

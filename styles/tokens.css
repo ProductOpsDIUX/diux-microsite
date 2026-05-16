@@ -138,7 +138,12 @@ html.loader-active, html.loader-active body { overflow: hidden; height: 100%; }
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 body {
-  background: var(--bg-0);
+  background-color: var(--bg-0);
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--fg-0) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--fg-0) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-attachment: fixed;
   color: var(--fg-0);
   font-family: var(--font-sans);
   font-size: var(--t-body);
@@ -375,9 +380,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   flex-shrink: 0;
 }
 .nav-theme-toggle:hover {
-  color: var(--fg-0);
-  border-color: var(--line-strong);
-  background: color-mix(in oklab, var(--fg-0) 6%, transparent);
+  color: var(--bg-0);
+  border-color: var(--fg-0);
+  background: var(--fg-0);
 }
 .nav-theme-toggle .theme-icon {
   position: absolute;
@@ -436,12 +441,35 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   z-index: 100;
   height: 64px;
   display: flex; align-items: center;
-  background: color-mix(in oklab, var(--bg-0) 80%, transparent);
-  backdrop-filter: blur(12px) saturate(140%);
-  -webkit-backdrop-filter: blur(12px) saturate(140%);
-  border-bottom: 1px solid var(--line);
-  transition: background var(--t-med) var(--ease);
+  background: color-mix(in oklab, var(--bg-0) 35%, transparent);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid color-mix(in oklab, var(--fg-0) 8%, transparent);
+  transition:
+    top 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    left 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    right 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.4s ease,
+    background 0.4s ease,
+    box-shadow 0.4s ease;
 }
+.nav.scrolled {
+  top: 14px;
+  left: clamp(16px, 12vw, 220px);
+  right: clamp(16px, 12vw, 220px);
+  height: 56px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--fg-0) 10%, transparent);
+  background: color-mix(in oklab, var(--bg-0) 45%, transparent);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+[data-theme="light"] .nav.scrolled {
+  background: color-mix(in oklab, var(--bg-0) 55%, transparent);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+}
+.nav.scrolled .nav-inner { padding: 0 28px; }
 .nav-inner {
   width: 100%;
   max-width: var(--maxw);
@@ -472,11 +500,23 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   padding: 8px 14px;
   font-family: var(--font-mono);
   font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--fg-1);
+  color: var(--fg-2);
   border-radius: 4px;
-  transition: color var(--t-fast) var(--ease);
+  transition: color 0.3s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 14px; right: 14px;
+  bottom: 4px;
+  height: 1px;
+  background: var(--fg-0);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s ease;
 }
 .nav-link:hover, .nav-link[aria-expanded="true"] { color: var(--fg-0); }
+.nav-link:hover::after, .nav-link[aria-expanded="true"]::after { transform: scaleX(1); }
 .nav-link .caret {
   display: inline-block; margin-left: 6px; font-size: 9px; transition: transform var(--t-fast) var(--ease);
 }
@@ -510,8 +550,13 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nav-actions > .btn { display: none; }
 }
 @media (max-width: 640px) {
-  .eyebrow { flex-wrap: wrap; white-space: normal; }
+  .eyebrow { display: block; white-space: normal; }
+  .eyebrow::before { display: block; margin: 0 0 10px; }
+  .eyebrow .eyebrow-sep { display: none; }
+  .eyebrow .eyebrow-meta { display: block; }
   .hero-h1 { word-break: break-word; }
+  .hero-content { padding-top: clamp(20px, 4vw, 40px); padding-bottom: clamp(24px, 5vw, 48px); }
+  .cursor-dot, .cursor-ring { display: none; }
 }
 
 /* === Mega menu === */

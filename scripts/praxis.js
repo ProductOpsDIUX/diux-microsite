@@ -490,6 +490,17 @@
     s.addEventListener('praxis:variant', syncHeroVariant)
   );
 
+  // Nav scroll-pill toggle
+  function initNavScroll() {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   // ----------------------------------------------------------
   // Init all
   // ----------------------------------------------------------
@@ -502,6 +513,7 @@
     initFilters();
     initCounters();
     initHero();
+    initNavScroll();
     syncHeroVariant();
   }
   if (document.readyState === 'loading') {
