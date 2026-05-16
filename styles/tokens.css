@@ -79,7 +79,7 @@ html.loader-active, html.loader-active body { overflow: hidden; height: 100%; }
   --t-h4: clamp(28px, 2.4vw, 36px);
   --t-h3: clamp(36px, 3.4vw, 56px);
   --t-h2: clamp(48px, 5vw, 84px);
-  --t-h1: clamp(64px, 8vw, 144px);
+  --t-h1: clamp(44px, 8vw, 144px);
 
   /* Spacing */
   --s-1: 4px;
@@ -481,7 +481,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   display: inline-block; margin-left: 6px; font-size: 9px; transition: transform var(--t-fast) var(--ease);
 }
 .nav-link[aria-expanded="true"] .caret { transform: rotate(180deg); }
-.nav-actions { display: flex; align-items: center; gap: 8px; }
+.nav-actions { display: flex; align-items: center; gap: 8px; grid-column: 3; justify-self: end; }
 .nav-search-trigger {
   display: inline-flex; align-items: center; gap: 8px;
   height: 36px; padding: 0 12px;
@@ -502,6 +502,16 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   font-family: var(--font-mono); font-size: 10px;
   color: var(--fg-1);
   background: var(--bg-2);
+}
+
+@media (max-width: 1080px) {
+  .nav-theme-toggle,
+  .nav-search-trigger,
+  .nav-actions > .btn { display: none; }
+}
+@media (max-width: 640px) {
+  .eyebrow { flex-wrap: wrap; white-space: normal; }
+  .hero-h1 { word-break: break-word; }
 }
 
 /* === Mega menu === */
