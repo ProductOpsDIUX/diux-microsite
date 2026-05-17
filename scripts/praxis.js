@@ -31,7 +31,7 @@
   }
   const FONT_PAIRS = {
     editorial: {
-      display: '"Special Gothic Expanded One", "Inter Tight", system-ui, sans-serif',
+      display: '"Instrument Sans", "Inter Tight", system-ui, sans-serif',
       sans: '"Inter", -apple-system, sans-serif',
       mono: '"JetBrains Mono", ui-monospace, monospace'
     },
@@ -366,6 +366,81 @@
   }
 
   // ----------------------------------------------------------
+  // Manifesto — word-by-word brighten on scroll
+  // ----------------------------------------------------------
+  function initManifesto() {
+    const sections = document.querySelectorAll('[data-manifesto-section]');
+    if (!sections.length) return;
+    sections.forEach(section => {
+      const words = section.querySelectorAll('.word');
+      const flashLine = section.querySelector('[data-manifesto-flash]');
+      if (!words.length) return;
+      // Reveal range: [0.05, 0.80] of section progress. After 0.80, flash + exit.
+      const startP = 0.05;
+      const endP = 0.80;
+      let prevLit = 0;
+      let flashTimer = 0;
+      const update = () => {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const total = section.offsetHeight - vh;
+        const rect = section.getBoundingClientRect();
+        const p = Math.max(0, Math.min(1, -rect.top / total));
+        const k = Math.max(0, Math.min(1, (p - startP) / (endP - startP)));
+        const lit = Math.round(k * words.length);
+        words.forEach((w, i) => w.classList.toggle('lit', i < lit));
+        if (lit >= words.length && prevLit < words.length && flashLine) {
+          flashLine.classList.add('flash');
+          clearTimeout(flashTimer);
+          flashTimer = setTimeout(() => flashLine.classList.remove('flash'), 280);
+        }
+        prevLit = lit;
+      };
+      let raf = 0;
+      const onScroll = () => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => { raf = 0; update(); });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    });
+  }
+
+  // ----------------------------------------------------------
+  // Capabilities — scroll-pinned pillar swap with growing line
+  // ----------------------------------------------------------
+  function initCapsScroll() {
+    const sections = document.querySelectorAll('[data-caps-section]');
+    if (!sections.length) return;
+    sections.forEach(section => {
+      const cards = section.querySelectorAll('.caps-card');
+      const nums = section.querySelectorAll('.caps-h-num');
+      if (!cards.length) return;
+      const stages = cards.length;
+      let lastIdx = -1;
+      let raf = 0;
+
+      const update = () => {
+        raf = 0;
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const total = rect.height - vh;
+        const t = total > 0 ? Math.max(0, Math.min(1, -rect.top / total)) : 0;
+        const idx = Math.max(0, Math.min(stages - 1, Math.floor(t * stages - 1e-6)));
+        if (idx !== lastIdx) {
+          cards.forEach((c, i) => c.classList.toggle('is-active', i === idx));
+          nums.forEach((n, i) => n.classList.toggle('is-active', i === idx));
+          lastIdx = idx;
+        }
+      };
+      const onScroll = () => { if (raf) return; raf = requestAnimationFrame(update); };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
+    });
+  }
+
+  // ----------------------------------------------------------
   // Hero variants — kinetic word rotator + dotfield
   // ----------------------------------------------------------
   function initHero() {
@@ -513,6 +588,8 @@
     initFilters();
     initCounters();
     initHero();
+    initManifesto();
+    initCapsScroll();
     initNavScroll();
     syncHeroVariant();
   }

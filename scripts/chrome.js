@@ -261,16 +261,51 @@
     document.addEventListener('DOMContentLoaded', inject);
   } else { inject(); }
 
+  function scrambleWord(el, opts) {
+    const target = (el.dataset.scramble || el.textContent || '').toUpperCase();
+    if (!target) return;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%@&!?$+=/*';
+    const duration = (opts && opts.duration) || 1600;
+    const start = performance.now();
+    function frame(now) {
+      const t = Math.min(1, (now - start) / duration);
+      // Reveal characters left-to-right with a soft easing.
+      const revealed = Math.floor(t * target.length);
+      let out = '';
+      for (let i = 0; i < target.length; i++) {
+        const ch = target[i];
+        if (ch === ' ') { out += ' '; continue; }
+        if (i < revealed) out += ch;
+        else out += chars[Math.floor(Math.random() * chars.length)];
+      }
+      el.textContent = out;
+      if (t < 1) requestAnimationFrame(frame);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(frame);
+  }
+
   function runLoader() {
     const el = document.querySelector('[data-loader]');
     if (!el) return;
     if (sessionStorage.getItem('diux.loader.v1')) { el.remove(); return; }
-    const HOLD = 2200;
+    // Seed each word with random glyphs immediately so nothing flashes blank.
+    el.querySelectorAll('[data-scramble]').forEach(w => {
+      const t = w.dataset.scramble;
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%@&!?$+=/*';
+      let s = '';
+      for (let i = 0; i < t.length; i++) s += chars[Math.floor(Math.random() * chars.length)];
+      w.textContent = s;
+    });
+    requestAnimationFrame(() => {
+      el.querySelectorAll('[data-scramble]').forEach(w => scrambleWord(w, { duration: 1500 }));
+    });
+    const HOLD = 3000;
     setTimeout(() => {
       sessionStorage.setItem('diux.loader.v1', '1');
       el.classList.add('done');
       document.documentElement.classList.remove('loader-active');
-      setTimeout(() => el.classList.add('gone'), 1200);
+      setTimeout(() => el.classList.add('gone'), 1000);
     }, HOLD);
   }
   if (document.readyState === 'loading') {

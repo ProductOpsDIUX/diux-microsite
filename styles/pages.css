@@ -39,51 +39,38 @@
   max-width: var(--maxw);
   margin: 0 auto;
   width: 100%;
-  align-self: end;
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  column-gap: clamp(32px, 6vw, 96px);
+  row-gap: clamp(32px, 6vw, 96px);
 }
 .hero-h1 {
   font-family: var(--font-display);
   font-size: var(--t-h1);
   line-height: 0.92;
   letter-spacing: -0.03em;
-  margin: 0 0 32px;
-  font-weight: 400;
+  margin: 0;
+  font-weight: 700;
   max-width: 14ch;
+  text-transform: uppercase;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  align-self: end;
 }
 .hero-h1 .em { font-style: italic; color: var(--accent); }
 .hero-sub {
   max-width: 56ch;
   font-size: var(--t-body-lg);
   color: var(--fg-1);
-  margin: 0 0 40px;
+  margin: 0;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: start;
 }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.hero-foot {
-  position: relative;
-  padding: 16px var(--gutter) 24px;
-  max-width: var(--maxw);
-  margin: 0 auto;
-  width: 100%;
-  display: flex; justify-content: center; align-items: end;
-  font-family: var(--font-mono); font-size: 11px; color: var(--fg-2);
-  letter-spacing: 0.08em; text-transform: uppercase;
-  z-index: 3;
-  gap: 24px;
-}
-.scroll-indicator {
-  display: inline-flex; flex-direction: column; align-items: center; gap: 8px;
-  color: var(--fg-2);
-}
-.scroll-indicator-line {
-  width: 1px; height: 32px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: scrollPulse 2.4s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-  50% { opacity: 1; transform: scaleY(1); }
-}
-
 /* === Hero radar variant === */
 .hero-radar {
   position: relative; width: min(720px, 70vw); aspect-ratio: 1;
@@ -796,6 +783,172 @@
 
 @media (max-width: 880px) {
   .contact-grid { grid-template-columns: 1fr; gap: 48px; padding: 64px 0; }
+}
+
+/* === Manifesto / Mission === */
+.manifesto {
+  position: relative;
+  height: 500vh;
+  border-bottom: 1px solid var(--line);
+}
+.manifesto-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.manifesto-head { margin-bottom: clamp(32px, 4vw, 56px); }
+.manifesto-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 6.4vw, 104px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  margin: 0;
+  max-width: 22ch;
+}
+.manifesto-text .line { display: block; }
+.manifesto-text .word {
+  color: var(--bg-0);
+  transition: color 360ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: color;
+}
+.manifesto-text .word.lit { color: var(--fg-0); }
+.manifesto-text .line.flash .word {
+  color: var(--accent);
+  transition: color 80ms ease-out;
+}
+
+@media (max-width: 640px) {
+  .manifesto { height: 460vh; }
+  .manifesto-text { font-size: 40px; max-width: none; }
+}
+
+/* === Capabilities — scroll-pinned pillars === */
+.caps-scroll {
+  position: relative;
+  height: 400vh;
+  background: var(--bg-1);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.caps-scroll-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+}
+.caps-scroll-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  column-gap: clamp(48px, 8vw, 128px);
+  align-items: start;
+  width: 100%;
+  height: 100vh;
+  padding-top: 14vh;
+  padding-bottom: 8vh;
+  box-sizing: border-box;
+}
+.caps-scroll-left {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+.caps-scroll-right {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-self: center;
+  margin-top: 14vh;
+}
+.caps-scroll-mark {
+  grid-column: 1;
+  grid-row: 3;
+  align-self: end;
+  font-family: var(--font-display);
+  font-size: clamp(72px, 11vw, 168px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: #000;
+  user-select: none;
+}
+.caps-scroll-left .eyebrow { margin-bottom: 16px; }
+.caps-scroll-left h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4.4vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0 0 clamp(32px, 5vw, 64px);
+  font-weight: 700;
+}
+.caps-h-count {
+  position: relative;
+  display: inline-block;
+  vertical-align: baseline;
+  width: 1ch;
+  color: var(--accent);
+}
+.caps-h-count .caps-h-num {
+  display: inline-block;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 380ms cubic-bezier(0.2,0.7,0.2,1), transform 380ms cubic-bezier(0.2,0.7,0.2,1);
+}
+.caps-h-count .caps-h-num:not(:first-child) {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.caps-h-count .caps-h-num.is-active { opacity: 1; transform: translateY(0); }
+.caps-scroll-right {
+  position: relative;
+  min-height: clamp(220px, 28vh, 360px);
+}
+.caps-card {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 420ms cubic-bezier(0.2,0.7,0.2,1), transform 420ms cubic-bezier(0.2,0.7,0.2,1);
+  pointer-events: none;
+}
+.caps-card.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.caps-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 44px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 20px;
+  font-weight: 400;
+}
+.caps-card p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--fg-1);
+  margin: 0;
+  max-width: 48ch;
+}
+
+@media (max-width: 900px) {
+  .caps-scroll { height: 100vh; }
+  .caps-scroll-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    gap: 24px;
+    padding-top: 10vh;
+    padding-bottom: 6vh;
+  }
+  .caps-scroll-left { grid-column: 1; grid-row: 1; }
+  .caps-scroll-right { grid-column: 1; grid-row: 2; align-self: start; margin-top: 0; }
+  .caps-scroll-mark { grid-column: 1; grid-row: 3; font-size: clamp(56px, 16vw, 96px); }
+  .caps-h-count { display: inline-block; }
 }
 
 @media (max-width: 640px) {
