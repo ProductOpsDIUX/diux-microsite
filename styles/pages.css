@@ -937,7 +937,6 @@
 }
 
 @media (max-width: 900px) {
-  .caps-scroll { height: 100vh; }
   .caps-scroll-grid {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto 1fr;
@@ -952,6 +951,7 @@
 }
 
 @media (max-width: 640px) {
+  .hero-sub { font-size: 14px; line-height: 1.5; }
   .pillars { grid-template-columns: 1fr; }
   .article-grid { grid-template-columns: 1fr; }
   .article-card { border-right: 0 !important; }
