@@ -17,7 +17,7 @@ export default async function HomePage() {
   // Show featured case studies first, fall back to whatever's in position order.
   const featuredCases = cases.filter((cs) => cs.featured);
   const homeCases = (featuredCases.length ? featuredCases : cases).slice(0, 5);
-  const homeArticles = articles.slice(0, 3);
+  const homeArticles = articles.slice(0, 6);
 
   return (
     <>

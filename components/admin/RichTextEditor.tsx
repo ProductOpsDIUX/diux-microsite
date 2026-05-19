@@ -4,21 +4,34 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
-import { useEffect, useCallback } from 'react';
+import Image from '@tiptap/extension-image';
+import Table from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
+import TableHeader from '@tiptap/extension-table-header';
+import TableCell from '@tiptap/extension-table-cell';
+import { useEffect, useCallback, useRef, useState } from 'react';
+import { uploadAction } from '@/app/admin/actions';
+
+const ACCEPTED_IMAGE_TYPES = 'image/jpeg,image/png,image/webp,image/gif,image/svg+xml';
 
 export function RichTextEditor({
   value,
   onChange,
   placeholder = 'Write the article…',
+  uploadPrefix = 'rich-text',
 }: {
   value: string;
   onChange: (html: string) => void;
   placeholder?: string;
+  // Where uploaded inline images get stored in Supabase Storage.
+  uploadPrefix?: string;
 }) {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        // Drop the heading levels we don't need to keep the toolbar focused.
         heading: { levels: [2, 3] },
       }),
       Link.configure({
@@ -26,6 +39,13 @@ export function RichTextEditor({
         HTMLAttributes: { rel: 'noopener noreferrer', target: '_blank' },
       }),
       Placeholder.configure({ placeholder }),
+      Image.configure({
+        HTMLAttributes: { class: 'rich-img' },
+      }),
+      Table.configure({ resizable: true }),
+      TableRow,
+      TableHeader,
+      TableCell,
     ],
     content: value,
     onUpdate: ({ editor }) => onChange(editor.getHTML()),
@@ -38,17 +58,19 @@ export function RichTextEditor({
           '[&_h3]:font-display [&_h3]:text-[18px] [&_h3]:mt-5 [&_h3]:mb-1.5 ' +
           '[&_p]:leading-relaxed [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-5 [&_ol]:pl-5 ' +
           '[&_code]:bg-bg2 [&_code]:px-1 [&_code]:rounded [&_blockquote]:border-l-2 ' +
-          '[&_blockquote]:border-line [&_blockquote]:pl-3 [&_blockquote]:text-fg1',
+          '[&_blockquote]:border-line [&_blockquote]:pl-3 [&_blockquote]:text-fg1 ' +
+          '[&_img]:rounded [&_img]:my-3 [&_img]:max-w-full ' +
+          '[&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:text-[14px] ' +
+          '[&_th]:border [&_th]:border-line [&_th]:bg-bg2/40 [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left ' +
+          '[&_td]:border [&_td]:border-line [&_td]:px-2 [&_td]:py-1.5 ',
       },
     },
-    // Tiptap warns about hydration mismatches in Next; this flag suppresses it.
     immediatelyRender: false,
   });
 
-  // Keep the editor in sync when the parent resets the value (e.g. on Discard).
   useEffect(() => {
     if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || '', false /* emitUpdate */);
+      editor.commands.setContent(value || '', false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
@@ -65,11 +87,42 @@ export function RichTextEditor({
     editor.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
   }, [editor]);
 
+  const onPickImage = useCallback(() => {
+    fileInputRef.current?.click();
+  }, []);
+
+  const onFileChosen = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      e.target.value = '';
+      if (!file || !editor) return;
+      setUploading(true);
+      try {
+        const fd = new FormData();
+        fd.append('file', file);
+        fd.append('prefix', uploadPrefix);
+        const result = await uploadAction(fd);
+        if (!result.ok) {
+          alert(`Image upload failed: ${result.error}`);
+          return;
+        }
+        editor.chain().focus().setImage({ src: result.url }).run();
+      } finally {
+        setUploading(false);
+      }
+    },
+    [editor, uploadPrefix]
+  );
+
+  const insertTable = useCallback(() => {
+    editor?.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+  }, [editor]);
+
   if (!editor) {
-    return (
-      <div className="rounded-md border border-line bg-bg1 min-h-[280px] animate-pulse" />
-    );
+    return <div className="rounded-md border border-line bg-bg1 min-h-[280px] animate-pulse" />;
   }
+
+  const inTable = editor.isActive('table');
 
   return (
     <div className="rounded-md border border-line bg-bg1 overflow-hidden">
@@ -87,10 +140,32 @@ export function RichTextEditor({
         <ToolbarBtn active={editor.isActive('code')} onClick={() => editor.chain().focus().toggleCode().run()}>{`<>`}</ToolbarBtn>
         <Divider />
         <ToolbarBtn active={editor.isActive('link')} onClick={promptLink}>Link</ToolbarBtn>
+        <ToolbarBtn onClick={onPickImage} disabled={uploading}>
+          {uploading ? '…' : '🖼 Image'}
+        </ToolbarBtn>
+        <ToolbarBtn onClick={insertTable}>⊞ Table</ToolbarBtn>
+        {/* Table-specific controls; only enabled when caret is inside one. */}
+        {inTable && (
+          <>
+            <Divider />
+            <ToolbarBtn onClick={() => editor.chain().focus().addColumnAfter().run()}>+ Col</ToolbarBtn>
+            <ToolbarBtn onClick={() => editor.chain().focus().addRowAfter().run()}>+ Row</ToolbarBtn>
+            <ToolbarBtn onClick={() => editor.chain().focus().deleteColumn().run()}>− Col</ToolbarBtn>
+            <ToolbarBtn onClick={() => editor.chain().focus().deleteRow().run()}>− Row</ToolbarBtn>
+            <ToolbarBtn onClick={() => editor.chain().focus().deleteTable().run()}>Delete</ToolbarBtn>
+          </>
+        )}
         <Divider />
         <ToolbarBtn onClick={() => editor.chain().focus().undo().run()}>↶</ToolbarBtn>
         <ToolbarBtn onClick={() => editor.chain().focus().redo().run()}>↷</ToolbarBtn>
       </div>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept={ACCEPTED_IMAGE_TYPES}
+        className="hidden"
+        onChange={onFileChosen}
+      />
       <EditorContent editor={editor} />
     </div>
   );
@@ -100,16 +175,19 @@ function ToolbarBtn({
   active,
   onClick,
   children,
+  disabled,
 }: {
   active?: boolean;
   onClick: () => void;
   children: React.ReactNode;
+  disabled?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`px-2 py-1 rounded text-[12px] font-medium transition-colors ${
+      disabled={disabled}
+      className={`px-2 py-1 rounded text-[12px] font-medium transition-colors disabled:opacity-50 ${
         active ? 'bg-accent text-bg0' : 'text-fg1 hover:bg-bg2'
       }`}
     >

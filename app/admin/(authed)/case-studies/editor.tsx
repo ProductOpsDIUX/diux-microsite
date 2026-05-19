@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { Card, Field, Input, Textarea, Button, Toast } from '@/components/admin/ui';
 import { ImageUploader } from '@/components/admin/ImageUploader';
+import { RichTextEditor } from '@/components/admin/RichTextEditor';
 import { CaseStudySchema, type CaseStudyFormValues } from '@/lib/schemas/case-study';
 import { saveCaseStudyAction, deleteCaseStudyAction } from './actions';
 import type { CaseStudy } from '@/lib/supabase/types';
@@ -147,10 +148,19 @@ export function CaseStudyEditor({ initial }: { initial: CaseStudy | null }) {
         />
       </Card>
 
-      <Card title="Body" description="The long-form write-up. Plain text or basic markdown.">
-        <Field label="Body" error={errors.body?.message}>
-          <Textarea {...register('body')} rows={14} />
-        </Field>
+      <Card title="Body" description="The long-form write-up — rich text with images and tables.">
+        <Controller
+          control={control}
+          name="body"
+          render={({ field }) => (
+            <RichTextEditor
+              value={field.value}
+              onChange={field.onChange}
+              uploadPrefix={`case-studies/${slugValue || 'misc'}/inline`}
+              placeholder="Write the case study…"
+            />
+          )}
+        />
       </Card>
 
       <Card title="Display">

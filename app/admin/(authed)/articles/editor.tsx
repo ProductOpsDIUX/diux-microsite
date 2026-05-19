@@ -136,12 +136,16 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
         />
       </Card>
 
-      <Card title="Body" description="Rich text — bold, italic, headings, lists, links.">
+      <Card title="Body" description="Rich text — bold, italic, headings, lists, links, images, tables.">
         <Controller
           control={control}
           name="body_html"
           render={({ field }) => (
-            <RichTextEditor value={field.value} onChange={field.onChange} />
+            <RichTextEditor
+              value={field.value}
+              onChange={field.onChange}
+              uploadPrefix={`articles/${slugValue || 'misc'}/inline`}
+            />
           )}
         />
       </Card>

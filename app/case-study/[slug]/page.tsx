@@ -5,6 +5,15 @@ import { LegacyScripts } from '@/components/site/LegacyScripts';
 
 export const revalidate = 60;
 
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 type Params = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
@@ -23,9 +32,18 @@ export default async function CaseStudyDetailPage({ params }: Params) {
   const cs = await getCaseStudyBySlug(slug);
   if (!cs) notFound();
 
-  // Body is plain text from the admin — render with whitespace preserved
-  // and paragraph breaks at blank lines.
-  const paragraphs = cs.body.split(/\n\s*\n/).filter((p) => p.trim().length > 0);
+  // The body is rich text (HTML) from the admin's Tiptap editor. Older
+  // case studies created before the rich-text switch may still be plain
+  // text — detect that and wrap with <p> on paragraph breaks for
+  // backwards compatibility.
+  const looksLikeHtml = /<\/?[a-z][\s\S]*>/i.test(cs.body);
+  const bodyHtml = looksLikeHtml
+    ? cs.body
+    : cs.body
+        .split(/\n\s*\n/)
+        .filter((p) => p.trim().length > 0)
+        .map((p, i) => `<p${i === 0 ? ' class="lead"' : ''}>${escapeHtml(p).replace(/\n/g, '<br/>')}</p>`)
+        .join('\n');
 
   const all = await listCaseStudies();
   const related = all.filter((c) => c.id !== cs.id).slice(0, 3);
@@ -102,14 +120,11 @@ export default async function CaseStudyDetailPage({ params }: Params) {
         </section>
       )}
 
-      {paragraphs.length > 0 && (
-        <article className="article-body wrap">
-          {paragraphs.map((p, i) => (
-            <p key={i} className={i === 0 ? 'lead reveal' : 'reveal'} style={{ whiteSpace: 'pre-wrap' }}>
-              {p}
-            </p>
-          ))}
-        </article>
+      {bodyHtml && (
+        <article
+          className="article-body wrap"
+          dangerouslySetInnerHTML={{ __html: bodyHtml }}
+        />
       )}
 
       {related.length > 0 && (

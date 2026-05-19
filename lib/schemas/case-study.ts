@@ -15,7 +15,7 @@ export const CaseStudySchema = z.object({
   category: z.string().max(60),
   tags: z.array(z.string().max(40)).max(20),
   hero_image: z.string().url().nullable().or(z.literal('').transform(() => null)),
-  body: z.string().max(50_000),
+  body: z.string().max(200_000),
   featured: z.boolean(),
   position: z.number().int().min(0).max(9999),
 });
