@@ -52,7 +52,9 @@ export function RichTextEditor({
     editorProps: {
       attributes: {
         class:
-          'prose prose-invert max-w-none px-4 py-3 min-h-[280px] focus:outline-none ' +
+          // Use min-content for table width so wide tables can grow beyond
+          // the editor's width — the scroll container below handles overflow.
+          'prose prose-invert max-w-none px-4 py-3 focus:outline-none ' +
           '[&_a]:text-accent [&_a]:underline ' +
           '[&_h2]:font-display [&_h2]:text-[22px] [&_h2]:mt-6 [&_h2]:mb-2 ' +
           '[&_h3]:font-display [&_h3]:text-[18px] [&_h3]:mt-5 [&_h3]:mb-1.5 ' +
@@ -60,11 +62,11 @@ export function RichTextEditor({
           '[&_code]:bg-bg2 [&_code]:px-1 [&_code]:rounded [&_blockquote]:border-l-2 ' +
           '[&_blockquote]:border-line [&_blockquote]:pl-3 [&_blockquote]:text-fg1 ' +
           '[&_img]:rounded [&_img]:my-3 [&_img]:max-w-full ' +
-          // Tables — use a brighter border inside the editor than the public
-          // site's --line (rgba 0.08) so the grid is actually visible while
-          // editing. Public render still uses --line via article-body CSS.
-          '[&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:text-[14px] ' +
-          '[&_th]:border [&_th]:border-white/30 [&_th]:bg-white/[0.06] [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left [&_th]:text-fg0 ' +
+          // Tables — brighter borders than the public site's --line so the
+          // grid is visible while editing. Width:max-content lets wide tables
+          // overflow horizontally; the wrapper below scrolls them.
+          '[&_table]:my-4 [&_table]:text-[14px] [&_table]:border-collapse [&_table]:w-max [&_table]:max-w-none ' +
+          '[&_th]:border [&_th]:border-white/30 [&_th]:bg-white/[0.06] [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left [&_th]:text-fg0 [&_th]:whitespace-nowrap ' +
           '[&_td]:border [&_td]:border-white/20 [&_td]:px-2 [&_td]:py-1.5 ',
       },
     },
@@ -122,7 +124,7 @@ export function RichTextEditor({
   }, [editor]);
 
   if (!editor) {
-    return <div className="rounded-md border border-line bg-bg1 min-h-[280px] animate-pulse" />;
+    return <div className="rounded-md border border-line bg-bg1 min-h-[60vh] animate-pulse" />;
   }
 
   const inTable = editor.isActive('table');
@@ -169,7 +171,13 @@ export function RichTextEditor({
         className="hidden"
         onChange={onFileChosen}
       />
-      <EditorContent editor={editor} />
+      {/* Scroll wrapper — vertical when content is long, horizontal when a
+          table or image stretches past the editor width. The min-height keeps
+          empty editors comfortably tall; the max-height caps growth so the
+          sticky save bar stays in view. */}
+      <div className="min-h-[60vh] max-h-[70vh] overflow-auto">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 }
