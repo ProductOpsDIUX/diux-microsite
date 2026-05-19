@@ -152,8 +152,7 @@ export default async function TeamPage() {
                     Who <span className="serif-italic">leads.</span>
                   </h2>
                   <p className="lead-rail-lede">
-                    Senior leaders who set the direction, run the chapters, and put
-                    designers in front of the people who use what we build.
+                    The people shaping how we grow, deliver, and educate.
                   </p>
                 </div>
               </div>
@@ -176,9 +175,11 @@ export default async function TeamPage() {
             <header className="team-section-head reveal">
               <div className="eyebrow">// On the ground</div>
               <h2>
-                The people bringing<br />
-                <span className="serif-italic">work to life.</span>
+                The <span className="serif-italic">team.</span>
               </h2>
+              <p className="hero-sub" style={{ marginTop: 16, maxWidth: '60ch' }}>
+                The people bringing work to life every day.
+              </p>
             </header>
             <div className="ground-grid">
               {others.map((m) => (
