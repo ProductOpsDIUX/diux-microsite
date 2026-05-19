@@ -21,6 +21,8 @@ export default async function HomePage() {
 
   return (
     <>
+      {/* HUD grid background — home page only. */}
+      <div className="home-grid" aria-hidden="true"></div>
       <div className="grid-overlay" aria-hidden="true"></div>
       {/* chrome.js injects the nav and footer here */}
       <div data-praxis-chrome="nav"></div>
