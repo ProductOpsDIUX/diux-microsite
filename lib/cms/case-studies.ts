@@ -18,6 +18,18 @@ export async function listCaseStudies(): Promise<CaseStudy[]> {
   }
 }
 
+export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null> {
+  try {
+    const sb = getPublicClient();
+    const { data, error } = await sb.from('case_studies').select('*').eq('slug', slug).maybeSingle();
+    if (error) throw error;
+    return data ?? null;
+  } catch (e) {
+    console.error('getCaseStudyBySlug failed', e);
+    return null;
+  }
+}
+
 export async function getCaseStudy(id: string): Promise<CaseStudy | null> {
   try {
     const sb = getServiceClient();
