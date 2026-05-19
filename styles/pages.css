@@ -1372,12 +1372,16 @@
   .lead-rail-right { padding-top: 0; }
 }
 
-/* === On the ground grid === — same card design as Leadership but smaller. */
+/* === On the ground grid === — same card design as Leadership but smaller.
+   Fixed at 5 columns on desktop so the row reads as a tidy strip; steps
+   down to 4 / 3 / 2 across breakpoints. */
 .ground-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: clamp(14px, 1.6vw, 24px);
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(20px, 2vw, 36px);
 }
+@media (max-width: 1180px) { .ground-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 900px)  { .ground-grid { grid-template-columns: repeat(3, 1fr); } }
 .ground-grid .lead-card-info {
   padding: 12px 14px 40px;
 }
