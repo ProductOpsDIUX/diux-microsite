@@ -7,7 +7,11 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.supabase.co' },
     ],
   },
-  // Server Actions are GA in Next 15 — config moved out of `experimental`.
-  serverActions: { bodySizeLimit: '10mb' },
+  // bodySizeLimit lets ImageUploader send files up to 8 MB through Server
+  // Actions. Stays under `experimental` in Next 15 (the feature itself is
+  // GA, but the tuning knob is still scoped there).
+  experimental: {
+    serverActions: { bodySizeLimit: '10mb' },
+  },
 };
 module.exports = nextConfig;
