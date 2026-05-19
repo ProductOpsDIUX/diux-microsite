@@ -63,12 +63,12 @@ export function RichTextEditor({
           '[&_code]:bg-bg2 [&_code]:px-1 [&_code]:rounded [&_blockquote]:border-l-2 ' +
           '[&_blockquote]:border-line [&_blockquote]:pl-3 [&_blockquote]:text-fg1 ' +
           '[&_img]:rounded [&_img]:my-3 [&_img]:max-w-full ' +
-          // Tables — brighter borders than the public site's --line so the
-          // grid is visible while editing. Width:max-content lets wide tables
+          // Tables — strong borders so the grid is clearly visible against
+          // the dark editor surface. Width:max-content lets wide tables
           // overflow horizontally; the wrapper below scrolls them.
           '[&_table]:my-4 [&_table]:text-[14px] [&_table]:border-collapse [&_table]:w-max [&_table]:max-w-none ' +
-          '[&_th]:border [&_th]:border-white/30 [&_th]:bg-white/[0.06] [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left [&_th]:text-fg0 [&_th]:whitespace-nowrap ' +
-          '[&_td]:border [&_td]:border-white/20 [&_td]:px-2 [&_td]:py-1.5 ',
+          '[&_th]:border [&_th]:border-solid [&_th]:border-fg2 [&_th]:bg-bg2 [&_th]:px-3 [&_th]:py-2 [&_th]:text-left [&_th]:text-fg0 [&_th]:whitespace-nowrap [&_th]:font-medium ' +
+          '[&_td]:border [&_td]:border-solid [&_td]:border-fg2 [&_td]:px-3 [&_td]:py-2 ',
       },
     },
     immediatelyRender: false,

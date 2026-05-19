@@ -1648,3 +1648,33 @@
   margin-right: 4px;
 }
 .article-body-tags .chip { text-transform: lowercase; }
+
+/* === Article body — rich text tables ===
+   Rendered by dangerouslySetInnerHTML from Tiptap output. Without explicit
+   styling the public site would show borderless cells. Borders use --fg-3
+   (mid-grey) so they read clearly against the dark page background. */
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: clamp(20px, 2.5vw, 32px) 0;
+  font-size: 15px;
+  display: block;
+  overflow-x: auto;
+  /* Custom thin scrollbar so wide tables don't look broken. */
+}
+.article-body table th,
+.article-body table td {
+  border: 1px solid var(--fg-3);
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+.article-body table th {
+  background: var(--bg-2);
+  color: var(--fg-0);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.article-body table tr:nth-child(even) td {
+  background: color-mix(in oklab, var(--bg-1) 60%, transparent);
+}
