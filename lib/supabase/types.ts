@@ -56,6 +56,8 @@ export interface TeamMember {
   role: string;
   bio: string;
   photo: string | null;
+  linkedin_url: string | null;
+  is_leadership: boolean;
   position: number;
   created_at: string;
   updated_at: string;

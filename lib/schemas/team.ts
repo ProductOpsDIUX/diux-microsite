@@ -5,6 +5,8 @@ export const TeamMemberSchema = z.object({
   role: z.string().max(120),
   bio: z.string().max(1200),
   photo: z.string().url().nullable().or(z.literal('').transform(() => null)),
+  linkedin_url: z.string().url('Must be a full URL').nullable().or(z.literal('').transform(() => null)),
+  is_leadership: z.boolean(),
   position: z.number().int().min(0).max(9999),
 });
 

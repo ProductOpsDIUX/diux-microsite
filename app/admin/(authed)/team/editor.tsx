@@ -32,6 +32,8 @@ export function TeamMemberEditor({ initial }: { initial: TeamMember | null }) {
       role: initial?.role ?? '',
       bio: initial?.bio ?? '',
       photo: initial?.photo ?? null,
+      linkedin_url: initial?.linkedin_url ?? null,
+      is_leadership: initial?.is_leadership ?? false,
       position: initial?.position ?? 0,
     },
   });
@@ -103,16 +105,53 @@ export function TeamMemberEditor({ initial }: { initial: TeamMember | null }) {
           )}
         />
         <Field
-          label="Position"
-          hint="Lower numbers appear first"
-          error={errors.position?.message}
+          label="LinkedIn URL"
+          hint="Full link, e.g. https://www.linkedin.com/in/their-handle"
+          error={errors.linkedin_url?.message}
         >
-          <Input
-            type="number"
-            min={0}
-            {...register('position', { valueAsNumber: true })}
+          <Controller
+            control={control}
+            name="linkedin_url"
+            render={({ field }) => (
+              <Input
+                type="url"
+                value={field.value ?? ''}
+                onChange={(e) => field.onChange(e.target.value || null)}
+                placeholder="https://www.linkedin.com/in/…"
+              />
+            )}
           />
         </Field>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Field label="Section">
+            <Controller
+              control={control}
+              name="is_leadership"
+              render={({ field }) => (
+                <label className="inline-flex items-center gap-2 mt-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={field.value}
+                    onChange={(e) => field.onChange(e.target.checked)}
+                    className="h-4 w-4 accent-[var(--accent)]"
+                  />
+                  <span className="text-[13px] text-fg0">Show under Leadership</span>
+                </label>
+              )}
+            />
+          </Field>
+          <Field
+            label="Position"
+            hint="Lower numbers appear first within each section"
+            error={errors.position?.message}
+          >
+            <Input
+              type="number"
+              min={0}
+              {...register('position', { valueAsNumber: true })}
+            />
+          </Field>
+        </div>
       </Card>
 
       <div className="sticky bottom-4 z-10 flex items-center justify-between gap-3 rounded-lg border border-line bg-bg0/95 backdrop-blur px-5 py-3 shadow-lg">

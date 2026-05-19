@@ -2,10 +2,12 @@ import type { Metadata } from 'next';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listTeam } from '@/lib/cms/team';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
+import { LinkedInIcon } from '@/components/site/LinkedInIcon';
 import {
   VerticalTimeline,
   type VerticalMilestone,
 } from '@/components/site/VerticalTimeline';
+import type { TeamMember } from '@/lib/supabase/types';
 
 const ORIGINS: VerticalMilestone[] = [
   {
@@ -63,8 +65,43 @@ function initials(name: string): string {
     .join('');
 }
 
+function MemberCard({ m }: { m: TeamMember }) {
+  return (
+    <div className="team-card reveal">
+      <div className="portrait">
+        {m.photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={m.photo} alt={m.name} />
+        ) : (
+          <span className="initials">{initials(m.name)}</span>
+        )}
+      </div>
+      <div className="info">
+        <div className="name">{m.name}</div>
+        <div className="role">{m.role}</div>
+        {m.bio && (
+          <p style={{ marginTop: 12, color: 'var(--fg-2)', fontSize: 14 }}>{m.bio}</p>
+        )}
+      </div>
+      {m.linkedin_url && (
+        <a
+          className="team-card-linkedin"
+          href={m.linkedin_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${m.name} on LinkedIn`}
+        >
+          <LinkedInIcon />
+        </a>
+      )}
+    </div>
+  );
+}
+
 export default async function TeamPage() {
   const members = await listTeam();
+  const leadership = members.filter((m) => m.is_leadership);
+  const others = members.filter((m) => !m.is_leadership);
 
   return (
     <>
@@ -91,28 +128,37 @@ export default async function TeamPage() {
 
       <VerticalTimeline label="ORIGINS OF DI &amp; UX" items={ORIGINS} />
 
-      {members.length > 0 && (
-        <section className="section" style={{ paddingTop: 0 }}>
+      {leadership.length > 0 && (
+        <section className="section team-section" style={{ paddingTop: 0 }}>
           <div className="wrap">
+            <header className="team-section-head reveal">
+              <div className="eyebrow">// Leadership</div>
+              <h2>
+                Who <span className="serif-italic">leads.</span>
+              </h2>
+            </header>
             <div className="team-grid">
-              {members.map((m) => (
-                <div key={m.id} className="team-card reveal">
-                  <div className="portrait">
-                    {m.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={m.photo} alt={m.name} />
-                    ) : (
-                      <span className="initials">{initials(m.name)}</span>
-                    )}
-                  </div>
-                  <div className="info">
-                    <div className="name">{m.name}</div>
-                    <div className="role">{m.role}</div>
-                    {m.bio && (
-                      <p style={{ marginTop: 12, color: 'var(--fg-2)', fontSize: 14 }}>{m.bio}</p>
-                    )}
-                  </div>
-                </div>
+              {leadership.map((m) => (
+                <MemberCard key={m.id} m={m} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {others.length > 0 && (
+        <section className="section team-section">
+          <div className="wrap">
+            <header className="team-section-head reveal">
+              <div className="eyebrow">// On the ground</div>
+              <h2>
+                The people bringing<br />
+                <span className="serif-italic">work to life.</span>
+              </h2>
+            </header>
+            <div className="team-grid">
+              {others.map((m) => (
+                <MemberCard key={m.id} m={m} />
               ))}
             </div>
           </div>
