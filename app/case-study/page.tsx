@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
@@ -45,7 +44,7 @@ export default async function CaseStudyIndexPage() {
                 // First card takes a wider span, then alternate 7/5 splits.
                 const span = i === 0 ? 'span-7' : i % 2 === 1 ? 'span-5' : 'span-7';
                 return (
-                  <Link
+                  <a
                     key={c.id}
                     className={`case-card ${span} reveal`}
                     href={`/case-study/${c.slug}`}
@@ -79,7 +78,7 @@ export default async function CaseStudyIndexPage() {
                     </div>
                     <h3>{c.title}</h3>
                     {c.summary && <p>{c.summary}</p>}
-                  </Link>
+                  </a>
                 );
               })}
             </div>

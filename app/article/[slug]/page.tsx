@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { getArticleBySlug, listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 
@@ -44,9 +43,9 @@ export default async function ArticleDetailPage({ params }: Params) {
       <header className="detail-hero">
         <div className="wrap">
           <nav className="crumbs">
-            <Link href="/">Home</Link>
+            <a href="/">Home</a>
             <span className="sep">/</span>
-            <Link href="/article">Thinking</Link>
+            <a href="/article">Thinking</a>
             <span className="sep">/</span>
             <span>{article.title}</span>
           </nav>
@@ -116,7 +115,7 @@ export default async function ArticleDetailPage({ params }: Params) {
             </div>
             <div className="article-grid">
               {related.map((r) => (
-                <Link key={r.id} className="article-card" href={`/article/${r.slug}`}>
+                <a key={r.id} className="article-card" href={`/article/${r.slug}`}>
                   <div className="media has-image" style={{ aspectRatio: '16 / 10' }}>
                     {r.cover_image ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -134,7 +133,7 @@ export default async function ArticleDetailPage({ params }: Params) {
                     <span>Read</span>
                     <span className="arrow">→</span>
                   </div>
-                </Link>
+                </a>
               ))}
             </div>
           </div>

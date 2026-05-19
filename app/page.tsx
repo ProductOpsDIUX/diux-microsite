@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { getHomeContent } from '@/lib/cms/home';
 import { listCaseStudies } from '@/lib/cms/case-studies';
 import { listArticles } from '@/lib/cms/articles';
@@ -142,15 +141,15 @@ export default async function HomePage() {
                 </h2>
               </div>
               <div className="actions">
-                <Link href="/case-study" className="btn">
+                <a href="/case-study" className="btn">
                   All case studies <span className="arrow">→</span>
-                </Link>
+                </a>
               </div>
             </div>
 
             <div className="case-grid">
               {homeCases.map((cs, i) => (
-                <Link
+                <a
                   key={cs.id}
                   className={`case-card ${CASE_SPANS[i] ?? 'span-4'} reveal`}
                   href={`/case-study/${cs.slug}`}
@@ -184,7 +183,7 @@ export default async function HomePage() {
                   </div>
                   <h3>{cs.title}</h3>
                   {cs.summary && <p>{cs.summary}</p>}
-                </Link>
+                </a>
               ))}
             </div>
           </div>
@@ -204,15 +203,15 @@ export default async function HomePage() {
                 </h2>
               </div>
               <div className="actions">
-                <Link href="/article" className="btn">
+                <a href="/article" className="btn">
                   All articles <span className="arrow">→</span>
-                </Link>
+                </a>
               </div>
             </div>
 
             <div className="article-grid">
               {homeArticles.map((a) => (
-                <Link key={a.id} className="article-card reveal" href={`/article/${a.slug}`}>
+                <a key={a.id} className="article-card reveal" href={`/article/${a.slug}`}>
                   <div className={`media${a.cover_image ? ' has-image' : ''}`} style={{ aspectRatio: '16 / 10' }}>
                     {a.cover_image ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -230,7 +229,7 @@ export default async function HomePage() {
                     <span>Read</span>
                     <span className="arrow">→</span>
                   </div>
-                </Link>
+                </a>
               ))}
             </div>
           </div>

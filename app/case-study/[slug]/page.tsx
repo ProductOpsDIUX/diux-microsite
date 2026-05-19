@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
 import { getCaseStudyBySlug, listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 
@@ -39,9 +38,9 @@ export default async function CaseStudyDetailPage({ params }: Params) {
       <header className="detail-hero">
         <div className="wrap">
           <nav className="crumbs">
-            <Link href="/">Home</Link>
+            <a href="/">Home</a>
             <span className="sep">/</span>
-            <Link href="/case-study">Work</Link>
+            <a href="/case-study">Work</a>
             <span className="sep">/</span>
             <span>{cs.title}</span>
           </nav>
@@ -126,7 +125,7 @@ export default async function CaseStudyDetailPage({ params }: Params) {
             </div>
             <div className="case-grid">
               {related.map((r, i) => (
-                <Link
+                <a
                   key={r.id}
                   className={`case-card ${i === 0 ? 'span-7' : 'span-5'}`}
                   href={`/case-study/${r.slug}`}
@@ -150,7 +149,7 @@ export default async function CaseStudyDetailPage({ params }: Params) {
                   </div>
                   <h3>{r.title}</h3>
                   {r.summary && <p>{r.summary}</p>}
-                </Link>
+                </a>
               ))}
             </div>
           </div>

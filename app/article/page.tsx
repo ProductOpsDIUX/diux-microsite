@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
@@ -42,7 +41,7 @@ export default async function ArticleIndexPage() {
           ) : (
             <div className="article-grid">
               {articles.map((a) => (
-                <Link key={a.id} className="article-card reveal" href={`/article/${a.slug}`}>
+                <a key={a.id} className="article-card reveal" href={`/article/${a.slug}`}>
                   <div className="media has-image" style={{ aspectRatio: '16 / 10' }}>
                     {a.cover_image ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -70,7 +69,7 @@ export default async function ArticleIndexPage() {
                     <span>Read</span>
                     <span className="arrow">→</span>
                   </div>
-                </Link>
+                </a>
               ))}
             </div>
           )}
