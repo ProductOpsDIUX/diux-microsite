@@ -1022,14 +1022,15 @@
 
 .vt-row {
   position: relative;
-  /* Tighter spacing between milestones than before; rows are no longer
-     forced to fill the viewport. */
-  min-height: clamp(360px, 44vh, 520px);
   display: grid;
   grid-template-columns: 1fr 1fr;
+  /* One grid row → align-items: center makes both children share the
+     same vertical midline (so the card sits next to its year, not
+     stacked below it). Padding handles inter-row spacing. */
+  grid-template-rows: 1fr;
   column-gap: clamp(8px, 1vw, 24px);
   align-items: center;
-  padding: clamp(24px, 4vw, 56px) 0;
+  padding: clamp(40px, 6vw, 88px) 0;
 }
 
 .vt-ghost {
@@ -1053,8 +1054,8 @@
   transform: scale(1);
   opacity: 0.18;
 }
-.vt-row.vt-right .vt-ghost { grid-column: 1; text-align: right; transform-origin: right center; }
-.vt-row.vt-left  .vt-ghost { grid-column: 2; text-align: left;  transform-origin: left center; }
+.vt-row.vt-right .vt-ghost { grid-column: 1; text-align: right; transform-origin: right center; align-self: center; }
+.vt-row.vt-left  .vt-ghost { grid-column: 2; text-align: left;  transform-origin: left center; align-self: center; }
 .vt-row.vt-right.is-active .vt-ghost { transform: scale(1); }
 .vt-row.vt-left.is-active  .vt-ghost { transform: scale(1); }
 
@@ -1066,6 +1067,9 @@
   max-width: 480px;
   backdrop-filter: blur(6px);
   transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 500ms ease, border-color 300ms ease;
+  /* Belt-and-braces: force the card to sit at the row's vertical center
+     so it aligns with the year ghost beside it. */
+  align-self: center;
 }
 /* Card sits flush against the center line on the opposite side of the year. */
 .vt-row.vt-right .vt-card { grid-column: 2; justify-self: start; margin-left: clamp(16px, 2vw, 32px); }
