@@ -3,7 +3,7 @@ import { getPageSeo } from '@/lib/cms/seo';
 import { listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
-
+import { PageBackground } from '@/components/site/PageBackground';
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -46,6 +46,7 @@ export default async function ArticleIndexPage({ searchParams }: Params) {
   return (
     <>
       <SiteNav />
+      <PageBackground color="var(--bg-2)" />
 
       <section className="section" style={{ paddingTop: '18vh' }}>
         <div className="wrap">

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getArticleBySlug, listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';import { ArticleToc } from '@/components/site/ArticleToc';
-import { buildToc } from '@/lib/html/toc';
+import { PageBackground } from '@/components/site/PageBackground';import { buildToc } from '@/lib/html/toc';
 
 export const revalidate = 60;
 
@@ -46,6 +46,7 @@ export default async function ArticleDetailPage({ params }: Params) {
   return (
     <>
       <SiteNav />
+      <PageBackground color="var(--bg-2)" />
 
       <header className="detail-hero">
         <div className="wrap">

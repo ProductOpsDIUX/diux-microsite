@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getCaseStudyBySlug, listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
-export const revalidate = 60;
+import { PageBackground } from '@/components/site/PageBackground';export const revalidate = 60;
 
 function escapeHtml(s: string): string {
   return s
@@ -51,6 +51,7 @@ export default async function CaseStudyDetailPage({ params }: Params) {
   return (
     <>
       <SiteNav />
+      <PageBackground color="var(--bg-2)" />
 
       <header className="detail-hero">
         <div className="wrap">
