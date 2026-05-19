@@ -25,7 +25,7 @@
         <button class="nav-link" data-mega="work" aria-expanded="false">Case studies <span class="caret">▾</span></button>
         <button class="nav-link" data-mega="thinking" aria-expanded="false">Blog <span class="caret">▾</span></button>
         <a class="nav-link" href="/team">Team</a>
-        <a class="nav-link" href="/#capabilities">Resources</a>
+        <a class="nav-link" href="/resources">Resources</a>
         <a class="nav-link" href="/#events">Events</a>
       </div>
       <div class="nav-actions">
@@ -49,7 +49,7 @@
     <a href="/case-study">Case studies</a>
     <a href="/article">Blog</a>
     <a href="/team">Team</a>
-    <a href="/#capabilities">Resources</a>
+    <a href="/resources">Resources</a>
     <a href="/#events">Events</a>
     <a href="/#publications">Publications</a>
   </div>
@@ -170,7 +170,7 @@
           <h5>// Practice</h5>
           <ul>
             <li><a href="/case-study">Case studies</a></li>
-            <li><a href="/#capabilities">Resources</a></li>
+            <li><a href="/resources">Resources</a></li>
             <li><a href="/#events">Events</a></li>
             <li><a href="/#publications">Publications</a></li>
           </ul>

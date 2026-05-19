@@ -51,16 +51,52 @@ export type UploadResult =
   | { ok: true; url: string; path: string }
   | { ok: false; error: string };
 
-const MAX_BYTES = 8 * 1024 * 1024;
-const ACCEPTED = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml']);
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+const ACCEPTED_IMAGES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml']);
 
 export async function uploadAction(formData: FormData): Promise<UploadResult> {
   await requireAuth();
   const file = formData.get('file');
   const prefix = String(formData.get('prefix') || 'misc');
   if (!(file instanceof File)) return { ok: false, error: 'No file provided' };
-  if (!ACCEPTED.has(file.type)) return { ok: false, error: 'Unsupported file type' };
-  if (file.size > MAX_BYTES) return { ok: false, error: 'File too large (max 8 MB)' };
+  if (!ACCEPTED_IMAGES.has(file.type)) return { ok: false, error: 'Unsupported file type' };
+  if (file.size > MAX_IMAGE_BYTES) return { ok: false, error: 'File too large (max 8 MB)' };
+  try {
+    const { url, path } = await uploadMedia({ file, prefix });
+    return { ok: true, url, path };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : 'Upload failed' };
+  }
+}
+
+// uploadFileAction — broader file types (PDFs, docx, xlsx, pptx, zips, …)
+// for the Resources section. Still gated by Clerk; bigger size cap.
+const MAX_FILE_BYTES = 25 * 1024 * 1024;
+const ACCEPTED_FILES = new Set<string>([
+  ...ACCEPTED_IMAGES,
+  'application/pdf',
+  'application/zip',
+  'application/x-zip-compressed',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'application/vnd.ms-powerpoint',
+  'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+  'text/plain',
+  'text/csv',
+  'text/markdown',
+]);
+
+export async function uploadFileAction(formData: FormData): Promise<UploadResult> {
+  await requireAuth();
+  const file = formData.get('file');
+  const prefix = String(formData.get('prefix') || 'misc');
+  if (!(file instanceof File)) return { ok: false, error: 'No file provided' };
+  if (file.type && !ACCEPTED_FILES.has(file.type)) {
+    return { ok: false, error: `Unsupported file type: ${file.type}` };
+  }
+  if (file.size > MAX_FILE_BYTES) return { ok: false, error: 'File too large (max 25 MB)' };
   try {
     const { url, path } = await uploadMedia({ file, prefix });
     return { ok: true, url, path };

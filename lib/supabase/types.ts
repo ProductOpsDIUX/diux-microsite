@@ -63,6 +63,20 @@ export interface TeamMember {
   updated_at: string;
 }
 
+export type ResourceKind = 'template' | 'manual';
+
+export interface Resource {
+  id: string;
+  title: string;
+  description: string;
+  kind: ResourceKind;
+  url: string;
+  file_path: string | null;
+  position: number;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface PageSeo {
   path: string;
   title: string;

@@ -6,21 +6,23 @@ export const dynamic = 'force-dynamic';
 async function getCounts() {
   try {
     const sb = getPublicClient();
-    const [cs, art, pub, team] = await Promise.all([
+    const [cs, art, pub, team, res] = await Promise.all([
       sb.from('case_studies').select('*', { count: 'exact', head: true }),
       sb.from('articles').select('*', { count: 'exact', head: true }),
       sb.from('articles').select('*', { count: 'exact', head: true }).eq('is_published', true),
       sb.from('team_members').select('*', { count: 'exact', head: true }),
+      sb.from('resources').select('*', { count: 'exact', head: true }),
     ]);
     return {
       caseStudies: cs.count ?? 0,
       articles: art.count ?? 0,
       articlesPublished: pub.count ?? 0,
       team: team.count ?? 0,
+      resources: res.count ?? 0,
     };
   } catch (e) {
     console.error('admin counts fetch skipped', e);
-    return { caseStudies: 0, articles: 0, articlesPublished: 0, team: 0 };
+    return { caseStudies: 0, articles: 0, articlesPublished: 0, team: 0, resources: 0 };
   }
 }
 
@@ -32,7 +34,8 @@ export default async function AdminDashboard() {
     { href: '/admin/case-studies', label: 'Case studies', desc: 'Manage selected work', stat: `${counts.caseStudies} total` },
     { href: '/admin/articles', label: 'Articles', desc: 'Blog posts with drafts', stat: `${counts.articlesPublished} live · ${counts.articles - counts.articlesPublished} draft` },
     { href: '/admin/team', label: 'Team', desc: 'Names, roles, photos', stat: `${counts.team} members` },
-    { href: '/admin/seo', label: 'SEO', desc: 'Per-page title, description, OG image', stat: '5 pages' },
+    { href: '/admin/resources', label: 'Resources', desc: 'Templates and manuals', stat: `${counts.resources} items` },
+    { href: '/admin/seo', label: 'SEO', desc: 'Per-page title, description, OG image', stat: '6 pages' },
   ];
 
   return (
