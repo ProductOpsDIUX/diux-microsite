@@ -320,12 +320,14 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
       transparent 1px 8px);
 }
 .media.has-image::before { display: none; }
-.media.has-image { background: #fff; }
+.media.has-image { background: var(--bg-2); }
 .media.has-image img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
-  object-fit: contain;
-  padding: 24px;
+  /* Fill the card. The image is cropped to the .media box's aspect ratio
+     rather than shown letter-boxed with padding. */
+  object-fit: cover;
+  display: block;
 }
 .media .media-label {
   position: absolute;

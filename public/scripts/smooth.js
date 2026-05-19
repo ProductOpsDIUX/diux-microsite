@@ -18,6 +18,10 @@
   }
   requestAnimationFrame(raf);
 
+  // Offset for the fixed top nav (64px) plus a little visual breathing room.
+  // Lenis doesn't read CSS scroll-margin-top, so we apply the offset here.
+  const NAV_OFFSET = -96;
+
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
     if (!a) return;
@@ -26,7 +30,7 @@
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: 0 });
+    lenis.scrollTo(target, { offset: NAV_OFFSET });
   });
 
   window.__lenis = lenis;

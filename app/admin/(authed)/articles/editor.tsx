@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useForm, Controller, type SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -142,18 +142,7 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
             control={control}
             name="tags"
             render={({ field }) => (
-              <Input
-                value={field.value.join(', ')}
-                onChange={(e) =>
-                  field.onChange(
-                    e.target.value
-                      .split(',')
-                      .map((s) => s.trim().toLowerCase())
-                      .filter(Boolean)
-                  )
-                }
-                placeholder="ai, ux, research"
-              />
+              <TagsInput value={field.value} onChange={field.onChange} />
             )}
           />
         </Field>
@@ -254,5 +243,52 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
         </div>
       </div>
     </form>
+  );
+}
+
+// Tags input — holds the raw comma-separated text in local state so the
+// admin can freely type commas, spaces, and uppercase characters without
+// the field reshuffling on every keystroke. The form's `tags` array is
+// kept in sync via the parent `onChange`. We re-parse on each keystroke
+// (so the array is correct when saving) but the displayed text always
+// reflects what the user actually typed.
+function TagsInput({
+  value,
+  onChange,
+}: {
+  value: string[];
+  onChange: (next: string[]) => void;
+}) {
+  const [text, setText] = useState(value.join(', '));
+
+  // Sync from outside (e.g. when the form `reset()`s after a save).
+  useEffect(() => {
+    setText(value.join(', '));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value.join('')]);
+
+  const normalize = (raw: string) =>
+    raw
+      .split(',')
+      .map((s) => s.trim().toLowerCase())
+      .filter(Boolean);
+
+  return (
+    <Input
+      value={text}
+      onChange={(e) => {
+        const raw = e.target.value;
+        setText(raw);
+        // Push the parsed array up so Save reflects current state, but the
+        // text input keeps the user's literal characters (commas, spaces).
+        onChange(normalize(raw));
+      }}
+      onBlur={() => {
+        // Tidy the displayed text on blur — collapses double commas, trims,
+        // and removes blanks.
+        setText(normalize(text).join(', '));
+      }}
+      placeholder="ai, ux, research"
+    />
   );
 }

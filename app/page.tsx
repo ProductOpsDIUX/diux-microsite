@@ -236,6 +236,13 @@ export default async function HomePage() {
                   </div>
                   <h3>{a.title}</h3>
                   {a.excerpt && <p>{a.excerpt}</p>}
+                  {(a.tags ?? []).length > 0 && (
+                    <div className="article-card-tags">
+                      {(a.tags ?? []).map((t) => (
+                        <span key={t} className="article-card-tag">#{t}</span>
+                      ))}
+                    </div>
+                  )}
                   <div className="read">
                     <span>Read</span>
                     <span className="arrow">→</span>
