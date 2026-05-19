@@ -12,6 +12,10 @@ export default clerkMiddleware(async (auth, req) => {
 });
 
 export const config = {
+  // Use Node.js runtime so Clerk's @clerk/shared/* + #crypto imports resolve
+  // (Vercel's Edge runtime rejects them). Needs `experimental.nodeMiddleware`
+  // in next.config and Next 15.2+.
+  runtime: 'nodejs',
   matcher: [
     // Run on everything except _next assets and common public files.
     '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
