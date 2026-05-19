@@ -1590,24 +1590,128 @@
   scroll-margin-top: 96px;
 }
 
+/* The mobile drawer + tab are hidden by default (desktop). */
+.article-toc-tab,
+.article-toc-drawer,
+.article-toc-backdrop { display: none; }
+
 @media (max-width: 1024px) {
   .article-with-toc {
     grid-template-columns: 1fr;
-    row-gap: clamp(24px, 4vw, 40px);
+    row-gap: 0;
   }
-  .article-toc {
-    position: static;
-    max-height: none;
-    padding-right: 0;
-  }
-  .article-toc-list {
+  /* Hide the inline desktop TOC and the empty rail. */
+  .article-toc { display: none; }
+  .article-toc-rail { display: none; }
+
+  /* Floating tab pinned to the left edge of the viewport. */
+  .article-toc-tab {
+    display: inline-flex;
+    position: fixed;
+    left: 0;
+    top: 50vh;
+    transform: translateY(-50%);
+    z-index: 90;
+    padding: 10px 12px 10px 8px;
+    border: 1px solid var(--line-strong);
     border-left: 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 4px 0;
+    border-radius: 0 999px 999px 0;
+    background: var(--bg-1);
+    color: var(--fg-0);
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
   }
-  .article-toc-item a { border-left: 0; }
-  .article-toc-item.is-active > a { border-left: 0; }
+  .article-toc-tab:hover { border-color: var(--accent); color: var(--accent); }
+  .article-toc-tab-icon {
+    width: 14px; height: 12px;
+    display: inline-grid; gap: 3px;
+  }
+  .article-toc-tab-icon span {
+    display: block; height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+  .article-toc-tab[aria-expanded="true"] { left: 280px; transition: left 320ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+  .article-toc-tab { transition: left 320ms cubic-bezier(0.2, 0.7, 0.2, 1), border-color 200ms ease, color 200ms ease; }
+
+  /* Backdrop covers the page when the drawer is open. */
+  .article-toc-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 80;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease;
+  }
+  .article-toc-backdrop.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* The drawer itself. */
+  .article-toc-drawer {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 90;
+    width: min(280px, 80vw);
+    background: var(--bg-1);
+    border-right: 1px solid var(--line-strong);
+    padding: 24px 18px 24px 20px;
+    transform: translateX(-100%);
+    transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    overflow-y: auto;
+  }
+  .article-toc-drawer.is-open { transform: translateX(0); }
+  .article-toc-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .article-toc-drawer-close {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--fg-1);
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-grid; place-items: center;
+  }
+  .article-toc-drawer-close:hover { color: var(--accent); border-color: var(--accent); }
+  /* Re-style the list inside the drawer (it was hidden via .article-toc). */
+  .article-toc-drawer .article-toc-list {
+    list-style: none; margin: 0; padding: 0;
+    border-left: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .article-toc-drawer .article-toc-item a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--fg-2);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+  }
+  .article-toc-drawer .article-toc-item.is-active > a {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+  .article-toc-drawer .article-toc-l3 a { padding-left: 28px; font-size: 12.5px; }
+  .article-toc-drawer .article-toc-l4 a { padding-left: 44px; font-size: 12px; color: var(--fg-3); }
+  .article-toc-drawer .article-toc-l4.is-active > a { color: var(--accent); }
 }
 
 /* === Article card tags — small inline chips below the excerpt === */
