@@ -7,7 +7,6 @@ export function PlaceholderPage({ eyebrow, title, body }: {
 }) {
   return (
     <>
-      <div className="grid-overlay" aria-hidden="true"></div>
       <div data-praxis-chrome="nav"></div>
       <main className="section" style={{ minHeight: '70vh', paddingTop: '20vh' }}>
         <div className="wrap">

@@ -22,10 +22,10 @@
         <span>DI &amp; UX</span>
       </a>
       <div class="nav-links">
-        <button class="nav-link" data-mega="work" aria-expanded="false">Work <span class="caret">▾</span></button>
-        <button class="nav-link" data-mega="thinking" aria-expanded="false">Thinking <span class="caret">▾</span></button>
+        <button class="nav-link" data-mega="work" aria-expanded="false">Case studies <span class="caret">▾</span></button>
+        <button class="nav-link" data-mega="thinking" aria-expanded="false">Blog <span class="caret">▾</span></button>
         <button class="nav-link" data-mega="team" aria-expanded="false">Team <span class="caret">▾</span></button>
-        <a class="nav-link" href="/#capabilities">Capabilities</a>
+        <a class="nav-link" href="/#capabilities">Resources</a>
         <a class="nav-link" href="/#events">Events</a>
       </div>
       <div class="nav-actions">
@@ -46,10 +46,10 @@
   </nav>
 
   <div class="nav-mobile-panel">
-    <a href="/#work">Work</a>
-    <a href="/#thinking">Thinking</a>
+    <a href="/case-study">Case studies</a>
+    <a href="/article">Blog</a>
     <a href="/team">Team</a>
-    <a href="/#capabilities">Capabilities</a>
+    <a href="/#capabilities">Resources</a>
     <a href="/#events">Events</a>
     <a href="/#publications">Publications</a>
   </div>
@@ -206,13 +206,13 @@
           <h5>// Practice</h5>
           <ul>
             <li><a href="/case-study">Case studies</a></li>
-            <li><a href="/#capabilities">Capabilities</a></li>
+            <li><a href="/#capabilities">Resources</a></li>
             <li><a href="/#events">Events</a></li>
             <li><a href="/#publications">Publications</a></li>
           </ul>
         </div>
         <div class="footer-col">
-          <h5>// Thinking</h5>
+          <h5>// Blog</h5>
           <ul>
             <li><a href="/article">Articles</a></li>
             <li><a href="#">Newsletter</a></li>

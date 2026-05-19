@@ -50,7 +50,6 @@ export default async function CaseStudyDetailPage({ params }: Params) {
 
   return (
     <>
-      <div className="grid-overlay" aria-hidden="true"></div>
       <div data-praxis-chrome="nav"></div>
 
       <header className="detail-hero">

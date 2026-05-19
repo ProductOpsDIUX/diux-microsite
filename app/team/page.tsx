@@ -28,7 +28,6 @@ export default async function TeamPage() {
 
   return (
     <>
-      <div className="grid-overlay" aria-hidden="true"></div>
       <div data-praxis-chrome="nav"></div>
 
       <section className="section" style={{ paddingTop: '18vh' }}>

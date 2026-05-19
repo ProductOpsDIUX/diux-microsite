@@ -37,7 +37,6 @@ export default async function ArticleDetailPage({ params }: Params) {
 
   return (
     <>
-      <div className="grid-overlay" aria-hidden="true"></div>
       <div data-praxis-chrome="nav"></div>
 
       <header className="detail-hero">
