@@ -24,7 +24,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <AdminNav />
 
         <div className="mt-auto p-4 border-t border-line flex items-center gap-3">
-          <UserButton afterSignOutUrl="/admin/sign-in" />
+          <UserButton />
           <div className="min-w-0 flex-1">
             <div className="truncate text-[13px] text-fg0">
               {user?.firstName || user?.username || 'Editor'}

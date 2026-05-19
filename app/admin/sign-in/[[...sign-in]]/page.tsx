@@ -13,9 +13,8 @@ export default function SignInPage() {
         <div className="flex justify-center">
           <SignIn
             path="/admin/sign-in"
-            routing="path"
             signUpUrl="/admin/sign-in"
-            afterSignInUrl="/admin"
+            fallbackRedirectUrl="/admin"
             appearance={{
               variables: {
                 colorPrimary: '#7CFFB2',
