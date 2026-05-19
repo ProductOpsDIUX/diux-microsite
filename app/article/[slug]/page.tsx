@@ -57,7 +57,6 @@ export default async function ArticleDetailPage({ params }: Params) {
             <span className="sep">/</span>
             <span>{article.title}</span>
           </nav>
-          {article.topic && <div className="eyebrow reveal">// {article.topic}</div>}
           <h1 className="detail-h1 reveal">{article.title}</h1>
           {article.excerpt && (
             <p
@@ -75,7 +74,7 @@ export default async function ArticleDetailPage({ params }: Params) {
               {article.excerpt}
             </p>
           )}
-          {(published || article.author || article.topic) && (
+          {(published || article.author) && (
             <div className="detail-meta">
               {article.author && (
                 <div className="detail-meta-item">
@@ -87,12 +86,6 @@ export default async function ArticleDetailPage({ params }: Params) {
                 <div className="detail-meta-item">
                   <div className="k">Published</div>
                   <div className="v">{published}</div>
-                </div>
-              )}
-              {article.topic && (
-                <div className="detail-meta-item">
-                  <div className="k">Topic</div>
-                  <div className="v">{article.topic}</div>
                 </div>
               )}
             </div>
@@ -160,9 +153,6 @@ export default async function ArticleDetailPage({ params }: Params) {
                     ) : (
                       <span className="media-label">[ {r.slug.toUpperCase()} ]</span>
                     )}
-                  </div>
-                  <div className="case-meta">
-                    {r.topic && <span>{r.topic}</span>}
                   </div>
                   <h3>{r.title}</h3>
                   {r.excerpt && <p>{r.excerpt}</p>}

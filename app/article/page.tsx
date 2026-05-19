@@ -103,11 +103,11 @@ export default async function ArticleIndexPage({ searchParams }: Params) {
                         <span className="media-label">[ {a.slug.toUpperCase()} ]</span>
                       )}
                     </div>
-                    <div className="case-meta">
-                      {a.topic && <span>{a.topic}</span>}
-                      {a.topic && date && <span className="dot"></span>}
-                      {date && <span>{date}</span>}
-                    </div>
+                    {date && (
+                      <div className="case-meta">
+                        <span>{date}</span>
+                      </div>
+                    )}
                     <h3>{a.title}</h3>
                     {a.excerpt && <p>{a.excerpt}</p>}
                     {a.tags.length > 0 && (

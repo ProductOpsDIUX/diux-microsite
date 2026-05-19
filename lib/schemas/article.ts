@@ -11,7 +11,6 @@ export const ArticleSchema = z.object({
   title: z.string().min(1, 'Required').max(200),
   excerpt: z.string().max(400),
   cover_image: z.string().url().nullable().or(z.literal('').transform(() => null)),
-  topic: z.string().max(40),
   author: z.string().max(160),
   display_date: z.string().max(40),
   tags: z.array(z.string().min(1).max(40)).max(20),

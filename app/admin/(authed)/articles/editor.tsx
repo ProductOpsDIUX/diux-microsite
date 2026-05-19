@@ -35,7 +35,6 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
       title: initial?.title ?? '',
       excerpt: initial?.excerpt ?? '',
       cover_image: initial?.cover_image ?? null,
-      topic: initial?.topic ?? '',
       author: initial?.author ?? '',
       display_date: initial?.display_date ?? '',
       tags: initial?.tags ?? [],
@@ -104,19 +103,14 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
             placeholder="Designing trust into autonomous mission systems"
           />
         </Field>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Field
-            label="Slug"
-            required
-            hint="URL: /article/<slug>"
-            error={errors.slug?.message}
-          >
-            <Input {...register('slug')} placeholder="autonomous-mission-systems" />
-          </Field>
-          <Field label="Topic" error={errors.topic?.message}>
-            <Input {...register('topic')} placeholder="AI · Trust" />
-          </Field>
-        </div>
+        <Field
+          label="Slug"
+          required
+          hint="URL: /article/<slug>"
+          error={errors.slug?.message}
+        >
+          <Input {...register('slug')} placeholder="autonomous-mission-systems" />
+        </Field>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Field
             label="Author"

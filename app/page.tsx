@@ -231,9 +231,6 @@ export default async function HomePage() {
                       <span className="media-label">[ {a.slug.toUpperCase()} ]</span>
                     )}
                   </div>
-                  <div className="case-meta">
-                    {a.topic && <span>{a.topic}</span>}
-                  </div>
                   <h3>{a.title}</h3>
                   {a.excerpt && <p>{a.excerpt}</p>}
                   {(a.tags ?? []).length > 0 && (

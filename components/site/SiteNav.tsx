@@ -116,7 +116,7 @@ export async function SiteNav() {
                   <a key={a.id} className="megamenu-item" href={`/article/${a.slug}`}>
                     <div className="megamenu-item-title">{a.title}</div>
                     <div className="megamenu-item-desc">
-                      {[a.topic, a.author].filter(Boolean).join(' · ')}
+                      {a.author || ''}
                     </div>
                   </a>
                 ))}
