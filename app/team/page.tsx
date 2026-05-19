@@ -101,8 +101,12 @@ function LeadCard({ m }: { m: TeamMember }) {
 
 export default async function TeamPage() {
   const members = await listTeam();
+  // Leadership keeps the explicit position ordering set in the admin;
+  // on-the-ground members are sorted alphabetically by name.
   const leadership = members.filter((m) => m.is_leadership);
-  const others = members.filter((m) => !m.is_leadership);
+  const others = members
+    .filter((m) => !m.is_leadership)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <>
