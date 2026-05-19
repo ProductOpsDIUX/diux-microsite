@@ -2,45 +2,44 @@ import type { Metadata } from 'next';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listTeam } from '@/lib/cms/team';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-import { Timeline, type TimelineMilestone } from '@/components/site/Timeline';
+import {
+  VerticalTimeline,
+  type VerticalMilestone,
+} from '@/components/site/VerticalTimeline';
 
-const ORIGINS: TimelineMilestone[] = [
+const ORIGINS: VerticalMilestone[] = [
   {
     year: '2018',
     title: 'Develop new capabilities',
-    bullets: [
-      'Conducted DI training for 50 HCDs and 100 staff via DI boot camp',
-      'Applied DI across 11 capability areas with 30+ new initiatives',
-    ],
+    body:
+      'Conducted DI training for 50 HCDs and 100 staff via DI boot camp. Applied DI across 11 capability areas with 30+ new initiatives.',
   },
   {
     year: '2019 — 2020',
+    ghostYear: '2019',
     title: 'Transform enterprise',
-    bullets: [
-      'Enhanced DI methodology for enterprise-level impact',
-      'Partnered SAF users to co-design new concepts for Army, Air Force and Navy',
-    ],
+    body:
+      'Enhanced DI methodology for enterprise-level impact. Partnered SAF users to co-design new concepts for Army, Air Force and Navy.',
   },
   {
     year: '2021 — 2022',
-    title: 'DI & UX is born 🎉',
-    bullets: [
-      'We used to be spread across different PCs such as C3D, CIO, EDS, and Digital Hub, before coming together under Digital Hub as one central DI & UX cluster',
-    ],
+    ghostYear: '2021',
+    title: 'DI & UX is born',
+    body:
+      'We used to be spread across different PCs such as C3D, CIO, EDS, and Digital Hub, before coming together under Digital Hub as one central DI & UX cluster.',
   },
   {
     year: '2023 — 2024',
+    ghostYear: '2023',
     title: 'Expand reach & influence',
-    bullets: [
-      'Not only did we support SAF projects and DSTA initiatives, but also expanded into MINDEF projects, shaped the DSTA Employee Experience and collaborated with external parties in MINDEF/SAF and the industry',
-    ],
+    body:
+      'Not only did we support SAF projects and DSTA initiatives, but also expanded into MINDEF projects, shaped the DSTA Employee Experience, and collaborated with external parties in MINDEF/SAF and the industry.',
   },
   {
     year: '2025',
     title: 'Scale data-driven UX',
-    bullets: [
-      'Our 3 chapters (Command Centre Experience, DSTA Experience and Enterprise Experience) covered 8 portfolios, 16 programmes, and 50+ projects/tracks',
-    ],
+    body:
+      'Our 3 chapters (Command Centre Experience, DSTA Experience and Enterprise Experience) covered 8 portfolios, 16 programmes, and 50+ projects/tracks.',
   },
 ];
 
@@ -71,7 +70,9 @@ export default async function TeamPage() {
     <>
       <div data-praxis-chrome="nav"></div>
 
-      <section className="section" style={{ paddingTop: '18vh' }}>
+      <VerticalTimeline label="ORIGINS OF DI &amp; UX" items={ORIGINS} />
+
+      <section className="section">
         <div className="wrap">
           <div className="section-head reveal">
             <div>
@@ -116,20 +117,6 @@ export default async function TeamPage() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      <section className="team-origins">
-        <div className="wrap">
-          <div className="team-origins-head">
-            <div className="eyebrow">Origins of DI &amp; UX</div>
-            <h2>How it started</h2>
-            <p>
-              DI &amp; UX began with one conviction: defence technology didn&rsquo;t need
-              more complexity. It needed better thinking.
-            </p>
-          </div>
-          <Timeline milestones={ORIGINS} />
         </div>
       </section>
 
