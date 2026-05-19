@@ -36,6 +36,7 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
       excerpt: initial?.excerpt ?? '',
       cover_image: initial?.cover_image ?? null,
       topic: initial?.topic ?? '',
+      author: initial?.author ?? '',
       body_html: initial?.body_html ?? '',
       is_published: initial?.is_published ?? false,
     },
@@ -114,6 +115,13 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
             <Input {...register('topic')} placeholder="AI · Trust" />
           </Field>
         </div>
+        <Field
+          label="Author"
+          hint="Shown in the byline. Multiple authors: separate with commas."
+          error={errors.author?.message}
+        >
+          <Input {...register('author')} placeholder="Maya Okafor" />
+        </Field>
         <Field
           label="Excerpt"
           hint="Short summary shown on the listing page"

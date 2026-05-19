@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listResources } from '@/lib/cms/resources';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-import type { Resource } from '@/lib/supabase/types';
+import { SiteNav } from '@/components/site/SiteNav';import type { Resource } from '@/lib/supabase/types';
 
 export const revalidate = 60;
 
@@ -55,7 +55,7 @@ export default async function ResourcesPage() {
 
   return (
     <>
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
 
       <section className="section" style={{ paddingTop: '18vh' }}>
         <div className="wrap">

@@ -43,6 +43,7 @@ export interface Article {
   excerpt: string;
   cover_image: string | null;
   topic: string;
+  author: string;
   body_html: string;
   is_published: boolean;
   published_at: string | null;

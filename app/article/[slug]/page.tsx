@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getArticleBySlug, listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-import { ArticleToc } from '@/components/site/ArticleToc';
+import { SiteNav } from '@/components/site/SiteNav';import { ArticleToc } from '@/components/site/ArticleToc';
 import { buildToc } from '@/lib/html/toc';
 
 export const revalidate = 60;
@@ -42,7 +42,7 @@ export default async function ArticleDetailPage({ params }: Params) {
 
   return (
     <>
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
 
       <header className="detail-hero">
         <div className="wrap">
@@ -71,12 +71,20 @@ export default async function ArticleDetailPage({ params }: Params) {
               {article.excerpt}
             </p>
           )}
-          {published && (
+          {(published || article.author || article.topic) && (
             <div className="detail-meta">
-              <div className="detail-meta-item">
-                <div className="k">Published</div>
-                <div className="v">{published}</div>
-              </div>
+              {article.author && (
+                <div className="detail-meta-item">
+                  <div className="k">By</div>
+                  <div className="v">{article.author}</div>
+                </div>
+              )}
+              {published && (
+                <div className="detail-meta-item">
+                  <div className="k">Published</div>
+                  <div className="v">{published}</div>
+                </div>
+              )}
               {article.topic && (
                 <div className="detail-meta-item">
                   <div className="k">Topic</div>

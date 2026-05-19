@@ -129,7 +129,14 @@
       t.addEventListener('mouseenter', () => open(t.dataset.mega));
       t.addEventListener('focus', () => open(t.dataset.mega));
       t.addEventListener('mouseleave', closeSoon);
-      t.addEventListener('click', (e) => { e.preventDefault(); active === t.dataset.mega ? close() : open(t.dataset.mega); });
+      // Clicks on real anchor links navigate; buttons (or anchors with no
+      // href) toggle the dropdown for keyboard / mobile users.
+      t.addEventListener('click', (e) => {
+        const href = t.tagName === 'A' ? t.getAttribute('href') : null;
+        if (href) { close(); return; }
+        e.preventDefault();
+        active === t.dataset.mega ? close() : open(t.dataset.mega);
+      });
     });
     menus.forEach(m => {
       m.addEventListener('mouseenter', () => clearTimeout(hideTimer));

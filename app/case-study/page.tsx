@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-
+import { SiteNav } from '@/components/site/SiteNav';
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -19,7 +19,7 @@ export default async function CaseStudyIndexPage() {
 
   return (
     <>
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
 
       <section className="section" style={{ paddingTop: '18vh' }}>
         <div className="wrap">

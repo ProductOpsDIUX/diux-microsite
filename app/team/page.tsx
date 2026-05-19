@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getPageSeo } from '@/lib/cms/seo';
 import { listTeam } from '@/lib/cms/team';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-import { LinkedInIcon } from '@/components/site/LinkedInIcon';
+import { SiteNav } from '@/components/site/SiteNav';import { LinkedInIcon } from '@/components/site/LinkedInIcon';
 import {
   VerticalTimeline,
   type VerticalMilestone,
@@ -110,7 +110,7 @@ export default async function TeamPage() {
 
   return (
     <>
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
 
       <section className="section" style={{ paddingTop: '18vh', paddingBottom: '4vh' }}>
         <div className="wrap">

@@ -2,7 +2,7 @@ import { getHomeContent } from '@/lib/cms/home';
 import { listCaseStudies } from '@/lib/cms/case-studies';
 import { listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-
+import { SiteNav } from '@/components/site/SiteNav';
 export const revalidate = 60; // ISR fallback; admin save also triggers explicit revalidate
 
 // Alternating span pattern that matches the legacy home page case grid.
@@ -25,7 +25,7 @@ export default async function HomePage() {
       <div className="home-grid" aria-hidden="true"></div>
       <div className="grid-overlay" aria-hidden="true"></div>
       {/* chrome.js injects the nav and footer here */}
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
 
       {/* ============ HERO ============ */}
       <header className="hero hud-corners" data-cms="cms.section/hero">

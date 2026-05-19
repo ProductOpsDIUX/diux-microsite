@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getCaseStudyBySlug, listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
-
+import { SiteNav } from '@/components/site/SiteNav';
 export const revalidate = 60;
 
 function escapeHtml(s: string): string {
@@ -50,7 +50,7 @@ export default async function CaseStudyDetailPage({ params }: Params) {
 
   return (
     <>
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
 
       <header className="detail-hero">
         <div className="wrap">

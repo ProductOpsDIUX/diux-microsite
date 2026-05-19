@@ -12,6 +12,7 @@ export const ArticleSchema = z.object({
   excerpt: z.string().max(400),
   cover_image: z.string().url().nullable().or(z.literal('').transform(() => null)),
   topic: z.string().max(40),
+  author: z.string().max(160),
   body_html: z.string().max(200_000),
   is_published: z.boolean(),
 });

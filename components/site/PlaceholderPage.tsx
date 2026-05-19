@@ -1,4 +1,5 @@
 import { LegacyScripts } from './LegacyScripts';
+import { SiteNav } from './SiteNav';
 
 export function PlaceholderPage({ eyebrow, title, body }: {
   eyebrow: string;
@@ -7,7 +8,7 @@ export function PlaceholderPage({ eyebrow, title, body }: {
 }) {
   return (
     <>
-      <div data-praxis-chrome="nav"></div>
+      <SiteNav />
       <main className="section" style={{ minHeight: '70vh', paddingTop: '20vh' }}>
         <div className="wrap">
           <div className="eyebrow">{eyebrow}</div>
