@@ -1,0 +1,16 @@
+/* Site CSS — design tokens + page styles, identical to the legacy build. */
+@import url('../styles/tokens.css');
+@import url('../styles/pages.css');
+
+/* Tailwind utilities (preflight is disabled in tailwind.config so the
+   admin can use utilities without resetting the public site's base CSS). */
+@tailwind components;
+@tailwind utilities;
+
+/* Admin-only base styles */
+.admin-root {
+  background: var(--bg-0);
+  color: var(--fg-0);
+  min-height: 100vh;
+  font-family: var(--font-body);
+}
