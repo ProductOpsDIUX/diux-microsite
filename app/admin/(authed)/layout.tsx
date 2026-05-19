@@ -1,16 +1,15 @@
-import { currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
 import { AdminNav } from '../nav';
+import { getAuthUser } from '@/lib/auth';
 
 export const metadata = { title: 'Admin · DI & UX', robots: { index: false } };
 export const dynamic = 'force-dynamic';
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  // currentUser() reads the session from the Clerk cookie + ClerkProvider
-  // without requiring a clerkMiddleware on the request path, which we
-  // removed because Vercel's Edge runtime can't bundle it.
-  const user = await currentUser();
+  // We can't use Clerk's auth()/currentUser() because they require
+  // clerkMiddleware() — and we can't ship that on Vercel (see lib/auth.ts).
+  const user = await getAuthUser();
   if (!user) redirect('/admin/sign-in');
 
   return (

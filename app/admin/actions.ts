@@ -1,18 +1,17 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { currentUser } from '@clerk/nextjs/server';
+import { getAuthUserId } from '@/lib/auth';
 import { updateHomeContent } from '@/lib/cms/home';
 import { uploadMedia } from '@/lib/cms/storage';
 import { HomeSchema, type HomeFormValues } from '@/lib/schemas/home';
 import type { HomeContent } from '@/lib/supabase/types';
 
-// Every action gates on a signed-in Clerk user. We removed the request-path
-// middleware (Vercel's runtime couldn't bundle it), so each action checks
-// auth itself via currentUser() — which reads the session cookie directly.
+// Every action gates on a signed-in Clerk user. We read the session cookie
+// directly (see lib/auth.ts) because we can't ship clerkMiddleware().
 async function requireAuth() {
-  const user = await currentUser();
-  if (!user) throw new Error('Not authenticated');
+  const userId = await getAuthUserId();
+  if (!userId) throw new Error('Not authenticated');
 }
 
 // ──────────────────────────────────────────────────────────────────────
