@@ -510,7 +510,12 @@
 .article-body {
   max-width: 720px;
   margin: 0 auto;
-  padding: 64px 0;
+  /* Vertical-only — horizontal padding is owned by the .wrap class (when
+     the page applies it directly to .article-body) or by an outer .wrap
+     container (article detail page wraps the body with .article-with-toc).
+     Using the longhand here means we don't clobber the .wrap gutter. */
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 .article-body p {
   font-size: 19px;
@@ -1026,7 +1031,13 @@
   .article-card { border-right: 0 !important; }
   .team-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr; }
-  .case-grid > .case-card { grid-column: span 12 !important; }
+  .case-grid > .case-card {
+    grid-column: span 12 !important;
+    /* Article cards have 32px of internal padding from their default
+       style; match that on case-cards on mobile so both list pages
+       have the same content width. */
+    padding: 0 32px;
+  }
   .stat-grid { grid-template-columns: 1fr; }
   .stat { border-left: 0; padding-left: 0; padding: 16px 0; border-top: 1px solid var(--line); }
   .stat:first-child { border-top: 0; padding-top: 0; }
