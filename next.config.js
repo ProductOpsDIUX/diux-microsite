@@ -7,8 +7,7 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.supabase.co' },
     ],
   },
-  experimental: {
-    serverActions: { bodySizeLimit: '10mb' },
-  },
+  // Server Actions are GA in Next 15 — config moved out of `experimental`.
+  serverActions: { bodySizeLimit: '10mb' },
 };
 module.exports = nextConfig;
