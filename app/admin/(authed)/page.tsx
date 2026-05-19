@@ -4,19 +4,24 @@ import { getPublicClient } from '@/lib/supabase/server';
 export const dynamic = 'force-dynamic';
 
 async function getCounts() {
-  const sb = getPublicClient();
-  const [cs, art, pub, team] = await Promise.all([
-    sb.from('case_studies').select('*', { count: 'exact', head: true }),
-    sb.from('articles').select('*', { count: 'exact', head: true }),
-    sb.from('articles').select('*', { count: 'exact', head: true }).eq('is_published', true),
-    sb.from('team_members').select('*', { count: 'exact', head: true }),
-  ]);
-  return {
-    caseStudies: cs.count ?? 0,
-    articles: art.count ?? 0,
-    articlesPublished: pub.count ?? 0,
-    team: team.count ?? 0,
-  };
+  try {
+    const sb = getPublicClient();
+    const [cs, art, pub, team] = await Promise.all([
+      sb.from('case_studies').select('*', { count: 'exact', head: true }),
+      sb.from('articles').select('*', { count: 'exact', head: true }),
+      sb.from('articles').select('*', { count: 'exact', head: true }).eq('is_published', true),
+      sb.from('team_members').select('*', { count: 'exact', head: true }),
+    ]);
+    return {
+      caseStudies: cs.count ?? 0,
+      articles: art.count ?? 0,
+      articlesPublished: pub.count ?? 0,
+      team: team.count ?? 0,
+    };
+  } catch (e) {
+    console.error('admin counts fetch skipped', e);
+    return { caseStudies: 0, articles: 0, articlesPublished: 0, team: 0 };
+  }
 }
 
 export default async function AdminDashboard() {

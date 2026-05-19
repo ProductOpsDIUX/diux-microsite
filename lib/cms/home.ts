@@ -28,13 +28,20 @@ const DEFAULTS: HomeContent = {
 };
 
 export async function getHomeContent(): Promise<HomeContent> {
-  const sb = getPublicClient();
-  const { data, error } = await sb.from('home_content').select('*').eq('id', 'home').maybeSingle();
-  if (error) {
-    console.error('home_content read failed', error);
+  try {
+    const sb = getPublicClient();
+    const { data, error } = await sb.from('home_content').select('*').eq('id', 'home').maybeSingle();
+    if (error) {
+      console.error('home_content read failed', error);
+      return DEFAULTS;
+    }
+    return mergeWithDefaults(data);
+  } catch (e) {
+    // Missing env (e.g. preview build without secrets) — fall back to defaults
+    // so the build still produces a working public site.
+    console.error('home_content fetch skipped', e);
     return DEFAULTS;
   }
-  return mergeWithDefaults(data);
 }
 
 export async function updateHomeContent(input: Partial<HomeContent>): Promise<HomeContent> {
