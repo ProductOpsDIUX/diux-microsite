@@ -65,41 +65,9 @@ function initials(name: string): string {
     .join('');
 }
 
-function MemberCard({ m }: { m: TeamMember }) {
-  return (
-    <div className="team-card reveal">
-      <div className="portrait">
-        {m.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={m.photo} alt={m.name} />
-        ) : (
-          <span className="initials">{initials(m.name)}</span>
-        )}
-      </div>
-      <div className="info">
-        <div className="name">{m.name}</div>
-        <div className="role">{m.role}</div>
-        {m.bio && (
-          <p style={{ marginTop: 12, color: 'var(--fg-2)', fontSize: 14 }}>{m.bio}</p>
-        )}
-      </div>
-      {m.linkedin_url && (
-        <a
-          className="team-card-linkedin"
-          href={m.linkedin_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${m.name} on LinkedIn`}
-        >
-          <LinkedInIcon />
-        </a>
-      )}
-    </div>
-  );
-}
-
-// Wider card used on the Leadership rails. Portrait on top, info beneath,
-// LinkedIn icon at the bottom-right of the whole card.
+// Portrait-on-top card used on both the Leadership rails and the
+// "On the ground" grid. Sizes via the surrounding grid + the
+// .ground-grid modifier shrinks the type for the larger group below.
 function LeadCard({ m }: { m: TeamMember }) {
   return (
     <article className="lead-card reveal">
@@ -208,9 +176,9 @@ export default async function TeamPage() {
                 <span className="serif-italic">work to life.</span>
               </h2>
             </header>
-            <div className="team-grid">
+            <div className="ground-grid">
               {others.map((m) => (
-                <MemberCard key={m.id} m={m} />
+                <LeadCard key={m.id} m={m} />
               ))}
             </div>
           </div>

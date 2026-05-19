@@ -1366,3 +1366,32 @@
   .lead-rails { grid-template-columns: 1fr; }
   .lead-rail-right { padding-top: 0; }
 }
+
+/* === On the ground grid === — same card design as Leadership but smaller. */
+.ground-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: clamp(14px, 1.6vw, 24px);
+}
+.ground-grid .lead-card-info {
+  padding: 12px 14px 40px;
+}
+.ground-grid .lead-card-name { font-size: 16px; line-height: 1.2; }
+.ground-grid .lead-card-role { font-size: 9px; margin-top: 4px; }
+.ground-grid .lead-card-bio {
+  margin-top: 8px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.ground-grid .lead-card-linkedin {
+  width: 24px; height: 24px;
+  right: 8px; bottom: 8px;
+  border-radius: 6px;
+}
+.ground-grid .lead-card-initials { font-size: 48px; }
+
+@media (max-width: 640px) {
+  .ground-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
