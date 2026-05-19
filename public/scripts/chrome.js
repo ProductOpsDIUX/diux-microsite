@@ -24,7 +24,7 @@
       <div class="nav-links">
         <button class="nav-link" data-mega="work" aria-expanded="false">Case studies <span class="caret">▾</span></button>
         <button class="nav-link" data-mega="thinking" aria-expanded="false">Blog <span class="caret">▾</span></button>
-        <button class="nav-link" data-mega="team" aria-expanded="false">Team <span class="caret">▾</span></button>
+        <a class="nav-link" href="/team">Team</a>
         <a class="nav-link" href="/#capabilities">Resources</a>
         <a class="nav-link" href="/#events">Events</a>
       </div>
@@ -122,43 +122,7 @@
     </div>
   </div>
 
-  <div class="megamenu" data-mega-panel="team">
-    <div class="megamenu-inner">
-      <div class="megamenu-section">
-        <h4>// People</h4>
-        <p style="font-family: var(--font-display); font-size: 28px; line-height: 1.15; letter-spacing: -0.015em; margin: 0; max-width: 14ch;">A multidisciplinary studio inside defence.</p>
-      </div>
-      <div class="megamenu-section">
-        <h4>// Disciplines</h4>
-        <div class="megamenu-list">
-          <a class="megamenu-item" href="/team">
-            <div class="megamenu-item-title">Interaction Design</div>
-            <div class="megamenu-item-desc">14 designers</div>
-          </a>
-          <a class="megamenu-item" href="/team">
-            <div class="megamenu-item-title">UX Research</div>
-            <div class="megamenu-item-desc">9 researchers</div>
-          </a>
-          <a class="megamenu-item" href="/team">
-            <div class="megamenu-item-title">AI &amp; ML Strategy</div>
-            <div class="megamenu-item-desc">7 specialists</div>
-          </a>
-          <a class="megamenu-item" href="/team">
-            <div class="megamenu-item-title">Service Design</div>
-            <div class="megamenu-item-desc">6 designers</div>
-          </a>
-          <a class="megamenu-item" href="/team">
-            <div class="megamenu-item-title">Design Systems</div>
-            <div class="megamenu-item-desc">5 engineers</div>
-          </a>
-          <a class="megamenu-item" href="/team">
-            <div class="megamenu-item-title">Innovation Labs</div>
-            <div class="megamenu-item-desc">4 leads</div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>`;
+`;
 
   const SEARCH_HTML = `
   <div id="search-overlay" class="search-overlay" data-open="false" role="dialog" aria-label="Search">
