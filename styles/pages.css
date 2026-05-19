@@ -1218,3 +1218,151 @@
     transform: translate(-50%, 0);
   }
 }
+
+/* === Leadership rails ===
+   Three-column layout: leadership cards stack vertically on either side
+   of a sticky middle column with the section copy. As the user scrolls,
+   the middle text stays pinned and the side cards pass by it. */
+.leadership-rails { padding-bottom: clamp(80px, 10vw, 160px); }
+.lead-rails {
+  display: grid;
+  grid-template-columns: 1fr clamp(280px, 28%, 420px) 1fr;
+  column-gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+}
+.lead-rail {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2vw, 40px);
+}
+/* Stagger the right rail so cards don't sit at the same y as the left ones. */
+.lead-rail-right { padding-top: clamp(48px, 8vw, 120px); }
+
+.lead-rail-center {
+  align-self: stretch;
+}
+.lead-rail-center-inner {
+  position: sticky;
+  top: clamp(96px, 18vh, 180px);
+  text-align: center;
+}
+.lead-rail-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 16px 0 16px;
+  font-weight: 400;
+}
+.lead-rail-lede {
+  color: var(--fg-1);
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 38ch;
+}
+.lead-rail-center-inner .eyebrow { justify-content: center; }
+
+/* Lead card — portrait on top, info beneath, LinkedIn at the bottom-right. */
+.lead-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  overflow: hidden;
+  background: var(--bg-1);
+  transition: transform var(--t-med) var(--ease), border-color var(--t-fast) var(--ease);
+}
+.lead-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.lead-card-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 12px),
+    var(--bg-2);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.lead-card-portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lead-card-initials {
+  font-family: var(--font-display);
+  font-size: 72px;
+  color: var(--fg-2);
+  letter-spacing: -0.03em;
+}
+.lead-card-info {
+  padding: clamp(16px, 1.6vw, 22px) clamp(18px, 1.8vw, 24px) clamp(44px, 4vw, 56px);
+}
+.lead-card-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--fg-0);
+}
+.lead-card-role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin-top: 6px;
+}
+.lead-card-bio {
+  margin: 14px 0 0;
+  color: var(--fg-1);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.lead-card-linkedin {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--bg-2);
+  color: var(--fg-1);
+  border: 1px solid var(--line);
+  transition: color 200ms ease, border-color 200ms ease, transform 200ms ease;
+}
+.lead-card-linkedin:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1080px) {
+  .lead-rails {
+    grid-template-columns: 1fr 1fr;
+    column-gap: clamp(20px, 3vw, 40px);
+  }
+  .lead-rail-center {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .lead-rail-center-inner {
+    position: static;
+    text-align: center;
+    margin-bottom: clamp(32px, 4vw, 64px);
+  }
+  .lead-rail-right { padding-top: clamp(32px, 6vw, 80px); }
+}
+
+@media (max-width: 640px) {
+  .lead-rails { grid-template-columns: 1fr; }
+  .lead-rail-right { padding-top: 0; }
+}

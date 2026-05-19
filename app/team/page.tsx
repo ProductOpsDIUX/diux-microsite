@@ -98,6 +98,39 @@ function MemberCard({ m }: { m: TeamMember }) {
   );
 }
 
+// Wider card used on the Leadership rails. Portrait on top, info beneath,
+// LinkedIn icon at the bottom-right of the whole card.
+function LeadCard({ m }: { m: TeamMember }) {
+  return (
+    <article className="lead-card reveal">
+      <div className="lead-card-portrait">
+        {m.photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={m.photo} alt={m.name} />
+        ) : (
+          <span className="lead-card-initials">{initials(m.name)}</span>
+        )}
+      </div>
+      <div className="lead-card-info">
+        <div className="lead-card-name">{m.name}</div>
+        <div className="lead-card-role">{m.role}</div>
+        {m.bio && <p className="lead-card-bio">{m.bio}</p>}
+      </div>
+      {m.linkedin_url && (
+        <a
+          className="lead-card-linkedin"
+          href={m.linkedin_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${m.name} on LinkedIn`}
+        >
+          <LinkedInIcon />
+        </a>
+      )}
+    </article>
+  );
+}
+
 export default async function TeamPage() {
   const members = await listTeam();
   const leadership = members.filter((m) => m.is_leadership);
@@ -129,18 +162,37 @@ export default async function TeamPage() {
       <VerticalTimeline label="ORIGINS OF DI &amp; UX" items={ORIGINS} />
 
       {leadership.length > 0 && (
-        <section className="section team-section" style={{ paddingTop: 0 }}>
+        <section className="section leadership-rails" style={{ paddingTop: 0 }}>
           <div className="wrap">
-            <header className="team-section-head reveal">
-              <div className="eyebrow">// Leadership</div>
-              <h2>
-                Who <span className="serif-italic">leads.</span>
-              </h2>
-            </header>
-            <div className="team-grid">
-              {leadership.map((m) => (
-                <MemberCard key={m.id} m={m} />
-              ))}
+            <div className="lead-rails">
+              <div className="lead-rail lead-rail-left">
+                {leadership
+                  .filter((_, i) => i % 2 === 0)
+                  .map((m) => (
+                    <LeadCard key={m.id} m={m} />
+                  ))}
+              </div>
+
+              <div className="lead-rail lead-rail-center" aria-hidden={false}>
+                <div className="lead-rail-center-inner reveal">
+                  <div className="eyebrow">// Leadership</div>
+                  <h2 className="lead-rail-title">
+                    Who <span className="serif-italic">leads.</span>
+                  </h2>
+                  <p className="lead-rail-lede">
+                    Senior leaders who set the direction, run the chapters, and put
+                    designers in front of the people who use what we build.
+                  </p>
+                </div>
+              </div>
+
+              <div className="lead-rail lead-rail-right">
+                {leadership
+                  .filter((_, i) => i % 2 === 1)
+                  .map((m) => (
+                    <LeadCard key={m.id} m={m} />
+                  ))}
+              </div>
             </div>
           </div>
         </section>
