@@ -60,9 +60,12 @@ export function RichTextEditor({
           '[&_code]:bg-bg2 [&_code]:px-1 [&_code]:rounded [&_blockquote]:border-l-2 ' +
           '[&_blockquote]:border-line [&_blockquote]:pl-3 [&_blockquote]:text-fg1 ' +
           '[&_img]:rounded [&_img]:my-3 [&_img]:max-w-full ' +
+          // Tables — use a brighter border inside the editor than the public
+          // site's --line (rgba 0.08) so the grid is actually visible while
+          // editing. Public render still uses --line via article-body CSS.
           '[&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:text-[14px] ' +
-          '[&_th]:border [&_th]:border-line [&_th]:bg-bg2/40 [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left ' +
-          '[&_td]:border [&_td]:border-line [&_td]:px-2 [&_td]:py-1.5 ',
+          '[&_th]:border [&_th]:border-white/30 [&_th]:bg-white/[0.06] [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left [&_th]:text-fg0 ' +
+          '[&_td]:border [&_td]:border-white/20 [&_td]:px-2 [&_td]:py-1.5 ',
       },
     },
     immediatelyRender: false,
