@@ -36,11 +36,17 @@ export default async function TeamPage() {
             <div>
               <div className="eyebrow">// Team</div>
               <h2>
-                The people behind<br />
-                <span className="serif-italic">the work.</span>
+                A design team built around<br />
+                <span className="serif-italic">people, not interfaces.</span>
               </h2>
             </div>
           </div>
+
+          <p className="hero-sub reveal" style={{ marginTop: 24, marginBottom: 48, maxWidth: '70ch' }}>
+            We&rsquo;re product designers and strategists building insight dashboards,
+            scenario planners, decision-support tools, and analytics systems that help
+            defence and enterprise teams think faster and operate better.
+          </p>
 
           {members.length === 0 ? (
             <p className="hero-sub" style={{ marginTop: 32 }}>
