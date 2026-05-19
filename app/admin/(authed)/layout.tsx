@@ -1,7 +1,7 @@
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
-import { AdminNav } from './nav';
+import { AdminNav } from '../nav';
 
 export const metadata = { title: 'Admin · DI & UX', robots: { index: false } };
 export const dynamic = 'force-dynamic';

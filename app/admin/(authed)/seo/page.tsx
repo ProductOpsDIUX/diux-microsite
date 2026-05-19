@@ -1,4 +1,4 @@
-import { ComingSoon } from '../coming-soon';
+import { ComingSoon } from '../../coming-soon';
 export const metadata = { title: 'SEO · DI & UX CMS', robots: { index: false } };
 export default function Page() {
   return (
