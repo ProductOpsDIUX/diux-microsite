@@ -1022,28 +1022,20 @@
 
 .vt-row {
   position: relative;
-  min-height: 70vh;
+  /* Tighter spacing between milestones than before; rows are no longer
+     forced to fill the viewport. */
+  min-height: clamp(360px, 44vh, 520px);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: clamp(32px, 6vw, 96px);
+  column-gap: clamp(8px, 1vw, 24px);
   align-items: center;
-  padding: clamp(40px, 6vw, 80px) 0;
+  padding: clamp(24px, 4vw, 56px) 0;
 }
-.vt-index {
-  position: absolute;
-  top: clamp(16px, 3vw, 32px);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--fg-2);
-}
-.vt-row.vt-right .vt-index { left: 0; }
-.vt-row.vt-left .vt-index { right: 0; }
 
 .vt-ghost {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: clamp(112px, 18vw, 280px);
+  font-size: clamp(96px, 14vw, 220px);
   letter-spacing: -0.05em;
   line-height: 0.85;
   color: var(--fg-0);
@@ -1051,21 +1043,33 @@
   user-select: none;
   white-space: nowrap;
   pointer-events: none;
+  /* Starts a touch smaller and grows as the row becomes active, giving
+     a subtle "settle into place" feel as the line passes through. */
+  transform: scale(0.88);
+  transform-origin: center;
+  transition: transform 700ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 700ms ease;
 }
-.vt-row.vt-right .vt-ghost { grid-column: 1; text-align: right; }
-.vt-row.vt-left .vt-ghost { grid-column: 2; text-align: left; }
+.vt-row.is-active .vt-ghost {
+  transform: scale(1);
+  opacity: 0.18;
+}
+.vt-row.vt-right .vt-ghost { grid-column: 1; text-align: right; transform-origin: right center; }
+.vt-row.vt-left  .vt-ghost { grid-column: 2; text-align: left;  transform-origin: left center; }
+.vt-row.vt-right.is-active .vt-ghost { transform: scale(1); }
+.vt-row.vt-left.is-active  .vt-ghost { transform: scale(1); }
 
 .vt-card {
   background: color-mix(in oklab, var(--bg-1) 88%, transparent);
   border: 1px solid var(--line-strong);
   border-radius: 14px;
-  padding: clamp(24px, 3vw, 40px);
-  max-width: 540px;
+  padding: clamp(20px, 2.4vw, 36px);
+  max-width: 480px;
   backdrop-filter: blur(6px);
   transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 500ms ease, border-color 300ms ease;
 }
-.vt-row.vt-right .vt-card { grid-column: 2; justify-self: start; }
-.vt-row.vt-left .vt-card { grid-column: 1; justify-self: end; }
+/* Card sits flush against the center line on the opposite side of the year. */
+.vt-row.vt-right .vt-card { grid-column: 2; justify-self: start; margin-left: clamp(16px, 2vw, 32px); }
+.vt-row.vt-left  .vt-card { grid-column: 1; justify-self: end;   margin-right: clamp(16px, 2vw, 32px); }
 .vt-row.is-active .vt-card { border-color: color-mix(in oklab, var(--accent) 45%, var(--line-strong)); }
 
 .vt-range {
@@ -1163,12 +1167,6 @@
     justify-self: start;
     max-width: none;
     width: 100%;
-  }
-  .vt-row.vt-right .vt-index,
-  .vt-row.vt-left .vt-index {
-    left: 56px;
-    right: auto;
-    top: 0;
   }
   .vt-dot {
     left: 22px;

@@ -95,9 +95,6 @@ export function VerticalTimeline({
               }}
               className={`vt-row vt-${side}${i <= activeIdx ? ' is-active' : ''}`}
             >
-              <span className="vt-index" aria-hidden="true">
-                {String(i + 1).padStart(2, '0')}
-              </span>
               <span className="vt-ghost" aria-hidden="true">
                 {ghost}
               </span>

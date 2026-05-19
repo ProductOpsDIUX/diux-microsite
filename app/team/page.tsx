@@ -70,11 +70,9 @@ export default async function TeamPage() {
     <>
       <div data-praxis-chrome="nav"></div>
 
-      <VerticalTimeline label="ORIGINS OF DI &amp; UX" items={ORIGINS} />
-
-      <section className="section">
+      <section className="section" style={{ paddingTop: '18vh', paddingBottom: '4vh' }}>
         <div className="wrap">
-          <div className="section-head reveal">
+          <div className="section-head reveal" style={{ borderBottom: 0, paddingBottom: 0, marginBottom: 24 }}>
             <div>
               <div className="eyebrow">// Team</div>
               <h2>
@@ -83,18 +81,19 @@ export default async function TeamPage() {
               </h2>
             </div>
           </div>
-
-          <p className="hero-sub reveal" style={{ marginTop: 24, marginBottom: 48, maxWidth: '70ch' }}>
+          <p className="hero-sub reveal" style={{ maxWidth: '70ch' }}>
             We&rsquo;re product designers and strategists building insight dashboards,
             scenario planners, decision-support tools, and analytics systems that help
             defence and enterprise teams think faster and operate better.
           </p>
+        </div>
+      </section>
 
-          {members.length === 0 ? (
-            <p className="hero-sub" style={{ marginTop: 32 }}>
-              No team members yet.
-            </p>
-          ) : (
+      <VerticalTimeline label="ORIGINS OF DI &amp; UX" items={ORIGINS} />
+
+      {members.length > 0 && (
+        <section className="section" style={{ paddingTop: 0 }}>
+          <div className="wrap">
             <div className="team-grid">
               {members.map((m) => (
                 <div key={m.id} className="team-card reveal">
@@ -116,9 +115,9 @@ export default async function TeamPage() {
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       <div data-praxis-chrome="footer"></div>
       <LegacyScripts />
