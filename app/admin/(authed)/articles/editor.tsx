@@ -37,6 +37,8 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
       cover_image: initial?.cover_image ?? null,
       topic: initial?.topic ?? '',
       author: initial?.author ?? '',
+      display_date: initial?.display_date ?? '',
+      tags: initial?.tags ?? [],
       body_html: initial?.body_html ?? '',
       is_published: initial?.is_published ?? false,
     },
@@ -115,12 +117,45 @@ export function ArticleEditor({ initial }: { initial: Article | null }) {
             <Input {...register('topic')} placeholder="AI · Trust" />
           </Field>
         </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Field
+            label="Author"
+            hint="Shown in the byline. Multiple authors: comma-separated."
+            error={errors.author?.message}
+          >
+            <Input {...register('author')} placeholder="Maya Okafor" />
+          </Field>
+          <Field
+            label="Date"
+            hint="Free text — e.g. “April 2026” or “28 Apr 2026”. Overrides the auto-publish date on the public site."
+            error={errors.display_date?.message}
+          >
+            <Input {...register('display_date')} placeholder="28 April 2026" />
+          </Field>
+        </div>
         <Field
-          label="Author"
-          hint="Shown in the byline. Multiple authors: separate with commas."
-          error={errors.author?.message}
+          label="Tags"
+          hint="Comma-separated. Visitors can click a tag on /article to filter by it."
+          error={(errors.tags as { message?: string } | undefined)?.message}
         >
-          <Input {...register('author')} placeholder="Maya Okafor" />
+          <Controller
+            control={control}
+            name="tags"
+            render={({ field }) => (
+              <Input
+                value={field.value.join(', ')}
+                onChange={(e) =>
+                  field.onChange(
+                    e.target.value
+                      .split(',')
+                      .map((s) => s.trim().toLowerCase())
+                      .filter(Boolean)
+                  )
+                }
+                placeholder="ai, ux, research"
+              />
+            )}
+          />
         </Field>
         <Field
           label="Excerpt"

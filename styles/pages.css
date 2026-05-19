@@ -1609,3 +1609,42 @@
   .article-toc-item a { border-left: 0; }
   .article-toc-item.is-active > a { border-left: 0; }
 }
+
+/* === Article card tags — small inline chips below the excerpt === */
+.article-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.article-card-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--fg-2);
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* === Article detail page — tag chips at the end of the body === */
+.article-body-tags {
+  margin-top: clamp(32px, 4vw, 56px);
+  padding-top: clamp(20px, 2vw, 32px);
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.article-body-tags-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin-right: 4px;
+}
+.article-body-tags .chip { text-transform: lowercase; }

@@ -44,6 +44,8 @@ export interface Article {
   cover_image: string | null;
   topic: string;
   author: string;
+  display_date: string;
+  tags: string[];
   body_html: string;
   is_published: boolean;
   published_at: string | null;

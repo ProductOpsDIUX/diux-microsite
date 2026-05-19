@@ -32,13 +32,16 @@ export default async function ArticleDetailPage({ params }: Params) {
   const all = await listArticles();
   const related = all.filter((a) => a.id !== article.id).slice(0, 3);
 
-  const published = article.published_at
-    ? new Date(article.published_at).toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      })
-    : null;
+  // display_date (admin-set free text) wins; otherwise format published_at.
+  const published =
+    article.display_date ||
+    (article.published_at
+      ? new Date(article.published_at).toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })
+      : null);
 
   return (
     <>
@@ -117,12 +120,22 @@ export default async function ArticleDetailPage({ params }: Params) {
         ) : (
           <aside className="article-toc-rail" aria-hidden="true" />
         )}
-        <article
-          className="article-body"
-          // Body HTML comes from our admin's Tiptap editor (controlled extensions
-          // — no inline scripts allowed by the schema, no XSS surface).
-          dangerouslySetInnerHTML={{ __html: bodyHtml }}
-        />
+        <article className="article-body">
+          {/* Body HTML comes from our admin's Tiptap editor (controlled
+              extensions — no inline scripts allowed by the schema, no XSS
+              surface). */}
+          <div dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+          {article.tags.length > 0 && (
+            <div className="article-body-tags">
+              <span className="article-body-tags-label">Tagged:</span>
+              {article.tags.map((t) => (
+                <a key={t} className="chip" href={`/article?tag=${encodeURIComponent(t)}`}>
+                  #{t}
+                </a>
+              ))}
+            </div>
+          )}
+        </article>
       </div>
 
       {related.length > 0 && (
