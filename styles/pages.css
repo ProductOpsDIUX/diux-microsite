@@ -1515,3 +1515,93 @@
   color: var(--accent);
   text-transform: uppercase;
 }
+
+/* === Article detail — TOC sidebar layout ===
+   Two-column wrap: sticky TOC rail on the left, article body in the
+   middle. On narrow viewports the TOC collapses above the body. */
+.article-with-toc {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  column-gap: clamp(32px, 5vw, 80px);
+  align-items: start;
+  padding-top: clamp(40px, 6vw, 80px);
+  padding-bottom: clamp(40px, 6vw, 96px);
+}
+.article-with-toc .article-body {
+  /* Override .article-body's own wrap padding since we wrap manually. */
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 72ch;
+}
+.article-toc-rail { position: relative; }
+
+.article-toc {
+  position: sticky;
+  top: clamp(96px, 14vh, 160px);
+  font-size: 13px;
+  line-height: 1.45;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+.article-toc-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  margin-bottom: 12px;
+}
+.article-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--line);
+}
+.article-toc-item { position: relative; }
+.article-toc-item a {
+  display: block;
+  padding: 6px 12px;
+  color: var(--fg-2);
+  text-decoration: none;
+  transition: color var(--t-fast) var(--ease);
+  border-left: 2px solid transparent;
+  margin-left: -1px; /* overlap the ol border so the active border replaces it */
+}
+.article-toc-item a:hover { color: var(--fg-0); }
+.article-toc-item.is-active > a {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+/* Indent each level. */
+.article-toc-l3 a { padding-left: 28px; font-size: 12.5px; }
+.article-toc-l4 a { padding-left: 44px; font-size: 12px; color: var(--fg-3); }
+.article-toc-l4.is-active > a { color: var(--accent); }
+
+/* Ensure anchor jumps don't tuck headings under the sticky chrome (the
+   site nav floats over the page). scroll-margin-top gives a buffer. */
+.article-body h2,
+.article-body h3,
+.article-body h4 {
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 1024px) {
+  .article-with-toc {
+    grid-template-columns: 1fr;
+    row-gap: clamp(24px, 4vw, 40px);
+  }
+  .article-toc {
+    position: static;
+    max-height: none;
+    padding-right: 0;
+  }
+  .article-toc-list {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 4px 0;
+  }
+  .article-toc-item a { border-left: 0; }
+  .article-toc-item.is-active > a { border-left: 0; }
+}

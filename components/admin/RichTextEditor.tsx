@@ -32,7 +32,7 @@ export function RichTextEditor({
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        heading: { levels: [2, 3] },
+        heading: { levels: [2, 3, 4] },
       }),
       Link.configure({
         openOnClick: false,
@@ -58,6 +58,7 @@ export function RichTextEditor({
           '[&_a]:text-accent [&_a]:underline ' +
           '[&_h2]:font-display [&_h2]:text-[22px] [&_h2]:mt-6 [&_h2]:mb-2 ' +
           '[&_h3]:font-display [&_h3]:text-[18px] [&_h3]:mt-5 [&_h3]:mb-1.5 ' +
+          '[&_h4]:font-display [&_h4]:text-[15px] [&_h4]:font-semibold [&_h4]:mt-4 [&_h4]:mb-1 [&_h4]:text-fg1 ' +
           '[&_p]:leading-relaxed [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-5 [&_ol]:pl-5 ' +
           '[&_code]:bg-bg2 [&_code]:px-1 [&_code]:rounded [&_blockquote]:border-l-2 ' +
           '[&_blockquote]:border-line [&_blockquote]:pl-3 [&_blockquote]:text-fg1 ' +
@@ -138,6 +139,7 @@ export function RichTextEditor({
         <Divider />
         <ToolbarBtn active={editor.isActive('heading', { level: 2 })} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>H2</ToolbarBtn>
         <ToolbarBtn active={editor.isActive('heading', { level: 3 })} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>H3</ToolbarBtn>
+        <ToolbarBtn active={editor.isActive('heading', { level: 4 })} onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}>H4</ToolbarBtn>
         <Divider />
         <ToolbarBtn active={editor.isActive('bulletList')} onClick={() => editor.chain().focus().toggleBulletList().run()}>• List</ToolbarBtn>
         <ToolbarBtn active={editor.isActive('orderedList')} onClick={() => editor.chain().focus().toggleOrderedList().run()}>1. List</ToolbarBtn>

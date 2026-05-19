@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getArticleBySlug, listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
+import { ArticleToc } from '@/components/site/ArticleToc';
+import { buildToc } from '@/lib/html/toc';
 
 export const revalidate = 60;
 
@@ -22,6 +24,9 @@ export default async function ArticleDetailPage({ params }: Params) {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
+
+  // Build the TOC + inject anchor ids into the body HTML on the server.
+  const { html: bodyHtml, headings } = buildToc(article.body_html);
 
   // Related = 3 most-recent other published articles
   const all = await listArticles();
@@ -94,12 +99,23 @@ export default async function ArticleDetailPage({ params }: Params) {
         </section>
       )}
 
-      <article
-        className="article-body wrap"
-        // Body HTML comes from our admin's Tiptap editor (controlled extensions
-        // — no inline scripts allowed by the schema, no XSS surface).
-        dangerouslySetInnerHTML={{ __html: article.body_html }}
-      />
+      {/* Two-column layout: sticky TOC on the left, article body in the
+          middle. The TOC is only rendered when the body has H2+ headings. */}
+      <div className="article-with-toc wrap">
+        {headings.length > 0 ? (
+          <aside className="article-toc-rail">
+            <ArticleToc headings={headings} />
+          </aside>
+        ) : (
+          <aside className="article-toc-rail" aria-hidden="true" />
+        )}
+        <article
+          className="article-body"
+          // Body HTML comes from our admin's Tiptap editor (controlled extensions
+          // — no inline scripts allowed by the schema, no XSS surface).
+          dangerouslySetInnerHTML={{ __html: bodyHtml }}
+        />
+      </div>
 
       {related.length > 0 && (
         <section className="section" style={{ borderTop: '1px solid var(--line)' }}>
