@@ -72,6 +72,7 @@ export interface Resource {
   kind: ResourceKind;
   url: string;
   file_path: string | null;
+  thumbnail: string | null;
   position: number;
   created_at: string;
   updated_at: string;

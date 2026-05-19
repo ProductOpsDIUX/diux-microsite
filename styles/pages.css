@@ -1450,30 +1450,48 @@
 }
 .resource-card {
   position: relative;
-  display: grid;
-  grid-template-columns: 44px 1fr;
-  gap: 16px;
-  align-items: start;
-  padding: 20px 20px 44px;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--r-3);
   background: var(--bg-1);
   color: var(--fg-0);
+  overflow: hidden;
   transition: border-color var(--t-fast) var(--ease), transform var(--t-med) var(--ease);
 }
 .resource-card:hover {
   border-color: var(--accent);
   transform: translateY(-2px);
 }
-.resource-card-glyph {
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: var(--bg-2);
-  border: 1px solid var(--line);
+.resource-card-thumb {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 12px),
+    var(--bg-2);
   display: grid;
   place-items: center;
-  font-size: 20px;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+.resource-card-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.resource-card-thumb-placeholder {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--fg-3);
+}
+.resource-card-body {
+  padding: 18px 18px 44px;
+  flex: 1;
 }
 .resource-card-title {
   font-family: var(--font-display);
@@ -1489,8 +1507,8 @@
 }
 .resource-card-arrow {
   position: absolute;
-  right: 20px;
-  bottom: 16px;
+  right: 18px;
+  bottom: 14px;
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.12em;

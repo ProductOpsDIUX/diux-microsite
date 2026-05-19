@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { Card, Field, Input, Textarea, Button, Toast } from '@/components/admin/ui';
 import { FileUploader } from '@/components/admin/FileUploader';
+import { ImageUploader } from '@/components/admin/ImageUploader';
 import { ResourceSchema, type ResourceFormValues } from '@/lib/schemas/resource';
 import { saveResourceAction, deleteResourceAction } from './actions';
 import type { Resource } from '@/lib/supabase/types';
@@ -39,6 +40,7 @@ export function ResourceEditor({ initial }: { initial: Resource | null }) {
       kind: initial?.kind ?? 'template',
       url: initial?.url ?? '',
       file_path: initial?.file_path ?? null,
+      thumbnail: initial?.thumbnail ?? null,
       position: initial?.position ?? 0,
     },
   });
@@ -180,6 +182,22 @@ export function ResourceEditor({ initial }: { initial: Resource | null }) {
         {source === 'file' && errors.url?.message && (
           <Toast kind="error">{errors.url.message}</Toast>
         )}
+      </Card>
+
+      <Card title="Thumbnail" description="Cover image shown on the public Resources page card.">
+        <Controller
+          control={control}
+          name="thumbnail"
+          render={({ field }) => (
+            <ImageUploader
+              label="Thumbnail"
+              prefix="resources/thumbnails"
+              value={field.value}
+              onChange={field.onChange}
+              hint="16:9 / 4:3 / 1:1 all work; the card crops to fit."
+            />
+          )}
+        />
       </Card>
 
       <Card title="Display">

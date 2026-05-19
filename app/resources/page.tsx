@@ -21,14 +21,21 @@ function ResourceCard({ r }: { r: Resource }) {
     <a
       className="resource-card reveal"
       href={r.url}
-      target={isFile ? '_blank' : '_blank'}
+      target="_blank"
       rel="noopener noreferrer"
       // The download attribute hints to the browser to save uploaded files
       // directly. External links ignore it.
       download={isFile ? '' : undefined}
     >
-      <div className="resource-card-glyph" aria-hidden="true">
-        {isFile ? '📎' : '🔗'}
+      <div className="resource-card-thumb" aria-hidden="true">
+        {r.thumbnail ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={r.thumbnail} alt="" />
+        ) : (
+          <span className="resource-card-thumb-placeholder">
+            {r.title.charAt(0).toUpperCase()}
+          </span>
+        )}
       </div>
       <div className="resource-card-body">
         <div className="resource-card-title">{r.title}</div>
@@ -56,13 +63,13 @@ export default async function ResourcesPage() {
             <div>
               <div className="eyebrow">// Resources</div>
               <h2>
-                Templates &amp; <span className="serif-italic">manuals.</span>
+                Our <span className="serif-italic">Repository.</span>
               </h2>
             </div>
           </div>
           <p className="hero-sub reveal" style={{ maxWidth: '70ch', marginBottom: 64 }}>
-            Practical artefacts from the DI &amp; UX practice — research plans, design
-            checklists, handover templates and how-to guides — ready to use.
+            Templates, manuals, and practical artefacts from the DI &amp; UX practice —
+            ready to use.
           </p>
 
           {all.length === 0 && (
