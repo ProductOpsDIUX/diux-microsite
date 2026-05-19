@@ -1263,13 +1263,18 @@
 }
 .lead-rail-center-inner .eyebrow { justify-content: center; }
 
-/* Lead card — portrait on top, info beneath, LinkedIn at the bottom-right. */
+/* Lead card — portrait on top, info beneath, LinkedIn at the bottom-right.
+   Capped width keeps cards from blowing out on wide viewports; the
+   .ground-grid variant overrides this for the tighter on-the-ground grid. */
 .lead-card {
   position: relative;
   border: 1px solid var(--line);
   border-radius: var(--r-3);
   overflow: hidden;
   background: var(--bg-1);
+  max-width: 340px;
+  width: 100%;
+  margin-inline: auto;
   transition: transform var(--t-med) var(--ease), border-color var(--t-fast) var(--ease);
 }
 .lead-card:hover {
@@ -1296,16 +1301,16 @@
 }
 .lead-card-initials {
   font-family: var(--font-display);
-  font-size: 72px;
+  font-size: 56px;
   color: var(--fg-2);
   letter-spacing: -0.03em;
 }
 .lead-card-info {
-  padding: clamp(16px, 1.6vw, 22px) clamp(18px, 1.8vw, 24px) clamp(44px, 4vw, 56px);
+  padding: 14px 16px 44px;
 }
 .lead-card-name {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 17px;
   letter-spacing: -0.015em;
   line-height: 1.15;
   margin: 0;
@@ -1317,20 +1322,20 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--fg-2);
-  margin-top: 6px;
+  margin-top: 5px;
 }
 .lead-card-bio {
-  margin: 14px 0 0;
+  margin: 10px 0 0;
   color: var(--fg-1);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
 }
 .lead-card-linkedin {
   position: absolute;
-  right: 12px;
-  bottom: 12px;
-  width: 30px;
-  height: 30px;
+  right: 10px;
+  bottom: 10px;
+  width: 26px;
+  height: 26px;
   display: inline-grid;
   place-items: center;
   border-radius: 8px;
