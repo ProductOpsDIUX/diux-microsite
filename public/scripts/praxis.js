@@ -388,10 +388,17 @@
         const k = Math.max(0, Math.min(1, (p - startP) / (endP - startP)));
         const lit = Math.round(k * words.length);
         words.forEach((w, i) => w.classList.toggle('lit', i < lit));
-        if (lit >= words.length && prevLit < words.length && flashLine) {
-          flashLine.classList.add('flash');
-          clearTimeout(flashTimer);
-          flashTimer = setTimeout(() => flashLine.classList.remove('flash'), 280);
+        if (lit >= words.length && flashLine) {
+          // Persistent glow on the final line once everything is lit.
+          // The brief `.flash` blink still fires on the first crossing.
+          if (prevLit < words.length) {
+            flashLine.classList.add('flash');
+            clearTimeout(flashTimer);
+            flashTimer = setTimeout(() => flashLine.classList.remove('flash'), 280);
+          }
+          flashLine.classList.add('is-finale');
+        } else if (flashLine) {
+          flashLine.classList.remove('is-finale');
         }
         prevLit = lit;
       };

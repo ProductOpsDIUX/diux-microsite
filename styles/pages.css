@@ -861,6 +861,34 @@
   color: var(--accent);
   transition: color 80ms ease-out;
 }
+/* Persistent finale state: once the last line's words are all lit, they
+   stay accent-coloured and pulse a soft glow. */
+.manifesto-text .line.is-finale .word {
+  color: var(--accent);
+  text-shadow:
+    0 0 8px color-mix(in oklab, var(--accent) 70%, transparent),
+    0 0 28px color-mix(in oklab, var(--accent) 55%, transparent),
+    0 0 56px color-mix(in oklab, var(--accent) 35%, transparent);
+  animation: manifesto-glow 2.8s ease-in-out infinite alternate;
+  transition: color 320ms ease-out, text-shadow 320ms ease-out;
+}
+@keyframes manifesto-glow {
+  from {
+    text-shadow:
+      0 0 6px color-mix(in oklab, var(--accent) 55%, transparent),
+      0 0 18px color-mix(in oklab, var(--accent) 35%, transparent),
+      0 0 36px color-mix(in oklab, var(--accent) 18%, transparent);
+  }
+  to {
+    text-shadow:
+      0 0 14px color-mix(in oklab, var(--accent) 90%, transparent),
+      0 0 38px color-mix(in oklab, var(--accent) 70%, transparent),
+      0 0 72px color-mix(in oklab, var(--accent) 45%, transparent);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .manifesto-text .line.is-finale .word { animation: none; }
+}
 
 @media (max-width: 640px) {
   .manifesto { height: 460vh; }

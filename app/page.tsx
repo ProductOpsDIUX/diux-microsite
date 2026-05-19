@@ -87,16 +87,25 @@ export default async function HomePage() {
               <div className="eyebrow">{c.mission_eyebrow}</div>
             </div>
             <p className="manifesto-text" data-manifesto>
-              {c.mission_lines.map((line, i) => (
-                <span key={i} className={`line${i === c.mission_lines.length - 1 ? '' : ''}`}>
-                  {line.split(' ').map((w, j) => (
-                    <span key={j} className="word">
-                      {w}
-                      {j < line.split(' ').length - 1 ? ' ' : ''}
-                    </span>
-                  ))}
-                </span>
-              ))}
+              {c.mission_lines.map((line, i) => {
+                // Tag the final line so praxis.js can flash + glow it once
+                // the manifesto has fully revealed.
+                const isLast = i === c.mission_lines.length - 1;
+                return (
+                  <span
+                    key={i}
+                    className="line"
+                    {...(isLast ? { 'data-manifesto-flash': true } : {})}
+                  >
+                    {line.split(' ').map((w, j) => (
+                      <span key={j} className="word">
+                        {w}
+                        {j < line.split(' ').length - 1 ? ' ' : ''}
+                      </span>
+                    ))}
+                  </span>
+                );
+              })}
             </p>
           </div>
         </div>
