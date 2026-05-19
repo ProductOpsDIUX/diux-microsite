@@ -1,18 +1,18 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { auth } from '@clerk/nextjs/server';
+import { currentUser } from '@clerk/nextjs/server';
 import { updateHomeContent } from '@/lib/cms/home';
 import { uploadMedia } from '@/lib/cms/storage';
 import { HomeSchema, type HomeFormValues } from '@/lib/schemas/home';
 import type { HomeContent } from '@/lib/supabase/types';
 
-// Every action runs this gate. The Clerk middleware already protects the
-// /admin routes, but server actions can be invoked from anywhere, so we
-// guard them explicitly too.
+// Every action gates on a signed-in Clerk user. We removed the request-path
+// middleware (Vercel's runtime couldn't bundle it), so each action checks
+// auth itself via currentUser() — which reads the session cookie directly.
 async function requireAuth() {
-  const { userId } = await auth();
-  if (!userId) throw new Error('Not authenticated');
+  const user = await currentUser();
+  if (!user) throw new Error('Not authenticated');
 }
 
 // ──────────────────────────────────────────────────────────────────────
