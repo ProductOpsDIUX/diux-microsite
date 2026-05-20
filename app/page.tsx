@@ -286,14 +286,14 @@ export default async function HomePage() {
       <section className="connect-banner" aria-labelledby="connect-heading">
         <div className="connect-banner-bg" aria-hidden="true">
           <BackgroundGradientAnimation
-            gradientBackgroundStart="rgb(10, 10, 14)"
+            gradientBackgroundStart="rgb(8, 12, 10)"
             gradientBackgroundEnd="rgb(0, 0, 0)"
-            firstColor="60, 80, 140"
-            secondColor="120, 60, 180"
-            thirdColor="40, 120, 200"
-            fourthColor="200, 90, 70"
-            fifthColor="130, 110, 90"
-            pointerColor="120, 90, 200"
+            firstColor="180, 255, 215"
+            secondColor="124, 255, 178"
+            thirdColor="210, 255, 230"
+            fourthColor="220, 220, 220"
+            fifthColor="180, 180, 180"
+            pointerColor="180, 255, 215"
             size="70%"
             blendingValue="screen"
             interactive={false}
