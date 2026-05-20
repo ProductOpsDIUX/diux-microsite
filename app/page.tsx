@@ -1,19 +1,22 @@
 import { getHomeContent } from '@/lib/cms/home';
 import { listCaseStudies } from '@/lib/cms/case-studies';
 import { listArticles } from '@/lib/cms/articles';
+import { listTeam } from '@/lib/cms/team';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
 import { ScrollTheme } from '@/components/site/ScrollTheme';
+import { TeamCarousel } from '@/components/site/TeamCarousel';
 export const revalidate = 60; // ISR fallback; admin save also triggers explicit revalidate
 
 // Alternating span pattern that matches the legacy home page case grid.
 const CASE_SPANS = ['span-7', 'span-5', 'span-4', 'span-4', 'span-4'];
 
 export default async function HomePage() {
-  const [c, cases, articles] = await Promise.all([
+  const [c, cases, articles, team] = await Promise.all([
     getHomeContent(),
     listCaseStudies(),
     listArticles(),
+    listTeam(),
   ]);
   // Show featured case studies first, fall back to whatever's in position order.
   const featuredCases = cases.filter((cs) => cs.featured);
@@ -252,46 +255,29 @@ export default async function HomePage() {
       <div data-scroll-theme="leave-light" aria-hidden="true"></div>
 
       {/* ============ TEAM ============ */}
-      <section className="section" id="team">
-        <div className="wrap">
-          <div className="section-head reveal">
-            <div>
-              <div className="eyebrow">// People</div>
-              <h2>
-                The practice
-                <br />
-                <span className="serif-italic">behind the practice.</span>
-              </h2>
-            </div>
-            <div className="actions">
-              <a href="/team" className="btn">
-                Meet the team <span className="arrow">→</span>
-              </a>
+      {team.length > 0 && (
+        <section className="section" id="team">
+          <div className="wrap">
+            <div className="section-head reveal">
+              <div>
+                <div className="eyebrow">// People</div>
+                <h2>
+                  The practice
+                  <br />
+                  <span className="serif-italic">behind the practice.</span>
+                </h2>
+              </div>
+              <div className="actions">
+                <a href="/team" className="btn">
+                  Meet the team <span className="arrow">→</span>
+                </a>
+              </div>
             </div>
           </div>
 
-          <div className="team-grid">
-            {[
-              { initials: 'MO', name: 'Maya Okafor', role: 'Head of Design Innovation' },
-              { initials: 'JL', name: 'Jonas Lindqvist', role: 'Principal AI / UX Researcher' },
-              { initials: 'AV', name: 'Aria Venkatesan', role: 'Staff Interaction Designer' },
-              { initials: 'RT', name: 'Rafael Tovar', role: 'Service Design Lead' },
-              { initials: 'HK', name: 'Hana Kobayashi', role: 'Design Systems Engineer' },
-              { initials: 'DM', name: 'Dele Maclean', role: 'Innovation Lab Director' },
-            ].map((m) => (
-              <a key={m.initials} className="team-card reveal" href="/team">
-                <div className="portrait">
-                  <span className="initials">{m.initials}</span>
-                </div>
-                <div className="info">
-                  <div className="name">{m.name}</div>
-                  <div className="role">{m.role}</div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
+          <TeamCarousel members={team} />
+        </section>
+      )}
 
       {/* chrome.js injects the footer here */}
       <div data-praxis-chrome="footer"></div>

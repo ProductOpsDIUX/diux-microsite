@@ -373,6 +373,102 @@ html, body, .nav {
   color: var(--fg-0);
 }
 [data-theme="light"] .team-card .info { background: linear-gradient(180deg, transparent, rgba(255,255,255,0.95)); }
+
+/* === Team carousel (home page) === */
+.team-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 24px;
+  /* Soft fades at left + right edges so cards slide in/out gracefully. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+}
+.team-marquee-track {
+  --team-marquee-gap: 16px;
+  --team-marquee-card-w: 240px;
+  --team-marquee-speed: 50s;
+  display: flex;
+  gap: var(--team-marquee-gap);
+  width: max-content;
+  animation: team-marquee-scroll var(--team-marquee-speed) linear infinite;
+  will-change: transform;
+}
+.team-marquee:hover .team-marquee-track { animation-play-state: paused; }
+@keyframes team-marquee-scroll {
+  from { transform: translateX(0); }
+  /* Move by exactly half the duplicated track so the loop is seamless. */
+  to {
+    transform: translateX(
+      calc(-1 * var(--team-marquee-count) * (var(--team-marquee-card-w) + var(--team-marquee-gap)))
+    );
+  }
+}
+.team-marquee-card {
+  flex: 0 0 var(--team-marquee-card-w);
+  width: var(--team-marquee-card-w);
+  aspect-ratio: 3 / 4;
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-3);
+  overflow: hidden;
+  transition: border-color var(--t-fast) var(--ease), transform var(--t-med) var(--ease);
+}
+.team-marquee-card:hover { border-color: var(--accent); }
+.team-marquee-card .portrait {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(135deg,
+      rgba(255,255,255,0.04) 0 1px,
+      transparent 1px 12px);
+  display: grid; place-items: center;
+}
+.team-marquee-card .portrait img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.team-marquee-card .initials {
+  font-family: var(--font-display);
+  font-size: 64px;
+  color: var(--fg-2);
+  letter-spacing: -0.03em;
+}
+.team-marquee-card .info {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 16px;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+  color: var(--fg-0);
+}
+[data-theme="light"] .team-marquee-card .info {
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.95));
+}
+.team-marquee-card .name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0;
+}
+.team-marquee-card .role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-2);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-top: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .team-marquee-track { animation: none; }
+}
+@media (max-width: 640px) {
+  .team-marquee-track {
+    --team-marquee-card-w: 200px;
+    --team-marquee-speed: 40s;
+  }
+  .team-marquee-card .name { font-size: 17px; }
+}
 .team-card .name {
   font-family: var(--font-display);
   font-size: 22px;
