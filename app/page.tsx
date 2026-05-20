@@ -3,6 +3,7 @@ import { listCaseStudies } from '@/lib/cms/case-studies';
 import { listArticles } from '@/lib/cms/articles';
 import { listTeam } from '@/lib/cms/team';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
+import { BackgroundGradientAnimation } from '@/components/site/BackgroundGradientAnimation';
 import { SiteNav } from '@/components/site/SiteNav';
 import { ScrollTheme } from '@/components/site/ScrollTheme';
 import { TeamCarousel } from '@/components/site/TeamCarousel';
@@ -283,6 +284,21 @@ export default async function HomePage() {
 
       {/* ============ CONNECT BANNER ============ */}
       <section className="connect-banner" aria-labelledby="connect-heading">
+        <div className="connect-banner-bg" aria-hidden="true">
+          <BackgroundGradientAnimation
+            gradientBackgroundStart="rgb(10, 10, 14)"
+            gradientBackgroundEnd="rgb(0, 0, 0)"
+            firstColor="60, 80, 140"
+            secondColor="120, 60, 180"
+            thirdColor="40, 120, 200"
+            fourthColor="200, 90, 70"
+            fifthColor="130, 110, 90"
+            pointerColor="120, 90, 200"
+            size="70%"
+            blendingValue="screen"
+            interactive={false}
+          />
+        </div>
         <div className="wrap connect-banner-inner">
           <div className="eyebrow">// Connect</div>
           <h2 id="connect-heading" className="connect-banner-title">
