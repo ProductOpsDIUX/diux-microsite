@@ -1,8 +1,11 @@
 import type { Metadata } from 'next';
 import { getPageSeo } from '@/lib/cms/seo';
+import { listOpenHiringRoles } from '@/lib/cms/hiring';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
 import { ContactForm } from '@/components/site/ContactForm';
+
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('/contact');
@@ -13,7 +16,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Page() {
+export default async function Page() {
+  const roles = await listOpenHiringRoles();
   return (
     <>
       <div className="grid-overlay" aria-hidden="true"></div>
@@ -61,10 +65,40 @@ export default function Page() {
             <h2 id="hiring-heading" className="hiring-title">
               Latest <span className="serif-italic">openings.</span>
             </h2>
-            <p className="hiring-empty">
-              We don&rsquo;t have any open positions at the moment. Keep an eye on this page for the
-              next round of opportunities.
-            </p>
+            {roles.length === 0 ? (
+              <p className="hiring-empty">
+                We don&rsquo;t have any open positions at the moment. Keep an eye on this page for
+                the next round of opportunities.
+              </p>
+            ) : (
+              <ul className="hiring-list">
+                {roles.map((r) => (
+                  <li key={r.id} className="hiring-item">
+                    <a
+                      className="hiring-item-link"
+                      href={r.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      <div className="hiring-item-main">
+                        <h3 className="hiring-item-title">{r.title}</h3>
+                        {(r.department || r.location) && (
+                          <div className="hiring-item-meta">
+                            {r.department && <span>{r.department}</span>}
+                            {r.department && r.location && <span className="dot"></span>}
+                            {r.location && <span>{r.location}</span>}
+                          </div>
+                        )}
+                        {r.summary && <p className="hiring-item-summary">{r.summary}</p>}
+                      </div>
+                      <span className="hiring-item-arrow" aria-hidden="true">
+                        →
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </section>
       </main>

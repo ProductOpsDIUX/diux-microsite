@@ -8,6 +8,7 @@ const items = [
   { href: '/admin/case-studies', label: 'Case studies' },
   { href: '/admin/articles', label: 'Articles' },
   { href: '/admin/team', label: 'Team' },
+  { href: '/admin/hiring', label: 'Hiring' },
   { href: '/admin/resources', label: 'Resources' },
   { href: '/admin/seo', label: 'SEO' },
 ];

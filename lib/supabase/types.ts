@@ -81,6 +81,19 @@ export interface Resource {
   updated_at: string;
 }
 
+export interface HiringRole {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  url: string;
+  summary: string;
+  position: number;
+  is_open: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface PageSeo {
   path: string;
   title: string;
