@@ -2024,3 +2024,13 @@ html, body, .nav {
   .hiring-item { grid-template-columns: 1fr; }
   .hiring-item-cta .btn { width: 100%; justify-content: center; }
 }
+
+/* === Nav: Connect CTA === */
+.nav-connect-cta {
+  height: 36px;
+  padding: 0 16px;
+  font-size: 11px;
+}
+@media (max-width: 1080px) {
+  .nav-connect-cta { display: none; }
+}

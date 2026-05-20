@@ -4,7 +4,6 @@ import { listArticles } from '@/lib/cms/articles';
 import { listTeam } from '@/lib/cms/team';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
-import { ScrollTheme } from '@/components/site/ScrollTheme';
 import { TeamCarousel } from '@/components/site/TeamCarousel';
 export const revalidate = 60; // ISR fallback; admin save also triggers explicit revalidate
 
@@ -114,11 +113,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      <ScrollTheme />
-
-      {/* Sentinel: scroll-driven theme switches to light from here. */}
-      <div data-scroll-theme="enter-light" aria-hidden="true"></div>
 
       {/* ============ STATS ============ */}
       <section className="stat-band">
@@ -251,9 +245,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-      {/* Sentinel: scroll-driven theme returns to dark from here. */}
-      <div data-scroll-theme="leave-light" aria-hidden="true"></div>
-
       {/* ============ TEAM ============ */}
       {team.length > 0 && (
         <section className="section" id="team">

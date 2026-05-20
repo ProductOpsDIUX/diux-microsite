@@ -22,8 +22,11 @@
   function loadTweaks() {
     try {
       const raw = localStorage.getItem(TWEAK_KEY);
-      if (!raw) return { ...TWEAK_DEFAULTS };
-      return { ...TWEAK_DEFAULTS, ...JSON.parse(raw) };
+      const merged = raw ? { ...TWEAK_DEFAULTS, ...JSON.parse(raw) } : { ...TWEAK_DEFAULTS };
+      // Theme switching has been removed — always render in the dark theme,
+      // even for users who previously toggled to light.
+      merged.theme = 'dark';
+      return merged;
     } catch { return { ...TWEAK_DEFAULTS }; }
   }
   function saveTweaks(t) {
