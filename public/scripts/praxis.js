@@ -11,7 +11,7 @@
   const TWEAK_KEY = 'praxis.tweaks.v1';
   const TWEAK_DEFAULTS = {
     theme: 'dark',
-    accent: '#7CFFB2',
+    accent: '#7DF6CF',
     heroVariant: 'dotfield',
     density: 'balanced',
     fontPair: 'editorial',
@@ -30,6 +30,9 @@
         const p = location.pathname;
         merged.theme = /^\/(case-study|article)(\/|$)/.test(p) ? 'light' : 'dark';
       } catch { merged.theme = 'dark'; }
+      // Pin accent per theme so stored values from previous sessions
+      // don't override the current palette.
+      merged.accent = merged.theme === 'light' ? '#7CFFB2' : '#7DF6CF';
       return merged;
     } catch { return { ...TWEAK_DEFAULTS }; }
   }
@@ -541,7 +544,7 @@
         mx = e.clientX - r.left; my = e.clientY - r.top;
       });
       resize();
-      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#7CFFB2';
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#7DF6CF';
       function tick() {
         ctx.clearRect(0, 0, w, h);
         for (const d of dots) {
