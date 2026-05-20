@@ -279,6 +279,27 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* ============ CONNECT BANNER ============ */}
+      <section className="connect-banner" aria-labelledby="connect-heading">
+        <div className="wrap connect-banner-inner">
+          <div className="eyebrow">// Connect</div>
+          <h2 id="connect-heading" className="connect-banner-title">
+            Got an idea, a brief,
+            <br />
+            <span className="serif-italic">or just want to say hello?</span>
+          </h2>
+          <p className="connect-banner-sub">
+            We&rsquo;re always up for a conversation about mission software, design innovation, or a
+            collaboration that doesn&rsquo;t fit a neat box.
+          </p>
+          <div className="connect-banner-actions">
+            <a href="/contact" className="btn btn-primary">
+              Connect with us <span className="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* chrome.js injects the footer here */}
       <div data-praxis-chrome="footer"></div>
 
