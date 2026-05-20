@@ -4,6 +4,7 @@ import { listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
 import { PageBackground } from '@/components/site/PageBackground';
+import { ForceTheme } from '@/components/site/ForceTheme';
 export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -45,6 +46,7 @@ export default async function ArticleIndexPage({ searchParams }: Params) {
 
   return (
     <>
+      <ForceTheme theme="light" />
       <SiteNav />
       <PageBackground color="var(--bg-2)" />
 

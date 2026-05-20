@@ -3,7 +3,9 @@ import { notFound } from 'next/navigation';
 import { getCaseStudyBySlug, listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
-import { PageBackground } from '@/components/site/PageBackground';export const revalidate = 60;
+import { PageBackground } from '@/components/site/PageBackground';
+import { ForceTheme } from '@/components/site/ForceTheme';
+export const revalidate = 60;
 
 function escapeHtml(s: string): string {
   return s
@@ -50,6 +52,7 @@ export default async function CaseStudyDetailPage({ params }: Params) {
 
   return (
     <>
+      <ForceTheme theme="light" />
       <SiteNav />
       <PageBackground color="var(--bg-2)" />
 

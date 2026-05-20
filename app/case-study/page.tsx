@@ -3,7 +3,9 @@ import { getPageSeo } from '@/lib/cms/seo';
 import { listCaseStudies } from '@/lib/cms/case-studies';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
-import { PageBackground } from '@/components/site/PageBackground';export const revalidate = 60;
+import { PageBackground } from '@/components/site/PageBackground';
+import { ForceTheme } from '@/components/site/ForceTheme';
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getPageSeo('/case-study');
@@ -19,6 +21,7 @@ export default async function CaseStudyIndexPage() {
 
   return (
     <>
+      <ForceTheme theme="light" />
       <SiteNav />
       <PageBackground color="var(--bg-2)" />
 
