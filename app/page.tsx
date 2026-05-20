@@ -3,6 +3,7 @@ import { listCaseStudies } from '@/lib/cms/case-studies';
 import { listArticles } from '@/lib/cms/articles';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
+import { ScrollTheme } from '@/components/site/ScrollTheme';
 export const revalidate = 60; // ISR fallback; admin save also triggers explicit revalidate
 
 // Alternating span pattern that matches the legacy home page case grid.
@@ -111,11 +112,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ============ DARK → LIGHT BRIDGE ============ */}
-      <div className="theme-bridge theme-bridge-to-light" aria-hidden="true"></div>
+      <ScrollTheme />
 
-      {/* ============ STATS (light) ============ */}
-      <section className="stat-band" data-theme="light">
+      {/* Sentinel: scroll-driven theme switches to light from here. */}
+      <div data-scroll-theme="enter-light" aria-hidden="true"></div>
+
+      {/* ============ STATS ============ */}
+      <section className="stat-band">
         <div className="wrap">
           <div className="stat-grid">
             {c.stats.map((s, i) => (
@@ -134,20 +137,9 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ============ LIGHT → DARK BRIDGE ============ */}
-      <div className="theme-bridge theme-bridge-to-dark" aria-hidden="true"></div>
-
       {/* ============ WORK / CASE STUDIES ============ */}
       {homeCases.length > 0 && (
-        <section
-          className="section"
-          id="work"
-          style={{
-            background: 'var(--bg-1)',
-            borderTop: '1px solid var(--line)',
-            borderBottom: '1px solid var(--line)',
-          }}
-        >
+        <section className="section section-tinted" id="work">
           <div className="wrap">
             <div className="section-head reveal">
               <div>
@@ -256,6 +248,9 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+      {/* Sentinel: scroll-driven theme returns to dark from here. */}
+      <div data-scroll-theme="leave-light" aria-hidden="true"></div>
+
       {/* ============ TEAM ============ */}
       <section className="section" id="team">
         <div className="wrap">
