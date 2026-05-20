@@ -142,10 +142,10 @@ export default async function CaseStudyDetailPage({ params }: Params) {
               </div>
             </div>
             <div className="case-grid">
-              {related.map((r, i) => (
+              {related.map((r) => (
                 <a
                   key={r.id}
-                  className={`case-card ${i === 0 ? 'span-7' : 'span-5'}`}
+                  className="case-card span-4"
                   href={`/case-study/${r.slug}`}
                 >
                   <div className={`media${r.hero_image ? ' has-image' : ''}`}>
