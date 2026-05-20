@@ -27,10 +27,10 @@ export function HomeLoader() {
   return (
     <div className={`home-loader${phase === 'out' ? ' is-out' : ''}`} aria-hidden="true">
       <svg className="home-loader-mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <path className="hl-tl" d="M0,0 A100,100 0 0 1 100,100 L0,100 Z" fill="#f4f5f7" />
-        <path className="hl-bl" d="M0,100 L100,100 A100,100 0 0 1 0,200 Z" fill="#f4f5f7" />
-        <rect className="hl-br" x="100" y="100" width="100" height="100" fill="#f4f5f7" />
-        <rect className="hl-tr" x="100" y="0" width="100" height="100" fill="#E63946" />
+        <path className="hl-tl" d="M0,0 A95,95 0 0 1 95,95 L0,95 Z" fill="#f4f5f7" />
+        <path className="hl-bl" d="M0,105 L95,105 A95,95 0 0 1 0,200 Z" fill="#f4f5f7" />
+        <rect className="hl-br" x="105" y="105" width="95" height="95" fill="#f4f5f7" />
+        <rect className="hl-tr" x="105" y="0" width="95" height="95" fill="#E63946" />
       </svg>
     </div>
   );
