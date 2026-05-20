@@ -53,6 +53,60 @@ html.loader-active, html.loader-active body { overflow: hidden; height: 100%; }
   .loader { transition: transform 250ms linear; }
 }
 
+/* === Home page loader: 8-frame brand-mark assembly === */
+html.home-loader-active, html.home-loader-active body { overflow: hidden; height: 100%; }
+.home-loader {
+  position: fixed; inset: 0; z-index: 99999;
+  background: #07080a;
+  display: grid; place-items: center;
+  opacity: 1;
+  transition: opacity 600ms cubic-bezier(0.5, 0, 0.1, 1);
+}
+.home-loader.is-out { opacity: 0; pointer-events: none; }
+.home-loader-mark {
+  width: clamp(120px, 18vw, 200px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+.home-loader-mark > * {
+  opacity: 0;
+  transform: scale(0);
+  transform-box: fill-box;
+  animation-duration: 3000ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
+}
+.home-loader-mark .hl-bl { transform-origin: top left;     animation-name: hl-bl; }
+.home-loader-mark .hl-tl { transform-origin: bottom left;  animation-name: hl-tl; }
+.home-loader-mark .hl-br { transform-origin: top left;     animation-name: hl-br; }
+.home-loader-mark .hl-tr { transform-origin: bottom left;  animation-name: hl-tr; }
+
+/* Frames are 12.5% each (8 frames over 3s). Each shape pops on and snaps off
+   using a tight 1.5% transition window so the cadence reads as discrete. */
+@keyframes hl-bl {
+  0%        { opacity: 1; transform: scale(1); }
+  62%       { opacity: 1; transform: scale(1); }
+  63.5%     { opacity: 0; transform: scale(0); }
+  100%      { opacity: 0; transform: scale(0); }
+}
+@keyframes hl-tl {
+  0%, 12%   { opacity: 0; transform: scale(0); }
+  13.5%, 49%{ opacity: 1; transform: scale(1); }
+  50.5%, 100% { opacity: 0; transform: scale(0); }
+}
+@keyframes hl-br {
+  0%, 24.5% { opacity: 0; transform: scale(0); }
+  26%, 86%  { opacity: 1; transform: scale(1); }
+  87.5%, 100% { opacity: 0; transform: scale(0); }
+}
+@keyframes hl-tr {
+  0%, 37%   { opacity: 0; transform: scale(0); }
+  38.5%, 100% { opacity: 1; transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-loader-mark > * { animation: none; opacity: 1; transform: none; }
+}
+
 :root {
   /* === Color: Dark (default) === */
   --bg-0: #07080a;

@@ -6,6 +6,7 @@ import { LegacyScripts } from '@/components/site/LegacyScripts';
 import { SiteNav } from '@/components/site/SiteNav';
 import { ScrollTheme } from '@/components/site/ScrollTheme';
 import { TeamCarousel } from '@/components/site/TeamCarousel';
+import { HomeLoader } from '@/components/site/HomeLoader';
 export const revalidate = 60; // ISR fallback; admin save also triggers explicit revalidate
 
 // Alternating span pattern that matches the legacy home page case grid.
@@ -25,6 +26,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <HomeLoader />
       {/* HUD grid background — home page only. */}
       <div className="home-grid" aria-hidden="true"></div>
       <div className="grid-overlay" aria-hidden="true"></div>
