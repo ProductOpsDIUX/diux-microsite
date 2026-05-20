@@ -11,7 +11,7 @@
   const TWEAK_KEY = 'praxis.tweaks.v1';
   const TWEAK_DEFAULTS = {
     theme: 'dark',
-    accent: '#7DF6CF',
+    accent: '#39EDB4',
     heroVariant: 'dotfield',
     density: 'balanced',
     fontPair: 'editorial',
@@ -32,7 +32,7 @@
       } catch { merged.theme = 'dark'; }
       // Pin accent per theme so stored values from previous sessions
       // don't override the current palette.
-      merged.accent = merged.theme === 'light' ? '#00E29C' : '#7DF6CF';
+      merged.accent = merged.theme === 'light' ? '#00D592' : '#39EDB4';
       return merged;
     } catch { return { ...TWEAK_DEFAULTS }; }
   }
@@ -544,7 +544,7 @@
         mx = e.clientX - r.left; my = e.clientY - r.top;
       });
       resize();
-      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#7DF6CF';
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#39EDB4';
       function tick() {
         ctx.clearRect(0, 0, w, h);
         for (const d of dots) {
