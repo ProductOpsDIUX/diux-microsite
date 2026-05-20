@@ -24,8 +24,12 @@
       const raw = localStorage.getItem(TWEAK_KEY);
       const merged = raw ? { ...TWEAK_DEFAULTS, ...JSON.parse(raw) } : { ...TWEAK_DEFAULTS };
       // Theme switching has been removed — always render in the dark theme,
-      // even for users who previously toggled to light.
-      merged.theme = 'dark';
+      // even for users who previously toggled to light. Case study and
+      // article pages are forced to light.
+      try {
+        const p = location.pathname;
+        merged.theme = /^\/(case-study|article)(\/|$)/.test(p) ? 'light' : 'dark';
+      } catch { merged.theme = 'dark'; }
       return merged;
     } catch { return { ...TWEAK_DEFAULTS }; }
   }
