@@ -19,6 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <ClerkProvider>
       <html lang="en">
         <head>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{var p=location.pathname;if(/^\\/(case-study|article)(\\/|$)/.test(p)){document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
+            }}
+          />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link
