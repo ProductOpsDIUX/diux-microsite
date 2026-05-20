@@ -32,7 +32,7 @@
       } catch { merged.theme = 'dark'; }
       // Pin accent per theme so stored values from previous sessions
       // don't override the current palette.
-      merged.accent = merged.theme === 'light' ? '#7CFFB2' : '#7DF6CF';
+      merged.accent = merged.theme === 'light' ? '#00E29C' : '#7DF6CF';
       return merged;
     } catch { return { ...TWEAK_DEFAULTS }; }
   }
