@@ -387,7 +387,7 @@ html, body, .nav {
 .team-marquee-track {
   --team-marquee-gap: 16px;
   --team-marquee-card-w: 240px;
-  --team-marquee-speed: 50s;
+  --team-marquee-speed: 100s;
   display: flex;
   gap: var(--team-marquee-gap);
   width: max-content;
