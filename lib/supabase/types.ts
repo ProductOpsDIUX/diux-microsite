@@ -86,6 +86,7 @@ export interface HiringRole {
   title: string;
   department: string;
   location: string;
+  experience: string;
   url: string;
   summary: string;
   position: number;

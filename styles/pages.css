@@ -1984,17 +1984,17 @@ html, body, .nav {
   gap: 0;
   border-top: 1px solid var(--line);
 }
-.hiring-item { border-bottom: 1px solid var(--line); }
-.hiring-item-link {
+.hiring-item {
+  border-bottom: 1px solid var(--line);
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 24px;
   align-items: center;
   padding: 24px 0;
-  transition: padding var(--t-fast) var(--ease);
 }
-.hiring-item-link:hover { padding-left: 12px; }
 .hiring-item-main { display: grid; gap: 6px; min-width: 0; }
+.hiring-item-cta { display: flex; align-items: center; }
+.hiring-item-meta-part { display: inline-flex; align-items: center; gap: 10px; }
 .hiring-item-title {
   font-family: var(--font-display);
   font-size: var(--t-h4);
@@ -2020,9 +2020,7 @@ html, body, .nav {
   font-size: 14px;
   max-width: 70ch;
 }
-.hiring-item-arrow {
-  color: var(--accent);
-  font-size: 24px;
-  transition: transform var(--t-fast) var(--ease);
+@media (max-width: 640px) {
+  .hiring-item { grid-template-columns: 1fr; }
+  .hiring-item-cta .btn { width: 100%; justify-content: center; }
 }
-.hiring-item-link:hover .hiring-item-arrow { transform: translateX(6px); }

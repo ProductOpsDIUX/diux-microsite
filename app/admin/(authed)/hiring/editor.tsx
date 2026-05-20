@@ -28,6 +28,7 @@ export function HiringRoleEditor({ initial }: { initial: HiringRole | null }) {
       title: initial?.title ?? '',
       department: initial?.department ?? '',
       location: initial?.location ?? 'Singapore',
+      experience: initial?.experience ?? '',
       url: initial?.url ?? '',
       summary: initial?.summary ?? '',
       position: initial?.position ?? 0,
@@ -79,6 +80,13 @@ export function HiringRoleEditor({ initial }: { initial: HiringRole | null }) {
         </Field>
         <Field label="Location" error={errors.location?.message}>
           <Input {...register('location')} placeholder="Singapore" />
+        </Field>
+        <Field
+          label="Experience"
+          hint="Free-text, e.g. “3–5 years”, “5+ years”, “Entry level”."
+          error={errors.experience?.message}
+        >
+          <Input {...register('experience')} placeholder="3–5 years" />
         </Field>
         <Field label="Summary" hint="Short description shown on the contact page." error={errors.summary?.message}>
           <Textarea {...register('summary')} rows={3} placeholder="What the role is about." />

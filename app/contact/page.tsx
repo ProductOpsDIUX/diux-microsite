@@ -72,31 +72,37 @@ export default async function Page() {
               </p>
             ) : (
               <ul className="hiring-list">
-                {roles.map((r) => (
-                  <li key={r.id} className="hiring-item">
-                    <a
-                      className="hiring-item-link"
-                      href={r.url}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
+                {roles.map((r) => {
+                  const meta = [r.department, r.location, r.experience].filter(Boolean);
+                  return (
+                    <li key={r.id} className="hiring-item">
                       <div className="hiring-item-main">
                         <h3 className="hiring-item-title">{r.title}</h3>
-                        {(r.department || r.location) && (
+                        {meta.length > 0 && (
                           <div className="hiring-item-meta">
-                            {r.department && <span>{r.department}</span>}
-                            {r.department && r.location && <span className="dot"></span>}
-                            {r.location && <span>{r.location}</span>}
+                            {meta.map((m, i) => (
+                              <span key={i} className="hiring-item-meta-part">
+                                {i > 0 && <span className="dot" aria-hidden="true"></span>}
+                                <span>{m}</span>
+                              </span>
+                            ))}
                           </div>
                         )}
                         {r.summary && <p className="hiring-item-summary">{r.summary}</p>}
                       </div>
-                      <span className="hiring-item-arrow" aria-hidden="true">
-                        →
-                      </span>
-                    </a>
-                  </li>
-                ))}
+                      <div className="hiring-item-cta">
+                        <a
+                          className="btn"
+                          href={r.url}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          View in Job Portal <span className="arrow">→</span>
+                        </a>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>
