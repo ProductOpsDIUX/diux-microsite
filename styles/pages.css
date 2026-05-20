@@ -1806,7 +1806,7 @@ html, body, .nav {
 .connect-banner {
   position: relative;
   width: 100%;
-  padding: clamp(72px, 10vw, 144px) 0;
+  padding: clamp(48px, 6vw, 72px) 0;
   border-top: 1px solid var(--line);
   background: #000;
   overflow: hidden;
@@ -1821,14 +1821,32 @@ html, body, .nav {
 .connect-banner-inner {
   position: relative;
   z-index: 1;
-  text-align: center;
+  text-align: left;
   display: grid;
-  justify-items: center;
-  gap: 24px;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  justify-items: stretch;
+  gap: 48px;
   color: #fff;
 }
-.connect-banner-title { color: #fff; }
-.connect-banner-sub { color: rgba(255,255,255,0.72) !important; }
+.connect-banner-title {
+  color: #fff;
+  margin: 0;
+  max-width: 22ch;
+}
+.connect-banner-sub {
+  color: rgba(255,255,255,0.72) !important;
+  margin-top: 12px;
+}
+.connect-banner-actions { margin: 0; justify-self: end; }
+
+@media (max-width: 720px) {
+  .connect-banner-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .connect-banner-actions { justify-self: start; }
+}
 .connect-banner-title {
   font-family: var(--font-display);
   font-size: var(--t-h2);
