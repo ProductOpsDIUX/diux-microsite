@@ -1,5 +1,6 @@
 import { getHomeContent } from '@/lib/cms/home';
 import { LegacyScripts } from '@/components/site/LegacyScripts';
+import { ConnectBanner } from '@/components/site/ConnectBanner';
 
 export const revalidate = 60; // ISR fallback; admin save also triggers explicit revalidate
 
@@ -154,6 +155,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ============ CONNECT BANNER ============ */}
+      <ConnectBanner />
 
       {/* chrome.js injects the footer here */}
       <div data-praxis-chrome="footer"></div>

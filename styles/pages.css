@@ -977,3 +977,141 @@
   .stat:first-child { border-top: 0; padding-top: 0; }
   .section-head { grid-template-columns: 1fr; }
 }
+
+/* === Connect band (animated gradient CTA) === */
+.connect-band {
+  position: relative;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #000;
+  overflow: hidden;
+  isolation: isolate;
+}
+.connect-band-bg { position: absolute; inset: 0; z-index: 0; }
+.connect-band-inner {
+  position: relative;
+  z-index: 1;
+  padding: 72px 0;
+}
+.connect-band-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 48px;
+}
+.connect-band h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  color: #fff;
+}
+.connect-band p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 52ch;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.connect-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: transform var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+  white-space: nowrap;
+}
+.connect-cta:hover { transform: translateY(-1px); background: #f0f0f0; }
+.connect-cta .arrow {
+  display: inline-grid; place-items: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  font-size: 11px;
+}
+
+@media (max-width: 720px) {
+  .connect-band-grid { grid-template-columns: 1fr; }
+  .connect-band-inner { padding: 56px 0; }
+}
+
+/* === BackgroundGradientAnimation === */
+.bga { width: 100%; height: 100%; position: relative; overflow: hidden; }
+.bga-gradients-container { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bga-blur-goo { filter: url(#blurMe) blur(40px); }
+.bga-blur-safari { filter: blur(40px); }
+
+.bga-orb {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  top: calc(50% - var(--size) / 2);
+  left: calc(50% - var(--size) / 2);
+  mix-blend-mode: var(--blending-value);
+  transform-origin: center center;
+  opacity: 1;
+}
+.bga-orb-1 {
+  background: radial-gradient(circle at center, rgba(var(--first-color), 0.8) 0, rgba(var(--first-color), 0) 50%) no-repeat;
+  animation: bga-first 30s ease infinite;
+}
+.bga-orb-2 {
+  background: radial-gradient(circle at center, rgba(var(--second-color), 0.8) 0, rgba(var(--second-color), 0) 50%) no-repeat;
+  transform-origin: calc(50% - 400px);
+  animation: bga-second 20s reverse infinite;
+}
+.bga-orb-3 {
+  background: radial-gradient(circle at center, rgba(var(--third-color), 0.8) 0, rgba(var(--third-color), 0) 50%) no-repeat;
+  transform-origin: calc(50% + 400px);
+  animation: bga-third 40s linear infinite;
+}
+.bga-orb-4 {
+  background: radial-gradient(circle at center, rgba(var(--fourth-color), 0.8) 0, rgba(var(--fourth-color), 0) 50%) no-repeat;
+  transform-origin: calc(50% - 200px);
+  opacity: 0.7;
+  animation: bga-fourth 40s ease infinite;
+}
+.bga-orb-5 {
+  background: radial-gradient(circle at center, rgba(var(--fifth-color), 0.8) 0, rgba(var(--fifth-color), 0) 50%) no-repeat;
+  transform-origin: calc(50% - 800px) calc(50% + 800px);
+  animation: bga-fifth 20s ease infinite;
+}
+.bga-pointer {
+  position: absolute;
+  width: 100%; height: 100%;
+  top: -50%; left: -50%;
+  background: radial-gradient(circle at center, rgba(var(--pointer-color), 0.8) 0, rgba(var(--pointer-color), 0) 50%) no-repeat;
+  mix-blend-mode: var(--blending-value);
+  opacity: 0.7;
+}
+
+@keyframes bga-first {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(50%); }
+}
+@keyframes bga-second {
+  0%,100% { transform: rotate(0deg) translate(0, 0); }
+  50%     { transform: rotate(180deg) translate(50%, 50%); }
+}
+@keyframes bga-third {
+  0%,100% { transform: rotate(0deg) translate(0, 0); }
+  50%     { transform: rotate(180deg) translate(-50%, -50%); }
+}
+@keyframes bga-fourth {
+  0%,100% { transform: rotate(0deg) translate(0, 0); }
+  50%     { transform: rotate(180deg) translate(-50%, 25%); }
+}
+@keyframes bga-fifth {
+  0%,100% { transform: rotate(0deg) translate(0, 0); }
+  50%     { transform: rotate(360deg) translate(25%, 25%); }
+}
+
